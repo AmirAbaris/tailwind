@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatDialogModule],
+  imports: [ReactiveFormsModule, MatDialogModule, MatButtonModule],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css'
 })
@@ -14,7 +15,9 @@ export class TaskFormComponent {
   readonly #fb = inject(FormBuilder);
 
   closeDialog(result: boolean): void {
-    this.dialogRef.close(result);
+    if (result) {
+      this.dialogRef.close(result);
+    }
   }
 
   @Output() addTask: EventEmitter<string> = new EventEmitter<string>();

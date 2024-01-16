@@ -1,25 +1,12 @@
-<!-- <form [formGroup]="taskGroup" (ngSubmit)="onSubmit()">
-    <div>
-        <label for="title" class="block text-sm font-medium text-gray-700 font-poppins">Task Title</label>
-        <input type="text" id="title" formControlName="titleCtrl" class="mt-1 p-2 w-full border rounded-md">
-    </div>
-    <button type="submit" [disabled]="taskGroup.invalid" class="bg-blue-500 text-white p-2 rounded-md">Add Task</button>
-</form> -->
-
-<h1 mat-dialog-title>Add task</h1>
 <div mat-dialog-content>
     <form [formGroup]="taskGroup" (ngSubmit)="onSubmit()">
         <div>
-            <label for="title" class="block text-sm font-medium text-gray-700 font-poppins">Task Title</label>
+            <label for="title">Task Title</label>
             <input type="text" id="title" formControlName="titleCtrl" class="mt-1 p-2 w-full border rounded-md">
         </div>
         <div class="actions" mat-dialog-actions>
-            <button type="submit" [disabled]="taskGroup.invalid" class="bg-blue-500 text-white p-2 rounded-md">Add
-                Task</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="taskGroup.invalid">Add Task</button>
+            <button mat-button mat-dialog-close cdkFocusInitial (click)="closeDialog(true)">Close</button>
         </div>
     </form>
 </div>
-<!-- <div class="actions" mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="closeDialog(false)">No</button>
-    <button mat-button mat-dialog-close cdkFocusInitial (click)="closeDialog(true)">Yes</button>
-</div> -->
