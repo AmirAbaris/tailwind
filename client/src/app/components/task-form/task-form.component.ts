@@ -11,14 +11,13 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 })
 export class TaskFormComponent {
   constructor(public dialogRef: MatDialogRef<TaskFormComponent>) { }
+  readonly #fb = inject(FormBuilder);
 
   closeDialog(result: boolean): void {
     this.dialogRef.close(result);
   }
-  
-  @Output() addTask: EventEmitter<string> = new EventEmitter<string>();
 
-  readonly #fb = inject(FormBuilder);
+  @Output() addTask: EventEmitter<string> = new EventEmitter<string>();
 
   taskGroup = this.#fb.group({
     titleCtrl: [null, [Validators.required]]
