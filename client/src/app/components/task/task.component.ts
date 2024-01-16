@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task',
@@ -10,22 +10,19 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
-  @Output() addTask: EventEmitter<string> = new EventEmitter<string>();
+  tasks: Task[] = [];
 
-  readonly #fb = inject(FormBuilder);
+  addTask(titleCtrl: string): void {
+    const newTask: Task = {
+      id: this.tasks.length + 1,
+      title: titleCtrl,
+      completed: false
+    }
 
-  taskGroup = this.#fb.group({
-    titleCtrl: [null, [Validators.required]]
-  });
-
-  // getter
-  get TitleCtrl(): FormControl {
-    return this.taskGroup.get('titleCtrl') as FormControl;
+    this.tasks.push(newTask);
   }
 
-  onSubmit(): void {
-    if (this.taskGroup.valid) {
-      this.addTask.emit(this.TitleCtrl.value);
-    }
+  completeTask(task: Task): void {
+    task.completed = true;
   }
 }
