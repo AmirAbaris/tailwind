@@ -1,0 +1,16 @@
+mat-toolbar {
+    background-color: white;
+
+    h1,
+    h2 {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    h1 {
+        font-weight: bolder;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+}
