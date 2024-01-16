@@ -14,4 +14,8 @@ export class TaskService {
     
     this.tasksSource.next(updatedTasks);
   }
+
+  deleteTask(taskId: string): void {
+    
+  }
 }
