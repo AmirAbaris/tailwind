@@ -12,6 +12,7 @@ export class TaskService {
 
   add(taskTitle: string): void {
     // added chance library to give a random input in id
+    // * not the best practice to add a id tbh, but it'll do the job for this project
     let chance = new Chance();
 
     const currentTask: Task = {
@@ -56,10 +57,13 @@ export class TaskService {
       const updatedTasks = [...this.tasksSource.value];
 
       // complete the task
-      updatedTasks[targetTaskIndex].completed === true;
+      updatedTasks[targetTaskIndex].completed = true;
 
       // update the observable
       this.tasksSource.next(updatedTasks);
+
+      // log the obj
+      console.log(this.tasksSource.value);
     }
   }
 }

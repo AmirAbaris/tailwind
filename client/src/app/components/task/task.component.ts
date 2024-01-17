@@ -26,11 +26,11 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  completeTask(task: Task): void {
-    task.completed = true;
-  }
-
   deleteTask(taskId: string): void {
     this.#taskService.delete(taskId);
+  }
+
+  completeTask(taskId: string): void {
+    this.#taskService.complete(taskId);
   }
 }

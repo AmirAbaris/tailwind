@@ -4,6 +4,7 @@
         <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
             <h1 class="mt-2 font-poppins text-white">{{ task.title }}</h1>
             <mat-icon (click)="deleteTask(task.id)">delete</mat-icon>
+            <mat-icon (click)="completeTask(task.id)">done</mat-icon>
         </div>
     </div>
     }
