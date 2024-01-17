@@ -15,7 +15,7 @@ export class TaskComponent implements OnInit {
   readonly #taskService = inject(TaskService);
   readonly #destryoRef = inject(DestroyRef);
 
-  tasks: string[] = [];
+  tasks: Task[] = [];
 
   ngOnInit(): void {
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destryoRef)).subscribe({
