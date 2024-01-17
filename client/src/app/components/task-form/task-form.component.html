@@ -5,7 +5,7 @@
             <input type="text" id="title" formControlName="titleCtrl" class="mt-1 p-2 w-full border rounded-md">
         </div>
         <div class="actions" mat-dialog-actions>
-            <button class="test" mat-raised-button color="primary" type="submit" [disabled]="taskGroup.invalid">Add</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="taskGroup.invalid">Add</button>
             <button mat-button mat-dialog-close cdkFocusInitial (click)="closeDialog(true)">Close</button>
         </div>
     </form>

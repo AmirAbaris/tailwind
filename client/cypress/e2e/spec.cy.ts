@@ -9,9 +9,9 @@ describe('add a task process', () => {
     cy.get('button').contains('Add task').click();
 
     // add input text
-    cy.get('input[formControlName="titleCtrl"]').type('lets test this cypress!');
+    cy.get('input[formControlName="titleCtrl"]').type('lets test this cypress!').blur;
 
     // click on submit btn
-    cy.get('.test button').contains('Add').should('exist').click();
+    cy.get('button').contains('Add').should('exist').click();
   });
 });
