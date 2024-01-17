@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskFormComponent } from '../task-form/task-form.component';
 
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
