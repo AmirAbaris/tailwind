@@ -10,7 +10,7 @@ export class TaskService {
   private tasksSource = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasksSource.asObservable();
 
-  addTask(taskTitle: string): void {
+  add(taskTitle: string): void {
     // added chance library to give a random input in id
     let chance = new Chance();
 
@@ -28,7 +28,7 @@ export class TaskService {
     this.tasksSource.next(updatedTasks);
   }
 
-  deleteTask(taskId: string): void {
+  delete(taskId: string): void {
     // find the target tasks index to delete
     const targetTask = this.tasksSource.value.findIndex(task => task.id === taskId);
 

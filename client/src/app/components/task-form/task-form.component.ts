@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -33,7 +33,7 @@ export class TaskFormComponent {
 
   onSubmit(): void {
     if (this.taskGroup.valid) {
-      this.#taskService.addTask(this.TitleCtrl.value);
+      this.#taskService.add(this.TitleCtrl.value);
 
       console.log('New Task Added:', this.TitleCtrl.value);
 

@@ -3,11 +3,12 @@ import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, MatIconModule],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
@@ -27,5 +28,9 @@ export class TaskComponent implements OnInit {
 
   completeTask(task: Task): void {
     task.completed = true;
+  }
+
+  deleteTask(taskId: string): void {
+    this.#taskService.delete(taskId);
   }
 }
