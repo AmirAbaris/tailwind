@@ -1,32 +1,14 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { TaskComponent } from '../task/task.component';
-import { TaskService } from '../../services/task.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TaskCountComponent } from '../task-count/task-count.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, TaskCountComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
-  readonly #taskService = inject(TaskService);
-  readonly #destroyRef = inject(DestroyRef);
+export class HomeComponent {
 
-  taskCount: number = 0;
-
-  ngOnInit(): void {
-    this.countAllTasks();
-  }
-
-  countAllTasks(): void {
-    this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-      next: (tasks) => {
-        if (tasks) {
-          this.taskCount = tasks.length;
-        }
-      }
-    });
-  }
 }
