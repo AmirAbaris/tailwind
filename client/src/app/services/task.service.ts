@@ -35,13 +35,30 @@ export class TaskService {
     // if item not found
     // * -1 is used for not found items in a index!
     if (targetTask !== -1) {
-      // create a copy of the tasks array and remove the task at the found index
+      // create a copy of the tasks array
       const updatedTasks = [...this.tasksSource.value];
 
       // remove the target task
       updatedTasks.splice(targetTask, 1);
 
       // update the observable with the new array of tasks
+      this.tasksSource.next(updatedTasks);
+    }
+  }
+
+  complete(taskId: string): void {
+    // find the target task
+    const targetTaskIndex = this.tasksSource.value.findIndex(task => task.id === taskId);
+
+    // check if the task was found
+    if (targetTaskIndex !== -1) {
+      // create a copy of the tasks array
+      const updatedTasks = [...this.tasksSource.value];
+
+      // complete the task
+      updatedTasks[targetTaskIndex].completed === true;
+
+      // update the observable
       this.tasksSource.next(updatedTasks);
     }
   }
