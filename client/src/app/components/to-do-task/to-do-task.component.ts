@@ -3,11 +3,14 @@ import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
+import { FilterPipe } from '../../pipes/filter.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-to-do-task',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, FilterPipe, FormsModule, ReactiveFormsModule, MatInputModule],
   templateUrl: './to-do-task.component.html',
   styleUrl: './to-do-task.component.css'
 })
@@ -16,6 +19,7 @@ export class ToDoTaskComponent implements OnInit {
   readonly #destryoRef = inject(DestroyRef);
 
   todoTasks: Task[] = [];
+  searchTerm: string = '';
 
   ngOnInit(): void {
     this.showTodoTasks();
