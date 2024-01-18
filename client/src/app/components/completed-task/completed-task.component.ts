@@ -3,11 +3,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-completed-task',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [
+    MatIconModule, MatDividerModule, MatCardModule
+  ],
   templateUrl: './completed-task.component.html',
   styleUrl: './completed-task.component.css'
 })
