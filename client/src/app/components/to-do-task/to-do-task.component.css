@@ -1,6 +1,8 @@
 .card {
-    max-width: 400px;
+    min-width: 320px;
+    max-width: 320px;
     background-color: #ffe8f7;
+    word-break: break-all;
 }
 
 h1 {
