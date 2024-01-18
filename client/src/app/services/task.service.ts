@@ -27,6 +27,9 @@ export class TaskService {
 
     // update ob value
     this.tasksSource.next(updatedTasks);
+
+    // to add the task to local storage
+    this.setCurrentTasks(updatedTasks);
   }
 
   delete(taskId: string): void {
@@ -65,5 +68,15 @@ export class TaskService {
       // log the obj
       console.log(this.tasksSource.value);
     }
+  }
+
+  setCurrentTasks(tasks: Task[]): void {
+    this.tasks$.subscribe({
+      next: (tasksRes) => {
+        tasks = tasksRes;
+      }
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 }
