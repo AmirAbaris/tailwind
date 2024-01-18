@@ -2,18 +2,32 @@
     <input type="text" [(ngModel)]="searchTerm" placeholder="Search tasks..." matInput class="rounded-border">
 </div>
 
-
-<div class="flex flex-row justify-start mt-10 gap-8 overflow-scroll">
+<!-- <div class="flex flex-row justify-start mt-10 gap-8 overflow-scroll">
     @for (task of todoTasks | filter: searchTerm; track task) {
     <div class="flex justify-center text-center">
-        <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
-            <h1 class="mt-2 font-poppins text-white">{{ task.title }}</h1>
-            <mat-icon (click)="deleteTask(task.id)">delete</mat-icon>
-            <mat-icon (click)="completeTask(task.id)">done</mat-icon>
+        <div class="flex flex-col items-center justify-center bg-purple-400 w-80 max-h-64 rounded-lg">
+            <h1 class="font-poppins text-white break-normal">{{ task.title }}</h1>
+            <div class="flex justify-around mt-12 w-72 text-white">
+                <mat-icon (click)="deleteTask(task.id)">delete</mat-icon>
+                <mat-icon (click)="completeTask(task.id)">done</mat-icon>
+            </div>
         </div>
     </div>
     }
-</div>
+</div> -->
+
+    <mat-card class="card">
+        @for (task of todoTasks | filter: searchTerm; track task) {
+        <mat-card-content>
+            <h1> {{task.title}}</h1>
+            <mat-divider></mat-divider>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+            <mat-icon (click)="deleteTask(task.id)">delete</mat-icon>
+            <mat-icon (click)="completeTask(task.id)">done</mat-icon>
+        </mat-card-actions>
+        }
+    </mat-card>
 
 @if (todoTasks.length == 0) {
 <div class="flex justify-center text-center">

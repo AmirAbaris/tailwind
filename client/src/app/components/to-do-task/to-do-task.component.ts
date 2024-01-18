@@ -6,11 +6,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-to-do-task',
   standalone: true,
-  imports: [MatIconModule, FilterPipe, FormsModule, ReactiveFormsModule, MatInputModule],
+  imports: [
+    MatIconModule, FilterPipe, FormsModule,
+    ReactiveFormsModule, MatInputModule, MatDividerModule,
+    MatCardModule
+  ],
   templateUrl: './to-do-task.component.html',
   styleUrl: './to-do-task.component.css'
 })

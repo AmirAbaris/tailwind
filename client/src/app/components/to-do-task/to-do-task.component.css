@@ -1,0 +1,18 @@
+.card {
+    max-width: 400px;
+    background-color: #ffe8f7;
+}
+
+h1 {
+    color: #474554;
+    display: flex;
+    justify-content: center;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0 12px 0 12px;
+    color: white;
+}
