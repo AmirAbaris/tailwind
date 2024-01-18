@@ -4,7 +4,7 @@
 
 
 <div class="flex flex-row justify-start mt-10 gap-8 overflow-scroll">
-    @for (task of todoTasks | filter:searchTerm; track task) {
+    @for (task of todoTasks | filter: searchTerm; track task) {
     <div class="flex justify-center text-center">
         <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
             <h1 class="mt-2 font-poppins text-white">{{ task.title }}</h1>
