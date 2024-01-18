@@ -16,7 +16,7 @@ export class NavbarComponent {
 
   addTask(): void {
     this.#dialog.open(TaskFormComponent, {
-      width: '300px'
+      width: '500px'
     });
   }
 }

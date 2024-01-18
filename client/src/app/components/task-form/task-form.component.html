@@ -2,7 +2,8 @@
     <form [formGroup]="taskGroup" (ngSubmit)="onSubmit()">
         <div>
             <label for="title">Task Title</label>
-            <input type="text" id="title" formControlName="titleCtrl" class="mt-1 p-2 w-full border rounded-md">
+            <textarea type="text" id="title" formControlName="titleCtrl"
+                class="mt-1 p-2 w-full border rounded-md"> </textarea>
         </div>
         <div class="actions" mat-dialog-actions>
             <button mat-raised-button color="primary" type="submit" [disabled]="taskGroup.invalid">Add</button>
