@@ -7,8 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 export class SearchService {
   private searchTermSubject = new BehaviorSubject<string | null>(null);
 
-  setSearchTerm(term: string): void {
-    this.searchTermSubject.next(term);
+  setSearchTerm(term: string | null): void {
+    if (term !== null) {
+      this.searchTermSubject.next(term);
+    }
   }
 
   getSearchTerm(): BehaviorSubject<string | null> {

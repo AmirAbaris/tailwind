@@ -3,6 +3,7 @@ import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-to-do-task',
@@ -13,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ToDoTaskComponent implements OnInit {
   readonly #taskService = inject(TaskService);
+  readonly #searchService = inject(SearchService);
   readonly #destryoRef = inject(DestroyRef);
 
   todoTasks: Task[] = [];
