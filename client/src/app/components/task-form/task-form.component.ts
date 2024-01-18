@@ -3,11 +3,18 @@ import { FormBuilder, Validators, FormControl, ReactiveFormsModule } from '@angu
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TaskService } from '../../services/task.service';
+import { customValidators } from '../../validators/validators';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatDialogModule, MatButtonModule],
+  imports: [
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatInputModule
+  ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css'
 })
@@ -23,7 +30,7 @@ export class TaskFormComponent {
   }
 
   taskGroup = this.#fb.group({
-    titleCtrl: [null, [Validators.required]]
+    titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
   });
 
   // getter

@@ -2,8 +2,18 @@
     <form [formGroup]="taskGroup" (ngSubmit)="onSubmit()">
         <div>
             <label for="title">Task Title</label>
-            <textarea type="text" id="title" formControlName="titleCtrl"
+            <textarea matInput type="text" id="title" formControlName="titleCtrl"
                 class="mt-1 p-2 w-full border rounded-md"> </textarea>
+            @if (TitleCtrl.hasError('required')) {
+            <mat-error>
+                This field is required.
+            </mat-error>
+            }
+            @else if (TitleCtrl.hasError('allSpaces')) {
+            <mat-error>
+                Can't let that input
+            </mat-error>
+            }
         </div>
         <div class="actions" mat-dialog-actions>
             <button mat-raised-button color="primary" type="submit" [disabled]="taskGroup.invalid">Add</button>
