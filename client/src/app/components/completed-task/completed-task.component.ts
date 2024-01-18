@@ -18,6 +18,10 @@ export class CompletedTaskComponent implements OnInit {
   completedTasks: Task[] = [];
 
   ngOnInit(): void {
+    this.showCompletedTasks();
+  }
+
+  showCompletedTasks(): void {
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destryoRef)).subscribe({
       next: (tasks) => {
         this.completedTasks = tasks.filter(task => task.completed);

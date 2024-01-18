@@ -18,6 +18,10 @@ export class ToDoTaskComponent implements OnInit {
   todoTasks: Task[] = [];
 
   ngOnInit(): void {
+    this.showTodoTasks();
+  }
+
+  showTodoTasks(): void {
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destryoRef)).subscribe({
       next: (tasks) => {
         this.todoTasks = tasks.filter(task => !task.completed);
