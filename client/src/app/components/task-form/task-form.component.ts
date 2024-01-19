@@ -19,9 +19,9 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './task-form.component.css'
 })
 export class TaskFormComponent {
-  constructor(public dialogRef: MatDialogRef<TaskFormComponent>) { }
   readonly #fb = inject(FormBuilder);
   readonly #taskService = inject(TaskService);
+  readonly dialogRef = inject(MatDialogRef);
 
   closeDialog(result: boolean): void {
     if (result) {
