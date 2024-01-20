@@ -1,11 +1,12 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskService } from '../../services/task.service';
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-task-count',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './task-count.component.html',
   styleUrl: './task-count.component.css'
 })
