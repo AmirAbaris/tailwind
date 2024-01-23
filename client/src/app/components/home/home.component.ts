@@ -5,6 +5,7 @@ import { CompletedTaskComponent } from '../completed-task/completed-task.compone
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ import { Task } from '../../models/task.model';
   imports: [
     ToDoTaskComponent,
     CompletedTaskComponent,
-    TaskCountComponent
+    TaskCountComponent,
+    TaskComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
