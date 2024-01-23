@@ -25,9 +25,7 @@ export class TaskCountComponent {
   countAllTasks(): void {
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: (tasks) => {
-        if (tasks) {
           this.taskCount = tasks.length;
-        }
       }
     });
   }
@@ -36,7 +34,7 @@ export class TaskCountComponent {
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: (tasks) => {
         // calc the completed tasks by arrow func
-        this.completedTasksCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0)
+        this.completedTasksCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
       }
     });
   }

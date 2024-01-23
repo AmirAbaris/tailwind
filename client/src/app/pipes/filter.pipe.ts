@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Task } from '../models/task.model';
 
 @Pipe({
   name: 'filter',
   standalone: true
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], searchTerm: string): any[] {
+  transform(items: Task[], searchTerm: string): Task[] {
     if (!items) {
       return [];
     }

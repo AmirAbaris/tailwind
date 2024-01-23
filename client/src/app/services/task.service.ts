@@ -19,7 +19,6 @@ export class TaskService {
       id: chance.string({ length: 8 }),
       title: taskTitle,
       completed: false
-
     }
 
     // update the observable with new input value
