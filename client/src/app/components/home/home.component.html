@@ -1,9 +1,6 @@
 <app-task-count [taskCount]="taskCount" [completedTasksCount]="completedTasksCount" />
 
-<app-to-do-task [todoTasks]="todoTasks" [searchTerm]="searchTerm" />
-
-<div class="flex justify-center mt-12">
-    <h2 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h2>
-</div>
+<app-to-do-task [todoTasks]="todoTasks" [searchTerm]="searchTerm" (deleteTaskEvent)="deleteTask($event)"
+    (completeTaskEvent)="completeTask($event)" />
 
 <app-completed-task />
