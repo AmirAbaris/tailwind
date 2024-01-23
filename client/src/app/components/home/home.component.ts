@@ -25,11 +25,13 @@ export class HomeComponent {
   completedTasksCount: number = 0;
   todoTasks: Task[] = [];
   searchTerm: string = '';
+  completedTasks: Task[] = [];
 
   ngOnInit(): void {
     this.countAllTasks();
     this.calcCompletedTasks();
     this.showTodoTasks();
+    this.showCompletedTasks();
   }
 
   countAllTasks(): void {
@@ -63,5 +65,13 @@ export class HomeComponent {
 
   completeTask(taskId: string): void {
     this.#taskService.complete(taskId);
+  }
+
+  showCompletedTasks(): void {
+    this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
+      next: (tasks) => {
+        this.completedTasks = tasks.filter(task => task.completed);
+      }
+    });
   }
 }

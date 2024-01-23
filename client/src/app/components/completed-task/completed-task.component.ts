@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
@@ -15,25 +15,12 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './completed-task.component.html',
   styleUrl: './completed-task.component.css'
 })
-export class CompletedTaskComponent implements OnInit {
-  readonly #taskService = inject(TaskService);
-  readonly #destryoRef = inject(DestroyRef);
+export class CompletedTaskComponent {
+  @Input() completedTasks: Task[] = [];
 
-  completedTasks: Task[] = [];
+  @Output() deleteTaskEvent = new EventEmitter<string>();
 
-  ngOnInit(): void {
-    this.showCompletedTasks();
-  }
-
-  showCompletedTasks(): void {
-    this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destryoRef)).subscribe({
-      next: (tasks) => {
-        this.completedTasks = tasks.filter(task => task.completed);
-      }
-    });
-  }
-
-  deleteTask(taskId: string): void {
-    this.#taskService.delete(taskId);
+  onDeleteTask(taskId: string): void {
+    this.deleteTaskEvent.emit(taskId);
   }
 }

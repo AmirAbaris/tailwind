@@ -3,4 +3,4 @@
 <app-to-do-task [todoTasks]="todoTasks" [searchTerm]="searchTerm" (deleteTaskEvent)="deleteTask($event)"
     (completeTaskEvent)="completeTask($event)" />
 
-<app-completed-task />
+<app-completed-task [completedTasks]="completedTasks" (deleteTaskEvent)="deleteTask($event)" />
