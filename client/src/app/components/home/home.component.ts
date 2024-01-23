@@ -65,6 +65,10 @@ export class HomeComponent {
     this.#taskService.complete(taskId);
   }
 
+  inCompleteTask(taskId: string): void {
+    this.#taskService.inComplete(taskId);
+  }
+
   showCompletedTasks(): void {
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: (tasks) => {

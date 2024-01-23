@@ -26,6 +26,7 @@ export class TaskComponent {
 
   @Output() deleteTaskEvent = new EventEmitter<string>();
   @Output() completeTaskEvent = new EventEmitter<string>();
+  @Output() inCompleteTaskEvent = new EventEmitter<string>();
 
   onDeleteTask(taskId: string): void {
     this.deleteTaskEvent.emit(taskId);
@@ -33,5 +34,9 @@ export class TaskComponent {
 
   onCompleteTask(taskId: string): void {
     this.completeTaskEvent.emit(taskId);
+  }
+
+  onInCompleteTask(taskId: string): void {
+    this.inCompleteTaskEvent.emit(taskId);
   }
 }

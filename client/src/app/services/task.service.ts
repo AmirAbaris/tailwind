@@ -65,4 +65,21 @@ export class TaskService {
       console.log(this.tasksSource.value);
     }
   }
+
+  inComplete(taskId: string): void {
+    // find the target task
+    const targetTaskIndex = this.tasksSource.value.findIndex(task => task.id == taskId);
+
+    // check if the task was found
+    if (targetTaskIndex !== -1) {
+      // create a copy of the task array
+      const updatedTasks = [...this.tasksSource.value];
+
+      // incomplete the task
+      updatedTasks[targetTaskIndex].completed = false;
+
+      // update the obsesrvable
+      this.tasksSource.next(updatedTasks);
+    }
+  }
 }
