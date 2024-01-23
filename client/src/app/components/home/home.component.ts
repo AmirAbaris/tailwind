@@ -1,7 +1,5 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { TaskCountComponent } from '../task-count/task-count.component';
-import { ToDoTaskComponent } from '../to-do-task/to-do-task.component';
-import { CompletedTaskComponent } from '../completed-task/completed-task.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
@@ -11,8 +9,6 @@ import { TaskComponent } from '../task/task.component';
   selector: 'app-home',
   standalone: true,
   imports: [
-    ToDoTaskComponent,
-    CompletedTaskComponent,
     TaskCountComponent,
     TaskComponent
   ],
