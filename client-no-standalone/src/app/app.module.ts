@@ -43,7 +43,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FilterPipe,
     MatIconModule,
     NgOptimizedImage,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

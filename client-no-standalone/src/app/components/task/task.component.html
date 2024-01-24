@@ -1,57 +1,63 @@
-<div class="flex justify-center mt-12">
-    <h1 class="font-poppins font-bold text-3xl">To Do 🚀</h1>
-</div>
-
 <div class="flex justify-center items-center my-14">
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Search tasks..." matInput class="rounded-border">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search All tasks...">
 </div>
 
-<div class="flex flex-col justify-center items-center mt-10 gap-8">
-    @for (task of todoTasks | filter: searchTerm; track task) {
-    <mat-card class="card">
-        <mat-card-content>
-            <h1>{{ task.title }}</h1>
-            <mat-divider></mat-divider>
-        </mat-card-content>
-        <mat-card-actions class="card-actions">
-            <mat-icon class="cursor-pointer" (click)="onDeleteTask(task.id)">delete</mat-icon>
-            <mat-icon class="cursor-pointer" (click)="onCompleteTask(task.id)">done</mat-icon>
-        </mat-card-actions>
-    </mat-card>
-    }
-</div>
+<div class="lg:flex flex-row items-center gap-64 justify-center">
+    <div>
+        <div class="flex justify-center mt-12">
+            <h1 class="font-poppins font-bold text-3xl">To Do 🚀</h1>
+        </div>
 
-@if (todoTasks.length == 0) {
-<div class="flex justify-center text-center">
-    <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
-        <h1 class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h1>
+        <div class="flex flex-col justify-center items-center mt-10 gap-8">
+            @for (task of todoTasks | filter: searchTerm; track task) {
+            <mat-card class="card">
+                <mat-card-content>
+                    <h1>{{ task.title }}</h1>
+                    <mat-divider></mat-divider>
+                </mat-card-content>
+                <mat-card-actions class="card-actions">
+                    <mat-icon class="cursor-pointer" (click)="onDeleteTask(task.id)">delete</mat-icon>
+                    <mat-icon class="cursor-pointer" (click)="onCompleteTask(task.id)">done</mat-icon>
+                </mat-card-actions>
+            </mat-card>
+            }
+        </div>
+
+        @if (todoTasks.length == 0) {
+        <div class="flex justify-center text-center">
+            <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
+                <h1 class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h1>
+            </div>
+        </div>
+        }
+    </div>
+
+    <div>
+        <div class="flex justify-center mt-12">
+            <h2 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h2>
+        </div>
+
+        <div class="flex flex-col justify-center items-center mt-10 gap-8">
+            @for (task of completedTasks | filter: searchTerm; track task) {
+            <mat-card class="card">
+                <mat-card-content>
+                    <h1>{{ task.title }}</h1>
+                    <mat-divider></mat-divider>
+                </mat-card-content>
+                <mat-card-actions class="card-actions">
+                    <mat-icon class="cursor-pointer" (click)="onDeleteTask(task.id)">delete</mat-icon>
+                    <mat-icon class="cursor-pointer" (click)="onInCompleteTask(task.id)">undo</mat-icon>
+                </mat-card-actions>
+            </mat-card>
+            }
+        </div>
+
+        @if (completedTasks.length == 0) {
+        <div class="flex justify-center text-center">
+            <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
+                <h1 class="mt-2 font-poppins text-white text-xl">No completed Tasks yet 💀</h1>
+            </div>
+        </div>
+        }
     </div>
 </div>
-}
-
-<div class="flex justify-center mt-12">
-    <h2 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h2>
-</div>
-
-<div class="flex flex-col justify-center items-center mt-10 gap-8">
-    @for (task of completedTasks; track task) {
-    <mat-card class="card">
-        <mat-card-content>
-            <h1>{{ task.title }}</h1>
-            <mat-divider></mat-divider>
-        </mat-card-content>
-        <mat-card-actions class="card-actions">
-            <mat-icon class="cursor-pointer" (click)="onDeleteTask(task.id)">delete</mat-icon>
-            <mat-icon class="cursor-pointer" (click)="onInCompleteTask(task.id)">undo</mat-icon>
-        </mat-card-actions>
-    </mat-card>
-    }
-</div>
-
-@if (completedTasks.length == 0) {
-<div class="flex justify-center text-center">
-    <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
-        <h1 class="mt-2 font-poppins text-white text-xl">No completed Tasks yet 💀</h1>
-    </div>
-</div>
-}
