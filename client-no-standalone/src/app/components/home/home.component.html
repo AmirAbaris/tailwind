@@ -1,1 +1,5 @@
-<p>home works!</p>
+<app-task-count [taskCount]="taskCount" [completedTasksCount]="completedTasksCount" />
+
+<app-task [todoTasks]="todoTasks" [searchTerm]="searchTerm" [completedTasks]="completedTasks"
+    (deleteTaskEvent)="deleteTask($event)" (completeTaskEvent)="completeTask($event)"
+    (inCompleteTaskEvent)="inCompleteTask($event)" />
