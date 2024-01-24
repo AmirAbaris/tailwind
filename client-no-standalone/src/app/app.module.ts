@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { FilterPipe } from '../app/pipes/filter.pipe';
 import { NgOptimizedImage } from '@angular/common'
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { NgOptimizedImage } from '@angular/common'
     MatDividerModule,
     FilterPipe,
     MatIconModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
