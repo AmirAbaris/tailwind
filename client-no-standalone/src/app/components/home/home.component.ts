@@ -40,37 +40,6 @@ export class HomeComponent {
     });
   }
 
-  // countToDoTasks(): void {
-  //   this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-  //     next: (tasks) => {
-  //       if (this.taskCount) {
-  //         this.taskCount.toDoTaskCount = tasks.length;
-  //       }
-  //     }
-  //   });
-  // }
-
-  // calcCompletedTaskCount(): void {
-  //   this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-  //     next: (tasks) => {
-  //       // calc the completed tasks by arrow func
-  //       if (this.taskCount) {
-  //         this.taskCount.completedTaskCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
-  //       }
-  //     }
-  //   });
-  // }
-
-  // showTodoTasks(): void {
-  //   this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-  //     next: (tasks) => {
-  //       if (this.taskInput) {
-  //         this.taskInput.todoTasks = tasks.filter(task => !task.completed);
-  //       }
-  //     }
-  //   });
-  // }
-
   deleteTask(taskId: string): void {
     this.#taskService.delete(taskId);
   }
@@ -82,14 +51,4 @@ export class HomeComponent {
   inCompleteTask(taskId: string): void {
     this.#taskService.inComplete(taskId);
   }
-
-  // showCompletedTasks(): void {
-  //   this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-  //     next: (tasks) => {
-  //       if (this.taskInput) {
-  //         this.taskInput.completedTasks = tasks.filter(task => task.completed);
-  //       }
-  //     }
-  //   });
-  // }
 }
