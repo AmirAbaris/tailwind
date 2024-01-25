@@ -4,6 +4,7 @@
             <label for="title">Task Title</label>
             <textarea matInput type="text" id="title" formControlName="titleCtrl"
                 class="mt-1 p-2 w-full border rounded-md"> </textarea>
+            <!-- fix this -->
             @if (TitleCtrl.hasError('required')) {
             <mat-error>
                 This field is required.

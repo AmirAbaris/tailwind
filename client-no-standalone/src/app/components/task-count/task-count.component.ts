@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TaskCountInupt } from '../../models/task-count-input.model';
 
 @Component({
   selector: 'app-task-count',
@@ -6,6 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './task-count.component.css'
 })
 export class TaskCountComponent {
-  @Input() taskCount: number = 0;
-  @Input() completedTasksCount: number = 0;
+  @Input() taskCount: TaskCountInupt | undefined;
 }

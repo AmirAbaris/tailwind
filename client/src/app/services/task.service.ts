@@ -4,7 +4,7 @@ import { Task } from '../models/task.model';
 import Chance from 'chance';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn:
 })
 export class TaskService {
   private tasksSource = new BehaviorSubject<Task[]>([]);

@@ -1,5 +1,4 @@
-<app-task-count [taskCount]="taskCount" [completedTasksCount]="completedTasksCount" />
+<app-task-count [taskCount]="taskCount" />
 
-<app-task [todoTasks]="todoTasks" [searchTerm]="searchTerm" [completedTasks]="completedTasks"
-    (deleteTaskEvent)="deleteTask($event)" (completeTaskEvent)="completeTask($event)"
+<app-task [taskInput]="taskInput" (deleteTaskEvent)="deleteTask($event)" (completeTaskEvent)="completeTask($event)"
     (inCompleteTaskEvent)="inCompleteTask($event)" />

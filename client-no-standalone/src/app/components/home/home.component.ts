@@ -1,7 +1,8 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TaskCountInupt } from '../../models/task-count-input.model';
+import { TaskInput } from '../../models/task-input.model';
 
 @Component({
   selector: 'app-home',
@@ -12,43 +13,56 @@ export class HomeComponent {
   readonly #taskService = inject(TaskService);
   readonly #destroyRef = inject(DestroyRef);
 
-  taskCount: number = 0;
-  completedTasksCount: number = 0;
-  todoTasks: Task[] = [];
-  searchTerm: string = '';
-  completedTasks: Task[] = [];
+  taskCount: TaskCountInupt | undefined;
+  taskInput: TaskInput | undefined;
 
   ngOnInit(): void {
-    this.countAllTasks();
-    this.calcCompletedTasks();
-    this.showTodoTasks();
-    this.showCompletedTasks();
+    this.fetchTasks();
   }
 
-  countAllTasks(): void {
+  fetchTasks(): void {
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: (tasks) => {
-        this.taskCount = tasks.length;
+        if (this.taskCount && this.taskInput) {
+          this.taskCount.toDoTaskCount = tasks.length;
+          this.taskCount.completedTaskCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
+          this.taskInput.todoTasks = tasks.filter(task => !task.completed);
+          this.taskInput.completedTasks = tasks.filter(task => task.completed);
+        }
       }
     });
   }
 
-  calcCompletedTasks(): void {
-    this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-      next: (tasks) => {
-        // calc the completed tasks by arrow func
-        this.completedTasksCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
-      }
-    });
-  }
+  // countToDoTasks(): void {
+  //   this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
+  //     next: (tasks) => {
+  //       if (this.taskCount) {
+  //         this.taskCount.toDoTaskCount = tasks.length;
+  //       }
+  //     }
+  //   });
+  // }
 
-  showTodoTasks(): void {
-    this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-      next: (tasks) => {
-        this.todoTasks = tasks.filter(task => !task.completed);
-      }
-    });
-  }
+  // calcCompletedTaskCount(): void {
+  //   this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
+  //     next: (tasks) => {
+  //       // calc the completed tasks by arrow func
+  //       if (this.taskCount) {
+  //         this.taskCount.completedTaskCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
+  //       }
+  //     }
+  //   });
+  // }
+
+  // showTodoTasks(): void {
+  //   this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
+  //     next: (tasks) => {
+  //       if (this.taskInput) {
+  //         this.taskInput.todoTasks = tasks.filter(task => !task.completed);
+  //       }
+  //     }
+  //   });
+  // }
 
   deleteTask(taskId: string): void {
     this.#taskService.delete(taskId);
@@ -62,11 +76,13 @@ export class HomeComponent {
     this.#taskService.inComplete(taskId);
   }
 
-  showCompletedTasks(): void {
-    this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
-      next: (tasks) => {
-        this.completedTasks = tasks.filter(task => task.completed);
-      }
-    });
-  }
+  // showCompletedTasks(): void {
+  //   this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
+  //     next: (tasks) => {
+  //       if (this.taskInput) {
+  //         this.taskInput.completedTasks = tasks.filter(task => task.completed);
+  //       }
+  //     }
+  //   });
+  // }
 }
