@@ -4,12 +4,12 @@
             <label for="title">Task Title</label>
             <textarea matInput type="text" id="title" formControlName="titleCtrl"
                 class="mt-1 p-2 w-full border rounded-md"> </textarea>
-            @if (TitleCtrl.hasError('required')) {
+            @if (taskGroup.get('titleCtrl')?.hasError('required')) {
             <mat-error>
                 This field is required.
             </mat-error>
             }
-            @else if (TitleCtrl.hasError('allSpaces')) {
+            @else if (taskGroup.get('titleCtrl')?.hasError('allSpaces')) {
             <mat-error>
                 Can't let that input
             </mat-error>
