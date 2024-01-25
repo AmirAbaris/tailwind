@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TaskComponent } from '../../components/task/task.component';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { MatInputModule } from '@angular/material/input';
