@@ -10,9 +10,12 @@ import { TaskInput } from '../../models/task-input.model';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  //#region inject functions
   readonly #taskService = inject(TaskService);
   readonly #destroyRef = inject(DestroyRef);
+  //#endregion inject functions
 
+  //#region interfaces
   taskCount: TaskCountInupt = {
     toDoTaskCount: 0,
     completedTaskCount: 0
@@ -22,11 +25,15 @@ export class HomeComponent {
     completedTasks: [],
     searchTerm: ''
   };
+  //#endregion interfaces
 
+  //#region lifecycles
   ngOnInit(): void {
     this.fetchTasks();
   }
+  //#endregion lifecycles
 
+  //#region methods
   fetchTasks(): void {
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: (tasks) => {
@@ -51,4 +58,5 @@ export class HomeComponent {
   inCompleteTask(taskId: string): void {
     this.#taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
   }
+  //#endregion methods
 }
