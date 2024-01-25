@@ -13,8 +13,15 @@ export class HomeComponent {
   readonly #taskService = inject(TaskService);
   readonly #destroyRef = inject(DestroyRef);
 
-  taskCount: TaskCountInupt | undefined;
-  taskInput: TaskInput | undefined;
+  taskCount: TaskCountInupt = {
+    toDoTaskCount: 0,
+    completedTaskCount: 0
+  };
+  taskInput: TaskInput = {
+    todoTasks: [],
+    completedTasks: [],
+    searchTerm: ''
+  };
 
   ngOnInit(): void {
     this.fetchTasks();

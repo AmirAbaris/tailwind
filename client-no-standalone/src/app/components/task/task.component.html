@@ -12,7 +12,7 @@
 
         <div class="flex flex-col justify-center items-center mt-10 gap-8">
             @if (taskInput) {
-            @for (task of taskInput.todoTasks| filter: taskInput.searchTerm; track task) {
+            @for (task of taskInput.todoTasks | filter: taskInput.searchTerm; track task) {
             <mat-card class="card">
                 <mat-card-content>
                     <h1>{{ task.title }}</h1>
@@ -24,16 +24,15 @@
                 </mat-card-actions>
             </mat-card>
             }
+            @if (taskInput.todoTasks.length == 0) {
+            <div class="flex justify-center text-center">
+                <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
+                    <h1 class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h1>
+                </div>
+            </div>
+            }
             }
         </div>
-
-        @if (taskInput?.todoTasks) {
-        <div class="flex justify-center text-center">
-            <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
-                <h1 class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h1>
-            </div>
-        </div>
-        }
     </div>
 
     <div>
@@ -43,7 +42,7 @@
 
         <div class="flex flex-col justify-center items-center mt-10 gap-8">
             @if (taskInput) {
-            @for (task of taskInput.completedTasks| filter: taskInput.searchTerm; track task) {
+            @for (task of taskInput.completedTasks | filter: taskInput.searchTerm; track task) {
             <mat-card class="card">
                 <mat-card-content>
                     <h1>{{ task.title }}</h1>
@@ -55,15 +54,14 @@
                 </mat-card-actions>
             </mat-card>
             }
+            @if (taskInput.completedTasks.length == 0) {
+            <div class="flex justify-center text-center">
+                <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
+                    <h1 class="mt-2 font-poppins text-white text-xl">No Completed Tasks here 💀</h1>
+                </div>
+            </div>
+            }
             }
         </div>
-
-        @if (taskInput?.completedTasks) {
-        <div class="flex justify-center text-center">
-            <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
-                <h1 class="mt-2 font-poppins text-white text-xl">No completed Tasks yet 💀</h1>
-            </div>
-        </div>
-        }
     </div>
 </div>
