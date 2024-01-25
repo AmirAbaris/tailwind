@@ -41,14 +41,14 @@ export class HomeComponent {
   }
 
   deleteTask(taskId: string): void {
-    this.#taskService.delete(taskId);
+    this.#taskService.delete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
   }
 
   completeTask(taskId: string): void {
-    this.#taskService.complete(taskId);
+    this.#taskService.complete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
   }
 
   inCompleteTask(taskId: string): void {
-    this.#taskService.inComplete(taskId);
+    this.#taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
   }
 }
