@@ -50,9 +50,9 @@ export class HomeComponent {
         }
       },
       error: (err) => {
-        console.log(err);
-
         this.loadingTasks = false;
+
+        console.log(err);
       }
     });
   }
