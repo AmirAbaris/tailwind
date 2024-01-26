@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, delay, map, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, delay, of, tap } from 'rxjs';
 import { Task } from '../models/task.model';
 import Chance from 'chance';
 

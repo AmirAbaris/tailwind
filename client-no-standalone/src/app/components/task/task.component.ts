@@ -8,6 +8,7 @@ import { TaskInput } from '../../models/task-input.model';
 })
 export class TaskComponent {
   @Input() taskInput: TaskInput | undefined;
+  @Input() loadingTasks: boolean | undefined;
 
   @Output() deleteTaskEvent = new EventEmitter<string>();
   @Output() completeTaskEvent = new EventEmitter<string>();

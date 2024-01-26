@@ -1,3 +1,7 @@
+@if (loadingTasks) {
+<mat-spinner />
+}
+
 <div class="flex justify-center items-center my-14">
     @if (taskInput) {
     <input type="text" [(ngModel)]="taskInput.searchTerm" placeholder="Search All tasks...">

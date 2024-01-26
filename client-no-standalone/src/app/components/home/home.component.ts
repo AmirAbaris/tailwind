@@ -15,7 +15,7 @@ export class HomeComponent {
   readonly #destroyRef = inject(DestroyRef);
   //#endregion inject functions
 
-  //#region interfaces
+  //#region interfaces and var
   taskCount: TaskCountInupt = {
     toDoTaskCount: 0,
     completedTaskCount: 0
@@ -25,7 +25,8 @@ export class HomeComponent {
     completedTasks: [],
     searchTerm: ''
   };
-  //#endregion interfaces
+  loadingTasks: boolean | undefined;
+  //#endregion interfaces and var
 
   //#region lifecycles
   ngOnInit(): void {
@@ -35,6 +36,8 @@ export class HomeComponent {
 
   //#region methods
   fetchTasks(): void {
+    this.loadingTasks = true;
+
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: (tasks) => {
         if (this.taskCount && this.taskInput) {
@@ -42,7 +45,14 @@ export class HomeComponent {
           this.taskCount.completedTaskCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
           this.taskInput.todoTasks = tasks.filter(task => !task.completed);
           this.taskInput.completedTasks = tasks.filter(task => task.completed);
+
+          this.loadingTasks = false;
         }
+      },
+      error: (err) => {
+        console.log(err);
+
+        this.loadingTasks = false;
       }
     });
   }
