@@ -7,7 +7,7 @@
 <div class="flex-row items-center gap-64 justify-center lg:flex">
     <div>
         <div class="flex justify-center mt-12">
-            <h1 class="font-poppins font-bold text-3xl">To Do 🚀</h1>
+            <h1 i18n class="font-poppins font-bold text-3xl">To Do 🚀</h1>
         </div>
 
         <div class="flex flex-col justify-center items-center mt-10 gap-8">
@@ -15,7 +15,7 @@
             @for (task of taskInput.todoTasks | filter: taskInput.searchTerm; track task) {
             <mat-card class="card">
                 <mat-card-content>
-                    <h1>{{ task.title }}</h1>
+                    <h2>{{ task.title }}</h2>
                     <mat-divider />
                 </mat-card-content>
                 <mat-card-actions class="card-actions">
@@ -27,7 +27,7 @@
             @if (taskInput.todoTasks.length == 0) {
             <div class="flex justify-center text-center">
                 <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
-                    <h1 class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h1>
+                    <h3 i18n class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h3>
                 </div>
             </div>
             }
@@ -37,7 +37,7 @@
 
     <div>
         <div class="flex justify-center mt-12">
-            <h2 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h2>
+            <h4 i18n class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h4>
         </div>
 
         <div class="flex flex-col justify-center items-center mt-10 gap-8">
@@ -45,7 +45,7 @@
             @for (task of taskInput.completedTasks | filter: taskInput.searchTerm; track task) {
             <mat-card class="card">
                 <mat-card-content>
-                    <h1>{{ task.title }}</h1>
+                    <h5>{{ task.title }}</h5>
                     <mat-divider></mat-divider>
                 </mat-card-content>
                 <mat-card-actions class="card-actions">
@@ -57,7 +57,7 @@
             @if (taskInput.completedTasks.length == 0) {
             <div class="flex justify-center text-center">
                 <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
-                    <h1 class="mt-2 font-poppins text-white text-xl">No Completed Tasks here 💀</h1>
+                    <p i18n class="mt-2 font-poppins text-white text-xl">No Completed Tasks here 💀</p>
                 </div>
             </div>
             }
