@@ -5,9 +5,7 @@
 }
 
 <div class="flex justify-center items-center my-14">
-    @if (taskInput) {
-    <input type="text" [(ngModel)]="taskInput.searchTerm" placeholder="Search All tasks...">
-    }
+    <input type="text" [(ngModel)]="taskInput().searchTerm" placeholder="Search All tasks...">
 </div>
 
 <div class="flex-row items-center gap-64 justify-center lg:flex">
@@ -17,8 +15,7 @@
         </div>
 
         <div class="flex flex-col justify-center items-center mt-10 gap-8">
-            @if (taskInput) {
-            @for (task of taskInput.todoTasks | filter: taskInput.searchTerm; track task) {
+            @for (task of taskInput().todoTasks | filter: taskInput().searchTerm; track task) {
             <mat-card class="card">
                 <mat-card-content>
                     <h2>{{ task.title }}</h2>
@@ -30,13 +27,12 @@
                 </mat-card-actions>
             </mat-card>
             }
-            @if (taskInput.todoTasks.length == 0) {
+            @if (taskInput().todoTasks.length == 0) {
             <div class="flex justify-center text-center">
                 <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
                     <h3 i18n class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h3>
                 </div>
             </div>
-            }
             }
         </div>
     </div>
@@ -47,8 +43,7 @@
         </div>
 
         <div class="flex flex-col justify-center items-center mt-10 gap-8">
-            @if (taskInput) {
-            @for (task of taskInput.completedTasks | filter: taskInput.searchTerm; track task) {
+            @for (task of taskInput().completedTasks | filter: taskInput().searchTerm; track task) {
             <mat-card class="card">
                 <mat-card-content>
                     <h5>{{ task.title }}</h5>
@@ -60,13 +55,12 @@
                 </mat-card-actions>
             </mat-card>
             }
-            @if (taskInput.completedTasks.length == 0) {
+            @if (taskInput().completedTasks.length == 0) {
             <div class="flex justify-center text-center">
                 <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
                     <p i18n class="mt-2 font-poppins text-white text-xl">No Completed Tasks here 💀</p>
                 </div>
             </div>
-            }
             }
         </div>
     </div>

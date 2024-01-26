@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { TaskInput } from '../../models/task-input.model';
 
 @Component({
@@ -7,7 +7,8 @@ import { TaskInput } from '../../models/task-input.model';
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
-  @Input() taskInput: TaskInput | undefined;
+  // new signal input
+  taskInput = input<TaskInput>({ todoTasks: [], completedTasks: [], searchTerm: '' });
   @Input() loadingTasks: boolean | undefined;
 
   @Output() deleteTaskEvent = new EventEmitter<string>();
