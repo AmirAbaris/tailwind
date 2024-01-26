@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="3712750896395477967" datatype="html">
         <source>Hello 👋🏻</source>
-        <target>سلام</target>
+          <target>👋🏻 سلام</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/navbar/navbar.component.html</context>
           <context context-type="linenumber">2,3</context>
@@ -26,17 +26,17 @@
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6869034594952530264" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{taskCount.completedTaskCount}}"/>/<x id="INTERPOLATION_1" equiv-text="{{taskCount.toDoTaskCount}}"/> Tasks</source>
-          <target>تسک</target>
+      <trans-unit id="6904866445262015585" datatype="html">
+        <source>Tasks</source>
+            <target>تسک</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/task-count/task-count.component.html</context>
-          <context context-type="linenumber">6,7</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5998593688100084031" datatype="html">
         <source>To Do 🚀</source>
-          <target>تسک ها</target>
+            <target>🚀 تسک ها</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/task/task.component.html</context>
           <context context-type="linenumber">10,11</context>
@@ -52,7 +52,7 @@
       </trans-unit>
       <trans-unit id="264102784686642719" datatype="html">
         <source>Complete 💆🏻‍♂️</source>
-          <target>تموم شده ها</target>
+            <target>💆🏻‍♂️ تموم شده ها</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/task/task.component.html</context>
           <context context-type="linenumber">40,41</context>
@@ -60,7 +60,7 @@
       </trans-unit>
       <trans-unit id="4700794929341719727" datatype="html">
         <source>No Completed Tasks here 💀</source>
-          <target>هیجی نیس اینجا</target>
+            <target>هیجی نیس اینجا</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/task/task.component.html</context>
           <context context-type="linenumber">60,61</context>
@@ -69,3 +69,4 @@
     </body>
   </file>
 </xliff>
+
