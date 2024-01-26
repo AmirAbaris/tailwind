@@ -2,10 +2,8 @@
     <div class="bg-blue-600 w-80  rounded-lg">
         <div class="font-poppins text-white ml-5 mt-1">
             <h1 i18n>Today</h1>
-            @if (taskCount) {
-            <h2 class="mt-4 text-4xl">{{taskCount.completedTaskCount}}/{{taskCount.toDoTaskCount}} <span
+            <h2 class="mt-4 text-4xl">{{taskCount().completedTaskCount}}/{{taskCount().toDoTaskCount}} <span
                     i18n>Tasks</span></h2>
-            }
         </div>
         <img class="float-end" width="112" height="112" ngSrc="../../../assets/free.svg" priority alt="free">
     </div>

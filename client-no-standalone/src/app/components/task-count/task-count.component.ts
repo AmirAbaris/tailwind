@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { TaskCountInupt } from '../../models/task-count-input.model';
 
 @Component({
@@ -7,5 +7,6 @@ import { TaskCountInupt } from '../../models/task-count-input.model';
   styleUrl: './task-count.component.css'
 })
 export class TaskCountComponent {
-  @Input() taskCount: TaskCountInupt | undefined;
+  // @Input() taskCount: TaskCountInupt | undefined;
+  taskCount = input<TaskCountInupt>({ toDoTaskCount: 0, completedTaskCount: 0 });
 }
