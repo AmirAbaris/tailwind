@@ -7,5 +7,5 @@ import { TaskCountInupt } from '../../models/task-count-input.model';
   styleUrl: './task-count.component.css'
 })
 export class TaskCountComponent {
-  taskCount = input<TaskCountInupt>({ toDoTaskCount: 0, completedTaskCount: 0 });
+  taskCount = input.required<TaskCountInupt>();
 }

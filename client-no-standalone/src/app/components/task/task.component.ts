@@ -8,7 +8,7 @@ import { TaskInput } from '../../models/task-input.model';
 })
 export class TaskComponent {
   // new signal input
-  taskInput = input<TaskInput>({ todoTasks: [], completedTasks: [], searchTerm: '' });
+  taskInput = input.required<TaskInput>();
   loadingTasks = input<boolean>();
 
   @Output() deleteTaskEvent = new EventEmitter<string>();
