@@ -5,6 +5,7 @@ import { TaskCountInupt } from '../../models/task-count-input.model';
 import { TaskInput } from '../../models/task-input.model';
 import { Task } from '../../models/task.model';
 import { TaskDto } from '../../models/task-dto.model';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent {
   //#region inject functions
   readonly #taskService = inject(TaskService);
   readonly #destroyRef = inject(DestroyRef);
+  private localStorageService = inject(LocalStorageService);
   //#endregion
 
   //#region interfaces and var
@@ -41,7 +43,7 @@ export class HomeComponent {
   private fetchTasks(): void {
     this.loadingTasks = true;
 
-    this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
+    this.localStorageService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: (tasks) => {
         if (this.taskCount && this.taskInput) {
           this.taskCount.toDoTaskCount = tasks.length;

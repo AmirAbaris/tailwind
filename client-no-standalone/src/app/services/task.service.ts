@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, delay, of, tap } from 'rxjs';
 import { Task } from '../models/task.model';
 import Chance from 'chance';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 export class TaskService {
-  private tasksSource = new BehaviorSubject<Task[]>([]);
-  tasks$ = this.tasksSource.asObservable();
+  private localStorageService = inject(LocalStorageService);
+
+  // private tasksSource = new BehaviorSubject<Task[]>([]);
+  // tasks$ = this.tasksSource.asObservable();
 
   add(taskTitle: string): Observable<null> { // return the list
     // simulate HTTP request delay
@@ -21,7 +24,9 @@ export class TaskService {
           title: taskTitle,
           completed: false
         };
-        this.tasksSource.next([...this.tasksSource.value, newTask]);
+
+        // this.tasksSource.next([...this.tasksSource.value, newTask]);
+        this.localStorageService.addTask(newTask);
       })
     );
   }
@@ -30,9 +35,9 @@ export class TaskService {
     return of(null).pipe(
       delay(500),
       tap(() => {
-        const tasks: Task[] = this.tasksSource.value.filter(task => task.id !== taskId);
-
-        this.tasksSource.next(tasks);
+        // const tasks: Task[] = this.tasksSource.value.filter(task => task.id !== taskId);
+        // this.tasksSource.next(tasks);
+        this.localStorageService.deleteTask(taskId);
       })
     );
   }
@@ -41,15 +46,17 @@ export class TaskService {
     return of(null).pipe(
       delay(500),
       tap(() => {
-        const tasks: Task[] = this.tasksSource.value.map(task => {
-          if (task.id === taskId) {
-            task.completed = true;
-          }
+        // const tasks: Task[] = this.tasksSource.value.map(task => {
+        //   if (task.id === taskId) {
+        //     task.completed = true;
+        //   }
 
-          return task;
-        });
+        //   return task;
+        // });
 
-        this.tasksSource.next(tasks);
+        // this.tasksSource.next(tasks);
+
+        this.localStorageService.completeTask(taskId);
       })
     );
   }
@@ -58,15 +65,16 @@ export class TaskService {
     return of(null).pipe(
       delay(500),
       tap(() => {
-        const tasks: Task[] = this.tasksSource.value.map(task => {
-          if (task.id === taskId) {
-            task.completed = false;
-          }
+        // const tasks: Task[] = this.tasksSource.value.map(task => {
+        //   if (task.id === taskId) {
+        //     task.completed = false;
+        //   }
 
-          return task;
-        });
+        //   return task;
+        // });
 
-        this.tasksSource.next(tasks);
+        // this.tasksSource.next(tasks);
+        this.localStorageService.inCompleteTask(taskId);
       })
     );
   }
