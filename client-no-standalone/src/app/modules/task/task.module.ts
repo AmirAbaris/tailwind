@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgOptimizedImage } from '@angular/common';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [TaskComponent, TaskCountComponent, TaskFormComponent],
@@ -30,7 +31,8 @@ import { LocalStorageService } from '../../services/local-storage.service';
     MatButtonModule,
     FormsModule,
     MatDialogModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    TranslateModule.forRoot()
   ],
   providers: [TaskService, LocalStorageService],
   exports: [TaskComponent, TaskCountComponent, TaskFormComponent]

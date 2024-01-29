@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output, input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject, input } from '@angular/core';
 import { TaskInput } from '../../models/task-input.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task',
@@ -7,6 +8,10 @@ import { TaskInput } from '../../models/task-input.model';
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
+  //#region inject function
+  private translate = inject(TranslateService);
+  //#endregion
+
   // new signal input
   taskInput = input.required<TaskInput>();
 
@@ -22,7 +27,11 @@ export class TaskComponent {
     this.completeTaskEvent.emit(taskId);
   }
 
-onInCompleteTaskHandler(taskId: string): void {
+  onInCompleteTaskHandler(taskId: string): void {
     this.inCompleteTaskEvent.emit(taskId);
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translate.instant(key);
   }
 }

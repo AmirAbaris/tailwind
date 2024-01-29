@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@ngx-translate/core": "^15.0.0",
     "chance": "^1.1.11",
     "rxjs": "~7.8.0",
     "save-dev": "^0.0.1-security",
