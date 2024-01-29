@@ -22,8 +22,8 @@
                     <mat-divider />
                 </mat-card-content>
                 <mat-card-actions class="card-actions">
-                    <mat-icon class="cursor-pointer" (click)="onDeleteTask(task.id)">delete</mat-icon>
-                    <mat-icon class="cursor-pointer" (click)="onCompleteTask(task.id)">done</mat-icon>
+                    <mat-icon class="cursor-pointer" (click)="onDeleteTaskHandler(task.id)">delete</mat-icon>
+                    <mat-icon class="cursor-pointer" (click)="onCompleteTaskHandler(task.id)">done</mat-icon>
                 </mat-card-actions>
             </mat-card>
             }
@@ -50,8 +50,8 @@
                     <mat-divider></mat-divider>
                 </mat-card-content>
                 <mat-card-actions class="card-actions">
-                    <mat-icon class="cursor-pointer" (click)="onDeleteTask(task.id)">delete</mat-icon>
-                    <mat-icon class="cursor-pointer" (click)="onInCompleteTask(task.id)">undo</mat-icon>
+                    <mat-icon class="cursor-pointer" (click)="onDeleteTaskHandler(task.id)">delete</mat-icon>
+                    <mat-icon class="cursor-pointer" (click)="onInCompleteTaskHandler(task.id)">undo</mat-icon>
                 </mat-card-actions>
             </mat-card>
             }

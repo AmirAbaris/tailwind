@@ -6,8 +6,6 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { TaskCountModule } from './modules/task-count/task-count.module';
-import { TaskFormModule } from './modules/task-form/task-form.module';
 import { TaskModule } from './modules/task/task.module';
 
 @NgModule({
@@ -21,8 +19,6 @@ import { TaskModule } from './modules/task/task.module';
     AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
-    TaskCountModule,
-    TaskFormModule,
     TaskModule
   ],
   providers: [],

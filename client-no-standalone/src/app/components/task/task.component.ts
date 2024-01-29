@@ -15,15 +15,15 @@ export class TaskComponent {
   @Output() completeTaskEvent = new EventEmitter<string>();
   @Output() inCompleteTaskEvent = new EventEmitter<string>();
 
-  onDeleteTask(taskId: string): void {
+  onDeleteTaskHandler(taskId: string): void {
     this.deleteTaskEvent.emit(taskId);
   }
 
-  onCompleteTask(taskId: string): void {
+  onCompleteTaskHandler(taskId: string): void {
     this.completeTaskEvent.emit(taskId);
   }
 
-  onInCompleteTask(taskId: string): void {
+  onInCompleteTaskHandler(taskId: string): void {
     this.inCompleteTaskEvent.emit(taskId);
   }
 }

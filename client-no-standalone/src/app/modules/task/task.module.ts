@@ -5,12 +5,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TaskService } from '../../services/task.service';
+import { TaskCountComponent } from '../../components/task-count/task-count.component';
+import { TaskFormComponent } from '../../components/task-form/task-form.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [TaskComponent],
+  declarations: [TaskComponent, TaskCountComponent, TaskFormComponent],
   imports: [
     FilterPipe,
     MatInputModule,
@@ -18,9 +22,14 @@ import { TaskService } from '../../services/task.service';
     MatDividerModule,
     MatIconModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [TaskService],
-  exports: [TaskComponent]
+  exports: [TaskComponent, TaskCountComponent, TaskFormComponent]
 })
 export class TaskModule { }
