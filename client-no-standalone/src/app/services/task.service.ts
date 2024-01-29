@@ -30,21 +30,9 @@ export class TaskService {
     return of(null).pipe(
       delay(500),
       tap(() => {
-        // find the target tasks index to delete
-        const targetTask = this.tasksSource.value.findIndex(task => task.id === taskId);
+        const tasks: Task[] = this.tasksSource.value.filter(task => task.id !== taskId);
 
-        // if item not found
-        // * -1 is used for not found items in a index!
-        if (targetTask !== -1) {
-          // create a copy of the tasks array
-          const updatedTasks = [...this.tasksSource.value];
-
-          // remove the target task
-          updatedTasks.splice(targetTask, 1);
-
-          // update the observable with the new array of tasks
-          this.tasksSource.next(updatedTasks);
-        }
+        this.tasksSource.next(tasks);
       })
     );
   }
@@ -53,23 +41,15 @@ export class TaskService {
     return of(null).pipe(
       delay(500),
       tap(() => {
-        // find the target task
-        const targetTaskIndex = this.tasksSource.value.findIndex(task => task.id === taskId);
+        const tasks: Task[] = this.tasksSource.value.map(task => {
+          if (task.id === taskId) {
+            task.completed = true;
+          }
 
-        // check if the task was found
-        if (targetTaskIndex !== -1) {
-          // create a copy of the tasks array
-          const updatedTasks = [...this.tasksSource.value];
+          return task;
+        });
 
-          // complete the task
-          updatedTasks[targetTaskIndex].completed = true;
-
-          // update the observable
-          this.tasksSource.next(updatedTasks);
-
-          // log the obj
-          console.log(this.tasksSource.value);
-        }
+        this.tasksSource.next(tasks);
       })
     );
   }
@@ -78,20 +58,15 @@ export class TaskService {
     return of(null).pipe(
       delay(500),
       tap(() => {
-        // find the target task
-        const targetTaskIndex = this.tasksSource.value.findIndex(task => task.id == taskId);
+        const tasks: Task[] = this.tasksSource.value.map(task => {
+          if (task.id === taskId) {
+            task.completed = false;
+          }
 
-        // check if the task was found
-        if (targetTaskIndex !== -1) {
-          // create a copy of the task array
-          const updatedTasks = [...this.tasksSource.value];
+          return task;
+        });
 
-          // incomplete the task
-          updatedTasks[targetTaskIndex].completed = false;
-
-          // update the obsesrvable
-          this.tasksSource.next(updatedTasks);
-        }
+        this.tasksSource.next(tasks);
       })
     );
   }
