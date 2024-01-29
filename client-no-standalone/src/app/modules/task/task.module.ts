@@ -12,6 +12,7 @@ import { TaskCountComponent } from '../../components/task-count/task-count.compo
 import { TaskFormComponent } from '../../components/task-form/task-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [TaskComponent, TaskCountComponent, TaskFormComponent],
@@ -27,7 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgOptimizedImage
   ],
   providers: [TaskService],
   exports: [TaskComponent, TaskCountComponent, TaskFormComponent]
