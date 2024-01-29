@@ -11,6 +11,7 @@ export class LocalStorageService {
   tasks$ = this.taskSource.asObservable();
   //#endregion
 
+  //#region methods
   addTask(task: Task): void {
     const tasks: Task[] = [...this.taskSource.value, task];
 
@@ -46,4 +47,5 @@ export class LocalStorageService {
 
     this.taskSource.next(tasks);
   }
+  //#endregion
 }

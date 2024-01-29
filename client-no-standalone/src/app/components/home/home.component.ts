@@ -15,7 +15,7 @@ export class HomeComponent {
   //#region inject functions
   readonly #taskService = inject(TaskService);
   readonly #destroyRef = inject(DestroyRef);
-  //#endregion inject functions
+  //#endregion
 
   //#region interfaces and var
   taskCount: TaskCountInupt = {
@@ -29,13 +29,13 @@ export class HomeComponent {
   };
 
   loadingTasks: boolean | undefined;
-  //#endregion interfaces and var
+  //#endregion
 
   //#region lifecycles
   ngOnInit(): void {
     this.fetchTasks();
   }
-  //#endregion lifecycles
+  //#endregion
 
   //#region methods
   private fetchTasks(): void {
@@ -71,7 +71,7 @@ export class HomeComponent {
   inCompleteTask(taskId: string): void {
     this.#taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
   } // fist publis and then privats
-  //#endregion methods
+  //#endregion
 
   //#region DTO convertor
   private convertTaskDtoToTask(taskDto: TaskDto): Task {
@@ -83,5 +83,5 @@ export class HomeComponent {
 
     return task;
   }
-  //#endregion DTO convertor
+  //#endregion
 }
