@@ -19,7 +19,7 @@ export class HomeComponent {
   private localStorageService = inject(LocalStorageService);
   //#endregion
 
-  //#region interfaces and var
+  //#region interfaces
   taskCount: TaskCountInupt = {
     toDoTaskCount: 0,
     completedTaskCount: 0
@@ -29,8 +29,6 @@ export class HomeComponent {
     completedTasks: [],
     searchTerm: ''
   };
-
-  loadingTasks: boolean | undefined;
   //#endregion
 
   //#region lifecycles
@@ -41,8 +39,6 @@ export class HomeComponent {
 
   //#region methods
   private fetchTasks(): void {
-    this.loadingTasks = true;
-
     this.localStorageService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
       next: (tasks) => {
         if (this.taskCount && this.taskInput) {
@@ -50,13 +46,9 @@ export class HomeComponent {
           this.taskCount.completedTaskCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
           this.taskInput.todoTasks = tasks.filter(task => !task.completed);
           this.taskInput.completedTasks = tasks.filter(task => task.completed);
-
-          this.loadingTasks = false;
         }
       },
       error: (err) => {
-        this.loadingTasks = false;
-
         console.log(err);
       }
     });

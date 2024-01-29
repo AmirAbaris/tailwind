@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Task } from '../models/task.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LocalStorageService {
   //#region behavior subject
   private taskSource = new BehaviorSubject<Task[]>([]);

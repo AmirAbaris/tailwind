@@ -9,7 +9,6 @@ import { TaskInput } from '../../models/task-input.model';
 export class TaskComponent {
   // new signal input
   taskInput = input.required<TaskInput>();
-  loadingTasks = input<boolean>();
 
   @Output() deleteTaskEvent = new EventEmitter<string>();
   @Output() completeTaskEvent = new EventEmitter<string>();
@@ -23,7 +22,7 @@ export class TaskComponent {
     this.completeTaskEvent.emit(taskId);
   }
 
-  onInCompleteTaskHandler(taskId: string): void {
+onInCompleteTaskHandler(taskId: string): void {
     this.inCompleteTaskEvent.emit(taskId);
   }
 }

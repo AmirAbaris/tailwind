@@ -13,6 +13,7 @@ import { TaskFormComponent } from '../../components/task-form/task-form.componen
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgOptimizedImage } from '@angular/common';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @NgModule({
   declarations: [TaskComponent, TaskCountComponent, TaskFormComponent],
@@ -31,7 +32,7 @@ import { NgOptimizedImage } from '@angular/common';
     MatDialogModule,
     NgOptimizedImage
   ],
-  providers: [TaskService],
+  providers: [TaskService, LocalStorageService],
   exports: [TaskComponent, TaskCountComponent, TaskFormComponent]
 })
 export class TaskModule { }
