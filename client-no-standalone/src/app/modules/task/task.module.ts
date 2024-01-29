@@ -7,6 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TaskService } from '../../services/task.service';
 
 @NgModule({
   declarations: [TaskComponent],
@@ -19,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     MatProgressSpinnerModule
   ],
+  providers: [TaskService],
   exports: [TaskComponent]
 })
 export class TaskModule { }

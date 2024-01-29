@@ -3,14 +3,12 @@ import { BehaviorSubject, Observable, delay, of, tap } from 'rxjs';
 import { Task } from '../models/task.model';
 import Chance from 'chance';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TaskService {
   private tasksSource = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasksSource.asObservable();
 
-  add(taskTitle: string): Observable<null> {
+  add(taskTitle: string): Observable<null> { // return the list
     // simulate HTTP request delay
     return of(null).pipe(
       delay(500),

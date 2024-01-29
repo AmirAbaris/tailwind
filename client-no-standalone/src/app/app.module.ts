@@ -13,7 +13,7 @@ import { TaskModule } from './modules/task/task.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    HomeComponent, // create home module then import child modules!
     NavbarComponent
   ],
   imports: [

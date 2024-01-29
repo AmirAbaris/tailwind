@@ -25,6 +25,7 @@ export class HomeComponent {
     completedTasks: [],
     searchTerm: ''
   };
+  
   loadingTasks: boolean | undefined;
   //#endregion interfaces and var
 
@@ -35,7 +36,7 @@ export class HomeComponent {
   //#endregion lifecycles
 
   //#region methods
-  fetchTasks(): void {
+  private fetchTasks(): void {
     this.loadingTasks = true;
 
     this.#taskService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
@@ -67,6 +68,6 @@ export class HomeComponent {
 
   inCompleteTask(taskId: string): void {
     this.#taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
-  }
+  } // fist publis and then privats
   //#endregion methods
 }
