@@ -3,6 +3,8 @@ import { TaskService } from '../../services/task.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskCountInupt } from '../../models/task-count-input.model';
 import { TaskInput } from '../../models/task-input.model';
+import { Task } from '../../models/task.model';
+import { TaskDto } from '../../models/task-dto.model';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +27,7 @@ export class HomeComponent {
     completedTasks: [],
     searchTerm: ''
   };
-  
+
   loadingTasks: boolean | undefined;
   //#endregion interfaces and var
 
@@ -70,4 +72,16 @@ export class HomeComponent {
     this.#taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
   } // fist publis and then privats
   //#endregion methods
+
+  //#region DTO convertor
+  private convertTaskDtoToTask(taskDto: TaskDto): Task {
+    let task: Task = {
+      id: taskDto.id,
+      title: taskDto.title,
+      completed: taskDto.completed,
+    }
+
+    return task;
+  }
+  //#endregion DTO convertor
 }
