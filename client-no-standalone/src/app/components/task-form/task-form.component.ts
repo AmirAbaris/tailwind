@@ -11,26 +11,24 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './task-form.component.css'
 })
 export class TaskFormComponent {
+  //#region inject functions
   readonly #fb = inject(FormBuilder);
   readonly #taskService = inject(TaskService);
   readonly dialogRef = inject(MatDialogRef);
   readonly #destroyRef = inject(DestroyRef);
-
-  closeDialog(result: boolean): void {
-    if (result) {
-      this.dialogRef.close(result);
-    }
-  }
+  //#endregion
 
   taskGroup = this.#fb.group({
     titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
   });
 
-  // getter
+  //#region getter
   get TitleCtrl(): FormControl {
     return this.taskGroup.get('titleCtrl') as FormControl;
   }
+  //#endregion
 
+  //#region methods
   onSubmit(): void {
     if (this.taskGroup.valid) {
       this.#taskService.add(this.TitleCtrl.value).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
@@ -40,4 +38,11 @@ export class TaskFormComponent {
       this.taskGroup.reset();
     }
   }
+
+  closeDialog(result: boolean): void {
+    if (result) {
+      this.dialogRef.close(result);
+    }
+  }
+  //#endregion
 }
