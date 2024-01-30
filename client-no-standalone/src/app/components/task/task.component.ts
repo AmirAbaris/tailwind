@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject, input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject, input } from '@angular/core';
 import { TaskInput } from '../../models/task-input.model';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -7,13 +7,22 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
   //#region inject function
   private translate = inject(TranslateService);
   //#endregion
 
   // new signal input
   taskInput = input.required<TaskInput>();
+
+  param = { value: 'world' };
+
+  ngOnInit(): void {
+    this.translate.get('HELLO', { value: 'world' }).subscribe((res: string) => {
+      console.log(res);
+      //=> 'hello world'
+    });
+  }
 
   //#region out puts
   @Output() deleteTaskEvent = new EventEmitter<string>();
