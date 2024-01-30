@@ -15,10 +15,13 @@ export class TaskComponent {
   // new signal input
   taskInput = input.required<TaskInput>();
 
+  //#region out puts
   @Output() deleteTaskEvent = new EventEmitter<string>();
   @Output() completeTaskEvent = new EventEmitter<string>();
   @Output() inCompleteTaskEvent = new EventEmitter<string>();
+  //#endregion
 
+  //#region handler methods
   onDeleteTaskHandler(taskId: string): void {
     this.deleteTaskEvent.emit(taskId);
   }
@@ -30,6 +33,7 @@ export class TaskComponent {
   onInCompleteTaskHandler(taskId: string): void {
     this.inCompleteTaskEvent.emit(taskId);
   }
+  //#endregion
 
   getTranslatedText(key: string): string {
     return this.translate.instant(key);

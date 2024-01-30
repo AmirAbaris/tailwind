@@ -9,7 +9,7 @@
             <h1 class="font-poppins font-bold text-3xl">{{ getTranslatedText('To Do') }}</h1>
         </div>
 
-        @if (taskInput().todoTasks.length == 0) {
+        @if (taskInput().todoTasks.length === 0) {
         <div class="flex justify-center text-center mt-12">
             <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
                 <h3 class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h3>
@@ -40,7 +40,7 @@
             <h4 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h4>
         </div>
 
-        @if (taskInput().completedTasks.length == 0) {
+        @if (taskInput().completedTasks.length === 0) {
         <div class="flex justify-center text-center mt-12">
             <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
                 <p class="mt-2 font-poppins text-white text-xl">No Completed Tasks here 💀</p>

@@ -14,8 +14,8 @@ import { LocalStorageService } from '../../services/local-storage.service';
 })
 export class HomeComponent {
   //#region inject functions
-  readonly #taskService = inject(TaskService);
-  readonly #destroyRef = inject(DestroyRef);
+  private taskService = inject(TaskService);
+  private destroyRef = inject(DestroyRef);
   private localStorageService = inject(LocalStorageService);
   //#endregion
 
@@ -38,8 +38,20 @@ export class HomeComponent {
   //#endregion
 
   //#region methods
-  private fetchTasks(): void {
-    this.localStorageService.tasks$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe({
+  deleteTask(taskId: string): void {
+    this.taskService.delete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+  }
+
+  completeTask(taskId: string): void {
+    this.taskService.complete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+  }
+
+  inCompleteTask(taskId: string): void {
+    this.taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+  }
+
+  private fetchTasks(): void { // fist publis and then private methods
+    this.localStorageService.tasks$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (tasks) => {
         if (this.taskCount && this.taskInput) {
           this.taskCount.toDoTaskCount = tasks.length;
@@ -53,18 +65,6 @@ export class HomeComponent {
       }
     });
   }
-
-  deleteTask(taskId: string): void {
-    this.#taskService.delete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
-  }
-
-  completeTask(taskId: string): void {
-    this.#taskService.complete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
-  }
-
-  inCompleteTask(taskId: string): void {
-    this.#taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe();
-  } // fist publis and then privats
   //#endregion
 
   //#region DTO convertor
