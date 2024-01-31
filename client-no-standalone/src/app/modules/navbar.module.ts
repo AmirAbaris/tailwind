@@ -4,6 +4,9 @@ import { NavbarMainComponent } from '../components/navbar/navbar-main/navbar-mai
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { TaskAddDialogComponent } from '../components/navbar/task-add-dialog/task-add-dialog.component';
+import { TaskService } from '../services/task.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [NavbarMainComponent, TaskAddDialogComponent],
@@ -11,8 +14,11 @@ import { TaskAddDialogComponent } from '../components/navbar/task-add-dialog/tas
     MatToolbarModule,
     ReactiveFormsModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
+
   ],
+  providers: [TaskService, LocalStorageService],
   exports: [NavbarMainComponent, TaskAddDialogComponent]
 })
 export class NavbarModule { }

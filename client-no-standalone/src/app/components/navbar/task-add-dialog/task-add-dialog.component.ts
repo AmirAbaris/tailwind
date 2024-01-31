@@ -38,9 +38,7 @@ export class TaskAddDialogComponent {
       const outputValue: TaskFormOutPutModel = {
         title: this.TitleCtrl.value
       }
-      this.dialogRef.close();
-
-      this.taskService.add(this.formKeys.titleCtrl).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+      this.dialogRef.close(outputValue);
 
       this.taskGroup.reset();
     }

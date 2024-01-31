@@ -2,7 +2,7 @@
     <form [formGroup]="taskGroup" (ngSubmit)="onSubmit()">
         <div>
             <label for="title">Task Title</label>
-            <textarea matInput type="text" id="title" [formControlName="formKeys.titleCtrl"]
+            <textarea matInput type="text" id="title" formControlName="{{formKeys.titleCtrl}}"
                 class="mt-1 p-2 w-full border rounded-md"> </textarea>
             @if (taskGroup.get('titleCtrl')?.hasError('required')) {
             <mat-error>

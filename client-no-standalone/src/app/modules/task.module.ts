@@ -8,6 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskEmptyCardComponent } from '../components/task-management/task-empty-card/task-empty-card.component';
 import { TaskCountCardComponent } from '../components/task-management/task-count-card/task-count-card.component';
+import { NgOptimizedImage } from '@angular/common'
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { TaskCountCardComponent } from '../components/task-management/task-count
     imports: [
         MatCardModule,
         MatDividerModule,
-        MatIconModule
+        MatIconModule,
+        NgOptimizedImage
     ],
     exports: [
         TaskManagementMainComponent, TaskTodoComponent,
