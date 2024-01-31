@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarModule } from './modules/navbar.module';
 import { TaskModule } from './modules/task.module';
+import { TaskCountCardComponent } from './components/task-management/task-count-card/task-count-card.component';
 
 @NgModule({
   declarations: [

@@ -7,14 +7,26 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskEmptyCardComponent } from '../components/task-management/task-empty-card/task-empty-card.component';
+import { TaskCountCardComponent } from '../components/task-management/task-count-card/task-count-card.component';
 
 @NgModule({
-    declarations: [TaskManagementMainComponent, TaskTodoComponent, TaskCompletedComponent, TaskEmptyCardComponent, FilterPipe],
+    declarations: [
+        TaskManagementMainComponent,
+        TaskTodoComponent,
+        TaskCompletedComponent,
+        TaskEmptyCardComponent,
+        TaskCountCardComponent,
+        FilterPipe
+    ],
     imports: [
         MatCardModule,
         MatDividerModule,
         MatIconModule
     ],
-    exports: [TaskManagementMainComponent, TaskTodoComponent, TaskCompletedComponent, TaskEmptyCardComponent]
+    exports: [
+        TaskManagementMainComponent, TaskTodoComponent,
+        TaskCompletedComponent, TaskEmptyCardComponent,
+        TaskCountCardComponent
+    ]
 })
 export class TaskModule { }
