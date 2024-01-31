@@ -6,7 +6,7 @@ import { Task } from '../models/task.model';
 export class LocalStorageService {
   //#region behavior subject
   private taskSource = new BehaviorSubject<Task[]>([]);
-  tasks$ = this.taskSource.asObservable();
+  tasks$ = this.taskSource.asObservable(); // remove this!
   //#endregion
 
   //#region methods

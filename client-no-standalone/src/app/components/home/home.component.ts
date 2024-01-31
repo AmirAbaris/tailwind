@@ -6,6 +6,7 @@ import { TaskInput } from '../../models/task-input.model';
 import { Task } from '../../models/task.model';
 import { TaskDto } from '../../models/task-dto.model';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -51,17 +52,12 @@ export class HomeComponent {
   }
 
   private fetchTasks(): void { // fist publis and then private methods
-    this.localStorageService.tasks$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: (tasks) => {
-        if (this.taskCount && this.taskInput) {
-          this.taskCount.toDoTaskCount = tasks.length;
-          this.taskCount.completedTaskCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
-          this.taskInput.todoTasks = tasks.filter(task => !task.completed);
-          this.taskInput.completedTasks = tasks.filter(task => task.completed);
-        }
-      },
-      error: (err) => {
-        console.log(err);
+    this.localStorageService.tasks$.pipe(takeUntilDestroyed(this.destroyRef), finalize(()=> {})).subscribe((tasks) => {
+      if (this.taskCount && this.taskInput) {
+        this.taskCount.toDoTaskCount = tasks.length;
+        this.taskCount.completedTaskCount = tasks.reduce((count, task) => task.completed ? count + 1 : count, 0);
+        this.taskInput.todoTasks = tasks.filter(task => !task.completed);
+        this.taskInput.completedTasks = tasks.filter(task => task.completed);
       }
     });
   }
