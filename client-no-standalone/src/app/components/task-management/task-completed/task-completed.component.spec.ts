@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskCountComponent } from './task-count.component';
+import { TaskCompletedComponent } from './task-completed.component';
 
-describe('TaskCountComponent', () => {
-  let component: TaskCountComponent;
-  let fixture: ComponentFixture<TaskCountComponent>;
+describe('TaskCompletedComponent', () => {
+  let component: TaskCompletedComponent;
+  let fixture: ComponentFixture<TaskCompletedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TaskCountComponent]
+      declarations: [TaskCompletedComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TaskCountComponent);
+    fixture = TestBed.createComponent(TaskCompletedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
