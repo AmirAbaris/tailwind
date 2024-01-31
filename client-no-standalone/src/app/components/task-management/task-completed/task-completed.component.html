@@ -1,1 +1,24 @@
-<p>task-completed works!</p>
+<div class="flex-row items-center gap-64 justify-center lg:flex">
+    <div>
+        <div class="flex justify-center mt-12">
+            <h4 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h4>
+        </div>
+
+        <app-task-empty-card [completedTaskInput]="completedTasks" [todoTaskInput]="todoTasks" />
+
+        <div class="flex flex-col justify-center items-center mt-10 gap-8">
+            @for (task of completedTaskInput().completedTasks | filter: completedTaskInput().searchTerm; track $index) {
+            <mat-card class="card">
+                <mat-card-content>
+                    <h5>{{ task.title }}</h5>
+                    <mat-divider></mat-divider>
+                </mat-card-content>
+                <mat-card-actions class="card-actions">
+                    <mat-icon class="cursor-pointer" (click)="onDeleteTaskHandler(task.id)">delete</mat-icon>
+                    <mat-icon class="cursor-pointer" (click)="onInCompleteTaskHandler(task.id)">undo</mat-icon>
+                </mat-card-actions>
+            </mat-card>
+            }
+        </div>
+    </div>
+</div>

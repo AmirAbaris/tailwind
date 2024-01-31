@@ -1,49 +1,67 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Task } from '../models/task.model';
+import { AllTasks, Task } from '../models/task.model';
 
 @Injectable()
 export class LocalStorageService {
-  //#region behavior subject
-  private taskSource = new BehaviorSubject<Task[]>([]);
-  tasks$ = this.taskSource.asObservable(); // remove this!
+  //#region properties
+  // todoTasks: Task[] = [];
+  // completedTasks: Task[] = [];
+  allTasks: AllTasks = {
+    todoTasks: [],
+    completedTasks: []
+  }
   //#endregion
 
-  //#region methods
-  addTask(task: Task): void {
-    const tasks: Task[] = [...this.taskSource.value, task];
+  //#region constructor
+  constructor() {
+    this.allTasks.todoTasks = this.getStoredTasks('todoTasks');
+    this.allTasks.completedTasks = this.getStoredTasks('completedTasks');
+  }
+  //#endregion
 
-    this.taskSource.next(tasks);
+  //#region logical methods
+  addTodoTask(task: Task): void {
+    this.allTasks.todoTasks.push(task);
+
+    this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
   }
 
   deleteTask(taskId: string): void {
-    const tasks: Task[] = this.taskSource.value.filter(task => task.id !== taskId);
+    this.allTasks.todoTasks = this.allTasks.todoTasks.filter(task => task.id !== taskId);
+    this.allTasks.completedTasks = this.allTasks.completedTasks.filter(task => task.id !== taskId);
 
-    this.taskSource.next(tasks);
+    this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
+    this.saveTasksToStorage('completedTasks', this.allTasks.completedTasks);
   }
 
   completeTask(taskId: string): void {
-    const tasks: Task[] = this.taskSource.value.map(task => {
+    this.allTasks.todoTasks.forEach(task => {
       if (task.id === taskId) {
         task.completed = true;
       }
-
-      return task;
     });
 
-    this.taskSource.next(tasks);
+    this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
   }
 
   inCompleteTask(taskId: string): void {
-    const tasks: Task[] = this.taskSource.value.map(task => {
+    this.allTasks.completedTasks.forEach(task => {
       if (task.id === taskId) {
         task.completed = false;
       }
-
-      return task;
     });
 
-    this.taskSource.next(tasks);
+    this.saveTasksToStorage('completedTasks', this.allTasks.todoTasks);
+  }
+
+  private getStoredTasks(key: string): Task[] {
+    const taskJson = localStorage.getItem(key);
+
+    return taskJson ? JSON.parse(taskJson) : [];
+  }
+
+  private saveTasksToStorage(key: string, tasks: Task[]): void {
+    localStorage.setItem(key, JSON.stringify(tasks));
   }
   //#endregion
 }

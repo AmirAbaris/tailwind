@@ -1,1 +1,9 @@
-<p>task-management-main works!</p>
+<!-- <div class="flex justify-center items-center my-14">
+    <input type="text" [(ngModel)]="taskInput().searchTerm" placeholder="Search All tasks...">
+</div> -->
+
+<app-task-todo [todoTaskInput]="todoTaskInput" (completeTaskEvent)="completeTask($event)"
+    (deleteTaskEvent)="deleteTask($event)" />
+
+<app-task-completed [completedTaskInput]="completedTaskInput" (inCompleteTaskEvent)="inCompleteTask($event)"
+    (deleteTaskEvent)="deleteTask($event)" />

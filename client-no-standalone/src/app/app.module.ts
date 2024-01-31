@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarModule } from './modules/navbar.module';
+import { TaskModule } from './modules/task.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { NavbarModule } from './modules/navbar.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NavbarModule
+    NavbarModule,
+    TaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,14 +1,39 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, delay, of, tap } from 'rxjs';
-import { Task } from '../models/task.model';
+import { Observable, delay, of, tap } from 'rxjs';
+import { AllTasks, Task } from '../models/task.model';
 import Chance from 'chance';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 export class TaskService {
+  //#region inject functions
   private localStorageService = inject(LocalStorageService);
+  //#endregion
 
-  add(taskTitle: string): Observable<null> { // return the list
+  //#region constructor
+  constructor() {
+    this.getTodoTasks();
+    this.getCompletedTasks();
+  }
+  //#endregion
+
+  //#region properties
+  tasks: AllTasks = {
+    todoTasks: [],
+    completedTasks: []
+  };
+  //#endregion
+
+  //#region logic methods
+  getTodoTasks(): void {
+    this.tasks.todoTasks = this.localStorageService.allTasks.todoTasks;
+  }
+
+  getCompletedTasks(): void {
+    this.tasks.completedTasks = this.localStorageService.allTasks.completedTasks;
+  }
+
+  add(taskTitle: string): Observable<null> {
     // simulate HTTP request delay
     return of(null).pipe(
       delay(500),
@@ -22,7 +47,7 @@ export class TaskService {
           completed: false
         };
 
-        this.localStorageService.addTask(newTask);
+        this.localStorageService.addTodoTask(newTask);
       })
     );
   }
@@ -53,4 +78,5 @@ export class TaskService {
       })
     );
   }
+  //#endregion
 }

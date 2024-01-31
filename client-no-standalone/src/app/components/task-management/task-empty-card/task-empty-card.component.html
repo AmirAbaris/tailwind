@@ -1,1 +1,15 @@
-<p>task-empty-card works!</p>
+@if (todoTaskInput().todoTasks.length === 0) {
+<div class="flex justify-center text-center mt-12">
+    <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
+        <h3 class="mt-2 font-poppins text-white text-xl">No Current Tasks here 💀</h3>
+    </div>
+</div>
+}
+
+@if (completedTaskInput().completedTasks.length === 0) {
+<div class="flex justify-center text-center mt-12">
+    <div class="flex items-center justify-center bg-purple-400 w-80 h-32 rounded-lg">
+        <p class="mt-2 font-poppins text-white text-xl">No Completed Tasks here 💀</p>
+    </div>
+</div>
+}
