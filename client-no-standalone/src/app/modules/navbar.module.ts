@@ -7,6 +7,7 @@ import { TaskAddDialogComponent } from '../components/navbar/task-add-dialog/tas
 import { TaskService } from '../services/task.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [NavbarMainComponent, TaskAddDialogComponent],
@@ -15,7 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
 
   ],
   providers: [TaskService, LocalStorageService],

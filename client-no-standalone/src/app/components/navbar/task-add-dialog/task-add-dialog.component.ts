@@ -1,9 +1,10 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TaskService } from '../../../services/task.service';
 import { customValidators } from '../../../validators/validators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TaskFormOutPutModel } from '../../../models/task-form-output.model';
 
 @Component({
   selector: 'app-task-add-dialog',
@@ -11,21 +12,21 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './task-add-dialog.component.css'
 })
 export class TaskAddDialogComponent {
-  //#region inject functions
-  private fb = inject(FormBuilder);
-  private taskService = inject(TaskService);
-  private dialogRef = inject(MatDialogRef);
-  private destroyRef = inject(DestroyRef);
-  //#endregion
-
   //#region properties
   readonly formKeys = {
     titleCtrl: 'titleCtrl'
   }
 
-  taskGroup = this.fb.group({
-    titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
-  });
+  taskGroup: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<TaskAddDialogComponent>,
+  ) {
+    this.taskGroup = this.fb.group({
+      titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
+    });
+  }
   //#endregion
 
   get TitleCtrl(): FormControl {
@@ -37,10 +38,9 @@ export class TaskAddDialogComponent {
     if (this.taskGroup.valid) {
       const outputValue: TaskFormOutPutModel = {
         title: this.TitleCtrl.value
-      }
-      this.dialogRef.close(outputValue);
+      };
 
-      this.taskGroup.reset();
+      this.dialogRef.close(outputValue);
     }
   }
 
@@ -48,9 +48,5 @@ export class TaskAddDialogComponent {
     this.dialogRef.close();
   }
   //#endregion
-}
-
-export interface TaskFormOutPutModel {
-  title: string
 }
 

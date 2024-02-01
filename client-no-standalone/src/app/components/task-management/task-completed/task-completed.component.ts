@@ -26,7 +26,7 @@ export class TaskCompletedComponent {
 
   //#region handler methods
   onDeleteTaskHandler(taskId: string): void {
-    this.deleteTaskEvent.emit();
+    this.deleteTaskEvent.emit(taskId);
   }
   onInCompleteTaskHandler(taskId: string): void {
     this.inCompleteTaskEvent.emit(taskId);
