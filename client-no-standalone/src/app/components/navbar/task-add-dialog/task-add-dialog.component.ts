@@ -1,9 +1,7 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { TaskService } from '../../../services/task.service';
 import { customValidators } from '../../../validators/validators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskFormOutPutModel } from '../../../models/task-form-output.model';
 
 @Component({
@@ -12,13 +10,7 @@ import { TaskFormOutPutModel } from '../../../models/task-form-output.model';
   styleUrl: './task-add-dialog.component.css'
 })
 export class TaskAddDialogComponent {
-  //#region properties
-  readonly formKeys = {
-    titleCtrl: 'titleCtrl'
-  }
-
-  taskGroup: FormGroup;
-
+  //#region constructor
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TaskAddDialogComponent>,
@@ -27,6 +19,14 @@ export class TaskAddDialogComponent {
       titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
     });
   }
+  //#endregion
+
+  //#region properties
+  readonly formKeys = {
+    titleCtrl: 'titleCtrl'
+  }
+
+  taskGroup: FormGroup;
   //#endregion
 
   get TitleCtrl(): FormControl {
