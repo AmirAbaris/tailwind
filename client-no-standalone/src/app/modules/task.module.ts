@@ -11,6 +11,7 @@ import { TaskCountCardComponent } from '../components/task-management/task-count
 import { NgOptimizedImage } from '@angular/common'
 import { TaskCompleteCardComponent } from '../components/task-management/task-complete-card/task-complete-card.component';
 import { TaskTodoCardComponent } from '../components/task-management/task-todo-card/task-todo-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -27,13 +28,14 @@ import { TaskTodoCardComponent } from '../components/task-management/task-todo-c
         MatCardModule,
         MatDividerModule,
         MatIconModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        TranslateModule
     ],
     exports: [
         TaskManagementMainComponent, TaskTodoComponent,
         TaskCompletedComponent, TaskEmptyCardComponent,
         TaskCountCardComponent, TaskCompleteCardComponent,
-        TaskTodoCardComponent
+        TaskTodoCardComponent, TranslateModule
     ]
 })
 export class TaskModule { }

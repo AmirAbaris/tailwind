@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TaskManagementMainComponent } from './components/task-management/task-management-main/task-management-main.component';
+import { I18nComponent } from './components/i18n/i18n.component';
 
 const routes: Routes = [
-  { path: '', component: TaskManagementMainComponent }
+  { path: '', component: TaskManagementMainComponent },
+  { path: 'i18n', component: I18nComponent }
 ];
 
 @NgModule({
