@@ -1,16 +1,33 @@
-<div class="flex-row items-center gap-64 justify-center lg:flex">
-    <div class="flex flex-col justify-center items-center mt-10 gap-8">
-        @for (task of taskInput(); track $index) {
-        <mat-card class="card">
-            <mat-card-content>
-                <h5>{{ task.title }}</h5>
-                <mat-divider></mat-divider>
-            </mat-card-content>
-            <mat-card-actions class="card-actions">
-                <!-- <mat-icon class="cursor-pointer" (click)="onDeleteTaskHandler(task.id)">delete</mat-icon>
+<div class="flex flex-col justify-center items-center mt-10 gap-8">
+    @if (allTasksInput().todoTasks.length > 0) {
+    @for (task of allTasksInput().todoTasks; track $index) {
+    <mat-card class="card">
+        <mat-card-content>
+            <h1>{{ task.title }}</h1>
+            <mat-divider></mat-divider>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+            <!-- <mat-icon class="cursor-pointer" (click)="onDeleteTaskHandler(task.id)">delete</mat-icon>
                 <mat-icon class="cursor-pointer" (click)="onInCompleteTaskHandler(task.id)">undo</mat-icon> -->
-            </mat-card-actions>
-        </mat-card>
-        }
-    </div>
+        </mat-card-actions>
+    </mat-card>
+    }
+    }
+    @else if (allTasksInput().completedTasks.length > 0) {
+    @for (task of allTasksInput().completedTasks; track $index) {
+    <mat-card class="card">
+        <mat-card-content>
+            <h2>{{ task.title }}</h2>
+            <mat-divider></mat-divider>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+            <!-- <mat-icon class="cursor-pointer" (click)="onDeleteTaskHandler(task.id)">delete</mat-icon>
+                        <mat-icon class="cursor-pointer" (click)="onInCompleteTaskHandler(task.id)">undo</mat-icon> -->
+        </mat-card-actions>
+    </mat-card>
+    }
+    }
+    @else {
+    <app-task-empty-card />
+    }
 </div>

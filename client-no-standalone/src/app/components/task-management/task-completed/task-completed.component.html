@@ -1,10 +1,6 @@
-<div class="flex-row items-center gap-64 justify-center lg:flex">
-    <div>
-        <div class="flex justify-center mt-12">
-            <h4 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h4>
-        </div>
+<div class="flex justify-center mt-12">
+    <h4 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h4>
+</div>
+<!-- <app-task-card [allTasksInput]="taskInput()" /> -->
 
-        <app-task-empty-card [completedTaskInput]="completedTasks" [todoTaskInput]="todoTasks" />
-
-        <app-task-card [taskInput]="tasks" />
-    </div>
+<app-task-complete-card [completedTaskInput]="taskInput().completedTasks" />

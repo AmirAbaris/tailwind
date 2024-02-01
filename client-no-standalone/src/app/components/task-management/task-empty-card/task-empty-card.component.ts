@@ -7,6 +7,4 @@ import { CompletedTaskInput, TodoTaskInput } from '../../../models/task-input.mo
   styleUrl: './task-empty-card.component.css'
 })
 export class TaskEmptyCardComponent {
-  todoTaskInput = input.required<TodoTaskInput>();
-  completedTaskInput = input.required<CompletedTaskInput>();
 }

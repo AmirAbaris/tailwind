@@ -3,8 +3,10 @@
     <input type="text" [(ngModel)]="taskInput().searchTerm" placeholder="Search All tasks...">
 </div> -->
 
-<app-task-todo [todoTaskInput]="todoTaskInput" (completeTaskEvent)="completeTask($event)"
-    (deleteTaskEvent)="deleteTask($event)" />
+<div class="flex-row items-center gap-64 justify-center mt-10 lg:flex">
+    <app-task-todo [taskInput]="allTasks" (completeTaskEvent)="completeTask($event)"
+        (deleteTaskEvent)="deleteTask($event)" (deleteTaskEvent)="deleteTask($event)" />
 
-<app-task-completed [completedTaskInput]="completedTaskInput" (inCompleteTaskEvent)="inCompleteTask($event)"
-    (deleteTaskEvent)="deleteTask($event)" />
+    <app-task-completed [taskInput]="allTasks" (inCompleteTaskEvent)="inCompleteTask($event)"
+        (deleteTaskEvent)="deleteTask($event)" />
+</div>

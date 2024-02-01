@@ -10,6 +10,8 @@ import { TaskEmptyCardComponent } from '../components/task-management/task-empty
 import { TaskCountCardComponent } from '../components/task-management/task-count-card/task-count-card.component';
 import { NgOptimizedImage } from '@angular/common'
 import { TaskCardComponent } from '../components/task-management/task-card/task-card.component';
+import { TaskCompleteCardComponent } from '../components/task-management/task-complete-card/task-complete-card.component';
+import { TaskTodoCardComponent } from '../components/task-management/task-todo-card/task-todo-card.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import { TaskCardComponent } from '../components/task-management/task-card/task-
         TaskEmptyCardComponent,
         TaskCountCardComponent,
         FilterPipe,
-        TaskCardComponent
+        TaskCardComponent,
+        TaskCompleteCardComponent,
+        TaskTodoCardComponent
     ],
     imports: [
         MatCardModule,
@@ -30,7 +34,8 @@ import { TaskCardComponent } from '../components/task-management/task-card/task-
     exports: [
         TaskManagementMainComponent, TaskTodoComponent,
         TaskCompletedComponent, TaskEmptyCardComponent,
-        TaskCountCardComponent, TaskCardComponent
+        TaskCountCardComponent, TaskCardComponent, TaskCompleteCardComponent,
+        TaskTodoCardComponent
     ]
 })
 export class TaskModule { }

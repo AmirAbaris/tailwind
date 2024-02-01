@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
 import { CompletedTaskInput, TodoTaskInput } from '../../../models/task-input.model';
+import { AllTasks, Task } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-todo',
@@ -8,19 +9,10 @@ import { CompletedTaskInput, TodoTaskInput } from '../../../models/task-input.mo
 })
 export class TaskTodoComponent {
   //#region properties
-  todoTaskInput = input.required<TodoTaskInput>();
+  taskInput = input.required<AllTasks>();
+
   @Output() deleteTaskEvent = new EventEmitter<string>();
   @Output() completeTaskEvent = new EventEmitter<string>();
-
-  todoTasks: TodoTaskInput = {
-    todoTasks: [],
-    searchTerm: ''
-  }
-  
-  completedTasks: CompletedTaskInput = {
-    completedTasks: [],
-    searchTerm: ''
-  }
   //#endregion
 
   //#region handler methods

@@ -4,8 +4,6 @@ import { AllTasks, Task } from '../models/task.model';
 @Injectable()
 export class LocalStorageService {
   //#region properties
-  // todoTasks: Task[] = [];
-  // completedTasks: Task[] = [];
   allTasks: AllTasks = {
     todoTasks: [],
     completedTasks: []
@@ -35,23 +33,29 @@ export class LocalStorageService {
   }
 
   completeTask(taskId: string): void {
-    this.allTasks.todoTasks.forEach(task => {
-      if (task.id === taskId) {
-        task.completed = true;
-      }
-    });
+    const taskIndex = this.allTasks.todoTasks.findIndex(task => task.id === taskId);
 
-    this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
+    if (taskIndex !== -1) {
+      const completedTask = this.allTasks.todoTasks.splice(taskIndex, 1)[0];
+      completedTask.completed = true;
+      this.allTasks.completedTasks.push(completedTask);
+
+      this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
+      this.saveTasksToStorage('completedTasks', this.allTasks.completedTasks);
+    }
   }
 
   inCompleteTask(taskId: string): void {
-    this.allTasks.completedTasks.forEach(task => {
-      if (task.id === taskId) {
-        task.completed = false;
-      }
-    });
+    const taskIndex = this.allTasks.todoTasks.findIndex(task => task.id === taskId);
 
-    this.saveTasksToStorage('completedTasks', this.allTasks.todoTasks);
+    if (taskIndex !== -1) {
+      const completedTask = this.allTasks.todoTasks.splice(taskIndex, 1)[0];
+      completedTask.completed = false;
+      this.allTasks.completedTasks.push(completedTask);
+
+      this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
+      this.saveTasksToStorage('completedTasks', this.allTasks.completedTasks);
+    }
   }
 
   private getStoredTasks(key: string): Task[] {
