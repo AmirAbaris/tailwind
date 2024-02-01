@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
-import { CompletedTaskInput, TodoTaskInput } from '../../../models/task-input.model';
-import { AllTasks, Task } from '../../../models/task.model';
+import { Component, input } from '@angular/core';
+import { AllTasks } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-todo',

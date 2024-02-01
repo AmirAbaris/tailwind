@@ -1,5 +1,4 @@
 import { Component, input } from '@angular/core';
-import { TaskCountInupt } from '../../../models/task-count-input.model';
 import { AllTasks } from '../../../models/task.model';
 
 @Component({

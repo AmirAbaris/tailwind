@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TaskCountInupt } from '../../../models/task-count-input.model';
-import { AllTasks, Task } from '../../../models/task.model';
+import { AllTasks } from '../../../models/task.model';
 import { TaskService } from '../../../services/task.service';
 
 @Component({
