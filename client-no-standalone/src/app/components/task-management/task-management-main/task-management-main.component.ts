@@ -1,10 +1,7 @@
-import { Component, DestroyRef, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, inject } from '@angular/core';
 import { TaskCountInupt } from '../../../models/task-count-input.model';
-import { TaskDto } from '../../../dtos/task-dto.model';
 import { AllTasks, Task } from '../../../models/task.model';
 import { TaskService } from '../../../services/task.service';
-import { CompletedTaskInput, TodoTaskInput } from '../../../models/task-input.model';
 
 @Component({
   selector: 'app-task-management-main',
@@ -14,14 +11,9 @@ import { CompletedTaskInput, TodoTaskInput } from '../../../models/task-input.mo
 export class TaskManagementMainComponent {
   //#region inject functions
   private taskService = inject(TaskService);
-  private destroyRef = inject(DestroyRef);
   //#endregion
 
   //#region interfaces
-  taskCount: TaskCountInupt = {
-    toDoTaskCount: 0,
-    completedTaskCount: 0
-  };
   allTasks: AllTasks = {
     todoTasks: [],
     completedTasks: []
@@ -34,32 +26,6 @@ export class TaskManagementMainComponent {
       this.allTasks.todoTasks = this.taskService.tasks.todoTasks;
       this.allTasks.completedTasks = this.taskService.tasks.completedTasks;
     }
-  }
-  //#endregion
-
-  //#region handler methods
-  deleteTask(taskId: string): void {
-    this.taskService.delete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-  }
-
-  completeTask(taskId: string): void {
-    this.taskService.complete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-  }
-
-  inCompleteTask(taskId: string): void {
-    this.taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-  }
-  //#endregion
-
-  //#region helper methods
-  private convertTaskDtoToTask(taskDto: TaskDto): Task {
-    let task: Task = {
-      id: taskDto.id,
-      title: taskDto.title,
-      completed: taskDto.completed,
-    }
-
-    return task;
   }
   //#endregion
 }

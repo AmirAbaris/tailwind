@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { TaskCountInupt } from '../../../models/task-count-input.model';
+import { AllTasks } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-count-card',
@@ -7,5 +8,5 @@ import { TaskCountInupt } from '../../../models/task-count-input.model';
   styleUrl: './task-count-card.component.css'
 })
 export class TaskCountCardComponent {
-  taskCount = input.required<TaskCountInupt>();
+  allTasks = input.required<AllTasks>();
 }

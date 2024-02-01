@@ -10,17 +10,5 @@ import { AllTasks, Task } from '../../../models/task.model';
 export class TaskTodoComponent {
   //#region properties
   taskInput = input.required<AllTasks>();
-
-  @Output() deleteTaskEvent = new EventEmitter<string>();
-  @Output() completeTaskEvent = new EventEmitter<string>();
   //#endregion
-
-  //#region handler methods
-  onDeleteTaskHandler(taskId: string): void {
-    this.deleteTaskEvent.emit(taskId);
-  }
-
-  onCompleteTaskHandler(taskId: string): void {
-    this.completeTaskEvent.emit(taskId);
-  }
 }

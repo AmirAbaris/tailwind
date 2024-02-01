@@ -46,12 +46,12 @@ export class LocalStorageService {
   }
 
   inCompleteTask(taskId: string): void {
-    const taskIndex = this.allTasks.todoTasks.findIndex(task => task.id === taskId);
+    const taskIndex = this.allTasks.completedTasks.findIndex(task => task.id === taskId);
 
     if (taskIndex !== -1) {
-      const completedTask = this.allTasks.todoTasks.splice(taskIndex, 1)[0];
-      completedTask.completed = false;
-      this.allTasks.completedTasks.push(completedTask);
+      const inCompletedTask = this.allTasks.completedTasks.splice(taskIndex, 1)[0];
+      inCompletedTask.completed = false;
+      this.allTasks.todoTasks.push(inCompletedTask);
 
       this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
       this.saveTasksToStorage('completedTasks', this.allTasks.completedTasks);

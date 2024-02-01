@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, delay, of, tap } from 'rxjs';
 import { AllTasks, Task } from '../models/task.model';
-import Chance from 'chance';
 import { LocalStorageService } from './local-storage.service';
+import Chance from 'chance';
 
 @Injectable()
 export class TaskService {
