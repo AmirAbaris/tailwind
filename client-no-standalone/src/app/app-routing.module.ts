@@ -4,7 +4,7 @@ import { TaskManagementMainComponent } from './components/task-management/task-m
 import { I18nComponent } from './components/i18n/i18n.component';
 
 const routes: Routes = [
-  { path: '', component: TaskManagementMainComponent },
+  { path: '', loadChildren: () => import('../app/modules/task.module').then((module) => module.TaskModule) },
   { path: 'i18n', component: I18nComponent }
 ];
 

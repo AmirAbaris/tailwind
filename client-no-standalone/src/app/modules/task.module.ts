@@ -12,7 +12,11 @@ import { NgOptimizedImage } from '@angular/common'
 import { TaskCompleteCardComponent } from '../components/task-management/task-complete-card/task-complete-card.component';
 import { TaskTodoCardComponent } from '../components/task-management/task-todo-card/task-todo-card.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule, Routes } from '@angular/router';
 
+const taskRoutes: Routes = [
+    { path: '', component: TaskManagementMainComponent }
+];
 @NgModule({
     declarations: [
         TaskManagementMainComponent,
@@ -29,7 +33,8 @@ import { TranslateModule } from '@ngx-translate/core';
         MatDividerModule,
         MatIconModule,
         NgOptimizedImage,
-        TranslateModule
+        TranslateModule,
+        RouterModule.forChild(taskRoutes),
     ],
     exports: [
         TaskManagementMainComponent, TaskTodoComponent,
