@@ -1,5 +1,6 @@
 <div class="flex flex-col justify-center items-center mt-10 gap-8">
     @if (todoTaskInput().length > 0) {
+    @defer (on immediate) {
     @for (task of todoTaskInput(); track $index) {
     <mat-card class="card">
         <mat-card-content>
@@ -8,9 +9,13 @@
         </mat-card-content>
         <mat-card-actions class="card-actions">
             <mat-icon class="cursor-pointer" (click)="onDeleteTaskHandler(task.id)">delete</mat-icon>
-                <mat-icon class="cursor-pointer" (click)="onCompleteTaskHandler(task.id)">done</mat-icon>
+            <mat-icon class="cursor-pointer" (click)="onCompleteTaskHandler(task.id)">done</mat-icon>
         </mat-card-actions>
     </mat-card>
+    }
+    }
+    @placeholder {
+    <mat-spinner></mat-spinner>
     }
     }
     @else {

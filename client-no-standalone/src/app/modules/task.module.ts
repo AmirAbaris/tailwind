@@ -13,6 +13,7 @@ import { TaskCompleteCardComponent } from '../components/task-management/task-co
 import { TaskTodoCardComponent } from '../components/task-management/task-todo-card/task-todo-card.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const taskRoutes: Routes = [
     { path: '', component: TaskManagementMainComponent }
@@ -34,6 +35,7 @@ const taskRoutes: Routes = [
         MatIconModule,
         NgOptimizedImage,
         TranslateModule,
+        MatProgressSpinnerModule,
         RouterModule.forChild(taskRoutes),
     ],
     exports: [
