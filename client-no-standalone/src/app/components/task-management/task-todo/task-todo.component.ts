@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { AllTasks } from '../../../models/task.model';
+import { TaskInput } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-todo',
@@ -8,6 +8,7 @@ import { AllTasks } from '../../../models/task.model';
 })
 export class TaskTodoComponent {
   //#region properties
-  taskInput = input.required<AllTasks>();
+  taskInput = input.required<TaskInput>();
+  searchQuery = input.required<string>();
   //#endregion
 }

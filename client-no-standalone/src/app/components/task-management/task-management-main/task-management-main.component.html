@@ -1,10 +1,10 @@
 <app-task-count-card [allTasks]="allTasks" />
-<!-- <div class="flex justify-center items-center my-14">
-    <input type="text" [(ngModel)]="taskInput().searchTerm" placeholder="Search All tasks...">
-</div> -->
+
+<div class="flex justify-center items-center my-14">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search All tasks...">
+</div>
 
 <div class="flex-row items-center gap-64 justify-center mt-10 lg:flex">
-    <app-task-todo [taskInput]="allTasks" />
-
+    <app-task-todo [taskInput]="allTasks" [searchQuery]="searchQuery" />
     <app-task-completed [taskInput]="allTasks" />
 </div>

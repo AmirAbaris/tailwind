@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { AllTasks } from '../../../models/task.model';
 import { TaskService } from '../../../services/task.service';
+import { TaskInput } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-management-main',
@@ -12,11 +12,12 @@ export class TaskManagementMainComponent {
   private taskService = inject(TaskService);
   //#endregion
 
-  //#region interfaces
-  allTasks: AllTasks = {
+  //#region properties
+  allTasks: TaskInput = {
     todoTasks: [],
     completedTasks: []
   };
+  searchQuery: string = '';
   //#endregion
 
   //#region lifecycles

@@ -1,6 +1,6 @@
 
 import { Component, input } from '@angular/core';
-import { AllTasks, Task } from '../../../models/task.model';
+import { TaskInput } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-completed',
@@ -9,6 +9,6 @@ import { AllTasks, Task } from '../../../models/task.model';
 })
 export class TaskCompletedComponent {
   //#region properties
-  taskInput = input.required<AllTasks>();
+  taskInput = input.required<TaskInput>();
   //#endregion
 }

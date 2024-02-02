@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, delay, of, tap } from 'rxjs';
-import { AllTasks, Task } from '../models/task.model';
+import { Task, TaskInput } from '../models/task.model';
 import { LocalStorageService } from './local-storage.service';
 import Chance from 'chance';
 
@@ -18,7 +18,7 @@ export class TaskService {
   //#endregion
 
   //#region properties
-  tasks: AllTasks = {
+  tasks: TaskInput = {
     todoTasks: [],
     completedTasks: []
   };

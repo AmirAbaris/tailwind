@@ -14,6 +14,7 @@ import { TaskTodoCardComponent } from '../components/task-management/task-todo-c
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
 
 const taskRoutes: Routes = [
     { path: '', component: TaskManagementMainComponent }
@@ -36,6 +37,7 @@ const taskRoutes: Routes = [
         NgOptimizedImage,
         TranslateModule,
         MatProgressSpinnerModule,
+        FormsModule,
         RouterModule.forChild(taskRoutes),
     ],
     exports: [

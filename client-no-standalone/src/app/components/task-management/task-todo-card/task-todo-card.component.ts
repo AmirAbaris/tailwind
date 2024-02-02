@@ -16,6 +16,7 @@ export class TaskTodoCardComponent {
 
   //#region properties
   todoTaskInput = input.required<Task[]>();
+  searchQuery = input.required<string>();
   //#endregion
 
   //#region handler methods

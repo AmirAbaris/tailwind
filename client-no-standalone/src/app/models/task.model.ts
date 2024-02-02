@@ -4,7 +4,7 @@ export interface Task {
     completed: boolean;
 }
 
-export interface AllTasks {
+export interface TaskInput {
     todoTasks: Task[];
     completedTasks: Task[];
 }
