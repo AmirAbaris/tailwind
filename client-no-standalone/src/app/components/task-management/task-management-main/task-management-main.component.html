@@ -6,5 +6,6 @@
 
 <div class="flex-row items-center gap-64 justify-center mt-10 lg:flex">
     <app-task-todo [taskInput]="allTasks" [searchQuery]="searchQuery" />
-    <app-task-completed [taskInput]="allTasks" />
+
+    <app-task-completed [taskInput]="allTasks" [searchQuery]="searchQuery" />
 </div>

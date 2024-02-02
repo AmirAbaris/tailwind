@@ -10,5 +10,6 @@ import { TaskInput } from '../../../models/task.model';
 export class TaskCompletedComponent {
   //#region properties
   taskInput = input.required<TaskInput>();
+  searchQuery = input.required<string>();
   //#endregion
 }

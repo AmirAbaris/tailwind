@@ -16,6 +16,7 @@ export class TaskCompleteCardComponent {
 
   //#region properties
   completedTaskInput = input.required<Task[]>();
+  searchQuery = input.required<string>();
   //#endregion
 
   //#region handler methods
