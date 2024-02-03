@@ -8,8 +8,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { I18nComponent } from './components/i18n/i18n.component';
 import { TaskManagementModule } from './modules/task-management.module';
-import { TaskTodoCardManagementComponent } from './components/task-management/task-todo-card-management/task-todo-card-management.component';
-import { TaskCompletedCardManagementComponent } from './components/task-management/task-completed-card-management/task-completed-card-management.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
