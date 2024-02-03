@@ -16,6 +16,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { TaskTodoCardManagementComponent } from '../components/task-management/task-todo-card-management/task-todo-card-management.component';
+import { TaskCompletedCardManagementComponent } from '../components/task-management/task-completed-card-management/task-completed-card-management.component';
 
 const taskRoutes: Routes = [
     { path: '', component: TaskManagementMainComponent }
@@ -30,7 +31,8 @@ const taskRoutes: Routes = [
         FilterPipe,
         TaskCompleteCardComponent,
         TaskTodoCardComponent,
-        TaskTodoCardManagementComponent
+        TaskTodoCardManagementComponent,
+        TaskCompletedCardManagementComponent
     ],
     imports: [
         MatCardModule,
@@ -47,7 +49,7 @@ const taskRoutes: Routes = [
         TaskCompletedComponent, TaskEmptyCardComponent,
         TaskCountCardComponent, TaskCompleteCardComponent,
         TaskTodoCardComponent, TranslateModule,
-        TaskTodoCardManagementComponent
+        TaskTodoCardManagementComponent, TaskCompletedCardManagementComponent
     ]
 })
 export class TaskManagementModule { }

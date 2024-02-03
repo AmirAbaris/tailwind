@@ -9,22 +9,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './task-complete-card.component.css'
 })
 export class TaskCompleteCardComponent {
-  //#region inject functions
-  private taskService = inject(TaskService);
-  private destroyRef = inject(DestroyRef);
-  //#endregion
-
   //#region properties
   completedTaskInput = input.required<Task[]>();
   searchQuery = input.required<string>();
-  //#endregion
-
-  //#region handler methods
-  onDeleteTaskHandler(taskId: string): void {
-    this.taskService.delete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-  }
-  onInCompleteTaskHandler(taskId: string): void {
-    this.taskService.inComplete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-  }
   //#endregion
 }
