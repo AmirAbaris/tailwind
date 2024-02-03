@@ -47,4 +47,4 @@ const taskRoutes: Routes = [
         TaskTodoCardComponent, TranslateModule
     ]
 })
-export class TaskModule { }
+export class TaskManagementModule { }

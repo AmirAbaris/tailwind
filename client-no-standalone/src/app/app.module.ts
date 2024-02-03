@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarModule } from './modules/navbar.module';
-import { TaskModule } from './modules/task.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { I18nComponent } from './components/i18n/i18n.component';
+import { TaskManagementModule } from './modules/task-management.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -23,7 +23,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     NavbarModule,
-    TaskModule,
+    TaskManagementModule,
     HttpClientModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
