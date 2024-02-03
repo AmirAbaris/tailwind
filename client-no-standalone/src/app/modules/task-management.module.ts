@@ -15,6 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
+import { TaskTodoCardManagementComponent } from '../components/task-management/task-todo-card-management/task-todo-card-management.component';
 
 const taskRoutes: Routes = [
     { path: '', component: TaskManagementMainComponent }
@@ -28,7 +29,8 @@ const taskRoutes: Routes = [
         TaskCountCardComponent,
         FilterPipe,
         TaskCompleteCardComponent,
-        TaskTodoCardComponent
+        TaskTodoCardComponent,
+        TaskTodoCardManagementComponent
     ],
     imports: [
         MatCardModule,
@@ -44,7 +46,8 @@ const taskRoutes: Routes = [
         TaskManagementMainComponent, TaskTodoComponent,
         TaskCompletedComponent, TaskEmptyCardComponent,
         TaskCountCardComponent, TaskCompleteCardComponent,
-        TaskTodoCardComponent, TranslateModule
+        TaskTodoCardComponent, TranslateModule,
+        TaskTodoCardManagementComponent
     ]
 })
 export class TaskManagementModule { }

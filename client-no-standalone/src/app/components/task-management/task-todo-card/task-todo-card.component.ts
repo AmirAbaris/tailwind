@@ -18,13 +18,4 @@ export class TaskTodoCardComponent {
   todoTaskInput = input.required<Task[]>();
   searchQuery = input.required<string>();
   //#endregion
-
-  //#region handler methods
-  onDeleteTaskHandler(taskId: string): void {
-    this.taskService.delete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-  }
-  onCompleteTaskHandler(taskId: string): void {
-    this.taskService.complete(taskId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-  }
-  //#endregion
 }
