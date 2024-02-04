@@ -7,17 +7,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskEmptyCardComponent } from '../components/task-management/task-empty-card/task-empty-card.component';
-import { TaskCountCardComponent } from '../components/task-management/task-count-card/task-count-card.component';
 import { NgOptimizedImage } from '@angular/common'
-import { TaskCompleteCardComponent } from '../components/task-management/task-complete-card/task-complete-card.component';
-import { TaskTodoCardComponent } from '../components/task-management/task-todo-card/task-todo-card.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
-import { TaskTodoCardManagementComponent } from '../components/task-management/task-todo-card-management/task-todo-card-management.component';
-import { TaskCompletedCardManagementComponent } from '../components/task-management/task-completed-card-management/task-completed-card-management.component';
 import { FormFieldErrorDirective } from '../directives/form-field-error.directive';
+import { TaskCardComponent } from '../components/task-management/task-card/task-card.component';
+import { TaskCountComponent } from '../components/task-management/task-count/task-count.component';
+import { TaskCardManagementComponent } from '../components/task-management/task-card-management/task-card-management.component';
+
+// to see lazy load of this module works
+console.log('lazy load works!');
 
 const taskRoutes: Routes = [
     { path: '', component: TaskManagementMainComponent }
@@ -28,12 +29,10 @@ const taskRoutes: Routes = [
         TaskTodoComponent,
         TaskCompletedComponent,
         TaskEmptyCardComponent,
-        TaskCountCardComponent,
+        TaskCardManagementComponent,
+        TaskCardComponent,
+        TaskCountComponent,
         FilterPipe,
-        TaskCompleteCardComponent,
-        TaskTodoCardComponent,
-        TaskTodoCardManagementComponent,
-        TaskCompletedCardManagementComponent,
         FormFieldErrorDirective,
     ],
     imports: [
@@ -45,14 +44,6 @@ const taskRoutes: Routes = [
         MatProgressSpinnerModule,
         FormsModule,
         RouterModule.forChild(taskRoutes),
-    ],
-    exports: [
-        TaskManagementMainComponent, TaskTodoComponent,
-        TaskCompletedComponent, TaskEmptyCardComponent,
-        TaskCountCardComponent, TaskCompleteCardComponent,
-        TaskTodoCardComponent, TranslateModule,
-        TaskTodoCardManagementComponent, TaskCompletedCardManagementComponent,
-        FormFieldErrorDirective
     ]
 })
 export class TaskManagementModule { }

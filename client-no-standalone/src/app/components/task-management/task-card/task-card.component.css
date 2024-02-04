@@ -10,3 +10,11 @@ h1 {
     display: flex;
     justify-content: center;
 }
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0 12px 0 12px;
+    color: white;
+}

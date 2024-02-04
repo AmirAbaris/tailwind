@@ -1,15 +1,14 @@
-
 import { Component, EventEmitter, Output, input } from '@angular/core';
 import { Task } from '../../../models/task.model';
 
 @Component({
-  selector: 'app-task-completed',
-  templateUrl: './task-completed.component.html',
-  styleUrl: './task-completed.component.css'
+  selector: 'app-task-card',
+  templateUrl: './task-card.component.html',
+  styleUrl: './task-card.component.css'
 })
-export class TaskCompletedComponent {
+export class TaskCardComponent {
   //#region properties
-  taskName = input.required<Task[]>();
+  task = input.required<Task[]>();
   rightButton = input.required<(taskId: string) => void>();
   leftButton = input.required<(taskId: string) => void>();
 

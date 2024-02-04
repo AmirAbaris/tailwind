@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskTodoCardComponent } from './task-todo-card.component';
+import { TaskCountComponent } from './task-count.component';
 
-describe('TaskTodoCardComponent', () => {
-  let component: TaskTodoCardComponent;
-  let fixture: ComponentFixture<TaskTodoCardComponent>;
+describe('TaskCountComponent', () => {
+  let component: TaskCountComponent;
+  let fixture: ComponentFixture<TaskCountComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TaskTodoCardComponent]
+      declarations: [TaskCountComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TaskTodoCardComponent);
+    fixture = TestBed.createComponent(TaskCountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

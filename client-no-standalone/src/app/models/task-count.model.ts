@@ -1,4 +1,4 @@
-export interface TaskCountInupt {
+export interface TaskCount {
     toDoTaskCount: number;
     completedTaskCount: number;
 }

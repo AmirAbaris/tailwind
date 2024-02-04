@@ -1,11 +1,4 @@
-<app-task-count-card [allTasks]="allTasks" />
+<app-task-count [taskCounts]="taskCounts" />
 
-<div class="flex justify-center items-center my-14">
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Search All tasks...">
-</div>
-
-<div class="flex-row items-center gap-64 justify-center mt-10 lg:flex">
-    <app-task-todo [taskInput]="allTasks" [searchQuery]="searchQuery" />
-
-    <app-task-completed [taskInput]="allTasks" [searchQuery]="searchQuery" />
-</div>
+<app-task-card-management [tasks]="allTasks" [leftButton]="onDeleteTaskHandler" [rightButton]="onCompleteTaskHandler"
+    (clickLeftButton)="onCompleteTaskHandler($event)" (clickRightButton)="onDeleteTaskHandler($event)" />

@@ -1,5 +1,5 @@
-import { Component, input } from '@angular/core';
-import { TaskInput } from '../../../models/task.model';
+import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Task } from '../../../models/task.model';
 
 @Component({
   selector: 'app-task-todo',
@@ -8,7 +8,11 @@ import { TaskInput } from '../../../models/task.model';
 })
 export class TaskTodoComponent {
   //#region properties
-  taskInput = input.required<TaskInput>();
-  searchQuery = input.required<string>();
+  taskName = input.required<Task[]>();
+  rightButton = input.required<(taskId: string) => void>();
+  leftButton = input.required<(taskId: string) => void>();
+
+  @Output('clickRightButton') clickRightButtonEvent = new EventEmitter();
+  @Output('clickLeftButton') clickLeftButonEvent = new EventEmitter();
   //#endregion
 }

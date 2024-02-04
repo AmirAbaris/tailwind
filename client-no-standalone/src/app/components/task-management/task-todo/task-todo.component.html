@@ -1,5 +1,5 @@
-<div class="flex justify-center mt-12">
+<div class="flex flex-col justify-center items-center gap-10 mt-12">
     <h1 class="font-poppins font-bold text-3xl">To Do 🚀</h1>
+    <app-task-card [task]="taskName()" [leftButton]="leftButton" [rightButton]="rightButton"
+        (clickLeftButton)="clickLeftButonEvent" (clickRightButton)="clickRightButtonEvent" />
 </div>
-
-<app-task-todo-card [todoTaskInput]="taskInput().todoTasks" [searchQuery]="searchQuery()" />

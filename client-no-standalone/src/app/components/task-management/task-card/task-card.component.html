@@ -1,13 +1,16 @@
 <div class="flex flex-col justify-center items-center mt-10 gap-8">
-    @if (completedTaskInput().length > 0) {
+    @if (task().length > 0) {
     @defer (on immediate) {
-    @for (task of completedTaskInput() | filter: searchQuery(); track $index) {
+    @for (task of task(); track $index) {
     <mat-card class="card">
         <mat-card-content>
             <h1>{{ task.title }}</h1>
             <mat-divider></mat-divider>
         </mat-card-content>
-        <app-task-completed-card-management [taskIdInput]="task.id" />
+        <mat-card-actions class="card-actions">
+            <mat-icon class="cursor-pointer" (click)="leftButton()">delete</mat-icon>
+            <mat-icon class="cursor-pointer" (click)="rightButton()">done</mat-icon>
+        </mat-card-actions>
     </mat-card>
     }
     }
