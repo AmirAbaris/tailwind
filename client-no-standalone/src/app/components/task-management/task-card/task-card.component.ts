@@ -12,7 +12,7 @@ export class TaskCardComponent {
   rightButton = input.required<(taskId: string) => void>();
   leftButton = input.required<(taskId: string) => void>();
 
-  @Output('clickRightButton') clickRightButtonEvent = new EventEmitter();
-  @Output('clickLeftButton') clickLeftButonEvent = new EventEmitter();
+  @Output('clickRightButton') clickRightButtonEvent = new EventEmitter<string>();
+  @Output('clickLeftButton') clickLeftButonEvent = new EventEmitter<string>();
   //#endregion
 }
