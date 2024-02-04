@@ -57,6 +57,10 @@ export class TaskService {
       delay(500),
       tap(() => {
         this.localStorageService.deleteTask(taskId);
+
+        // reload the tasks
+        this.getTodoTasks();
+        this.getCompletedTasks();
       })
     );
   }
