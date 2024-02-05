@@ -2,11 +2,11 @@ import { Component, EventEmitter, Output, input } from '@angular/core';
 import { Task } from '../models/task.model';
 
 @Component({
-  selector: 'app-task-card-management',
-  templateUrl: './task-card-management.component.html',
-  styleUrl: './task-card-management.component.css'
+  selector: 'app-task',
+  templateUrl: './task.component.html',
+  styleUrl: './task.component.css'
 })
-export class TaskCardManagementComponent {
+export class TaskComponent {
   //#region properties
   todoTasks = input.required<Task[]>();
   completedTasks = input.required<Task[]>();
@@ -14,9 +14,17 @@ export class TaskCardManagementComponent {
   @Output() clickLeftButtonEvent = new EventEmitter<string>();
   @Output() clickRightButtonEvent = new EventEmitter<string>();
   @Output() anotherClickRightButtonEvent = new EventEmitter<string>();
-  //#endregion
+
+  // #endregion
 
   // #region handler methods
+  // public onClickLeftButtonHandler(taskId: string): void {
+  //   this.clickLeftButtonEvent.emit(taskId);
+  // }
+
+  // public onClickRightButtonHandler(taskId: string): void {
+  //   this.clickRightButtonEvent.emit(taskId);
+  // }
   public onClickDoneHandler(taskId: string): void {
     this.clickRightButtonEvent.emit(taskId);
   }

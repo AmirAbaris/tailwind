@@ -2,7 +2,7 @@ import { Component, DestroyRef } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { customValidators } from '../../../validators/validators';
-import { TaskFormOutPutModel } from '../../../models/task-form-output.model';
+import { TaskFormOutPutModel } from '../../task-management/models/task-form-output.model';
 
 @Component({
   selector: 'app-task-add-dialog',

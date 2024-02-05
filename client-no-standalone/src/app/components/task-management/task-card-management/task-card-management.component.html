@@ -1,7 +1,5 @@
 <div class="flex-row items-center gap-64 justify-center mt-10 lg:flex">
-    <app-task-todo [taskName]="tasks().todoTasks" [leftButton]="leftButton" [rightButton]="rightButton"
-        (clickLeftButton)="clickLeftButonEvent" (clickRightButton)="clickRightButtonEvent" />
-
-    <app-task-completed [taskName]="tasks().completedTasks" [leftButton]="leftButton" [rightButton]="rightButton"
-        (clickLeftButton)="clickLeftButonEvent" (clickRightButton)="clickRightButtonEvent" />
+    <app-task [todoTasks]="todoTasks()" [completedTasks]="completedTasks()"
+        (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickDoneHandler($event)"
+        (anotherClickRightButtonEvent)="onClickUndoHandler($event)" />
 </div>

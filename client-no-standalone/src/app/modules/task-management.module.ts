@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { TaskManagementMainComponent } from '../components/task-management/task-management-main/task-management-main.component';
-import { TaskTodoComponent } from '../components/task-management/task-todo/task-todo.component';
-import { TaskCompletedComponent } from '../components/task-management/task-completed/task-completed.component';
 import { FilterPipe } from "../pipes/filter.pipe";
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -16,9 +14,7 @@ import { FormFieldErrorDirective } from '../directives/form-field-error.directiv
 import { TaskCardComponent } from '../components/task-management/task-card/task-card.component';
 import { TaskCountComponent } from '../components/task-management/task-count/task-count.component';
 import { TaskCardManagementComponent } from '../components/task-management/task-card-management/task-card-management.component';
-
-// to see lazy load of this module works
-console.log('lazy load works!');
+import { TaskComponent } from '../components/task-management/task/task.component';
 
 const taskRoutes: Routes = [
     { path: '', component: TaskManagementMainComponent }
@@ -26,12 +22,11 @@ const taskRoutes: Routes = [
 @NgModule({
     declarations: [
         TaskManagementMainComponent,
-        TaskTodoComponent,
-        TaskCompletedComponent,
         TaskEmptyCardComponent,
         TaskCardManagementComponent,
         TaskCardComponent,
         TaskCountComponent,
+        TaskComponent,
         FilterPipe,
         FormFieldErrorDirective,
     ],

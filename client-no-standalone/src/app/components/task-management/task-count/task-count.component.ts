@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
-import { TaskCount } from '../../../models/task-count.model';
+import { Component, inject, input } from '@angular/core';
+import { TaskCount } from '../models/task-count.model';
+import { TaskService } from '../../../services/task.service';
 
 @Component({
   selector: 'app-task-count',
@@ -7,5 +8,7 @@ import { TaskCount } from '../../../models/task-count.model';
   styleUrl: './task-count.component.css'
 })
 export class TaskCountComponent {
-  taskCounts = input.required<TaskCount>();
+  //#region properties
+  public counts = input.required<TaskCount>();
+  //#endregion
 }

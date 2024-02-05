@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, delay, of, tap } from 'rxjs';
-import { Task, TaskInput } from '../models/task.model';
+import { Task } from '../components/task-management/models/task.model';
 import { LocalStorageService } from './local-storage.service';
 import Chance from 'chance';
 
@@ -17,20 +17,13 @@ export class TaskService {
   }
   //#endregion
 
-  //#region properties
-  tasks: TaskInput = {
-    todoTasks: [],
-    completedTasks: []
-  };
-  //#endregion
-
   //#region logic methods
-  getTodoTasks(): void {
-    this.tasks.todoTasks = this.localStorageService.allTasks.todoTasks;
+  getTodoTasks(): Observable<Task[]> {
+    return of(this.localStorageService.allTasks.todoTasks);
   }
 
-  getCompletedTasks(): void {
-    this.tasks.completedTasks = this.localStorageService.allTasks.completedTasks;
+  getCompletedTasks(): Observable<Task[]> {
+    return of(this.localStorageService.allTasks.completedTasks);
   }
 
   add(taskTitle: string): Observable<null> {
@@ -58,9 +51,7 @@ export class TaskService {
       tap(() => {
         this.localStorageService.deleteTask(taskId);
 
-        // reload the tasks
-        this.getTodoTasks();
-        this.getCompletedTasks();
+        console.log('delete is ok!');
       })
     );
   }
@@ -70,6 +61,8 @@ export class TaskService {
       delay(500),
       tap(() => {
         this.localStorageService.completeTask(taskId);
+
+        console.log('done is ok!');
       })
     );
   }
@@ -79,6 +72,8 @@ export class TaskService {
       delay(500),
       tap(() => {
         this.localStorageService.inCompleteTask(taskId);
+
+        console.log('undo is ok!');
       })
     );
   }

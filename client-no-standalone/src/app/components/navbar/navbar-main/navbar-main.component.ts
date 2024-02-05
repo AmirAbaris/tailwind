@@ -4,7 +4,7 @@ import { TaskAddDialogComponent } from '../task-add-dialog/task-add-dialog.compo
 import { TaskService } from '../../../services/task.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
-import { TaskFormOutPutModel } from '../../../models/task-form-output.model';
+import { TaskFormOutPutModel } from '../../task-management/models/task-form-output.model';
 
 @Component({
   selector: 'app-navbar-main',

@@ -8,8 +8,8 @@
             <mat-divider></mat-divider>
         </mat-card-content>
         <mat-card-actions class="card-actions">
-            <mat-icon class="cursor-pointer" (click)="leftButton()">delete</mat-icon>
-            <mat-icon class="cursor-pointer" (click)="rightButton()">done</mat-icon>
+            <mat-icon class="cursor-pointer" (click)="onClickLeftButtonHandler(task.id)">delete</mat-icon>
+            <mat-icon class="cursor-pointer" (click)="onClickRightButtonHandler(task.id)">done</mat-icon>
         </mat-card-actions>
     </mat-card>
     }

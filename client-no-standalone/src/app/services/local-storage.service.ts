@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Task, TaskInput } from '../models/task.model';
+import { Task, TaskInput } from '../components/task-management/models/task.model';
 
 @Injectable()
 export class LocalStorageService {
