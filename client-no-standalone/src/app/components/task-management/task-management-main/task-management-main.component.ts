@@ -4,6 +4,7 @@ import { Task, TaskInput } from '../models/task.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskCount } from '../models/task-count.model';
 import { forkJoin } from 'rxjs';
+import { TaskIcon } from '../models/task-card-icon.model';
 
 @Component({
   selector: 'app-task-management-main',
@@ -29,6 +30,11 @@ export class TaskManagementMainComponent {
     toDoTaskCount: 0,
     completedTaskCount: 0
   };
+  public icon: TaskIcon = {
+    delete: 'delete',
+    complete: 'done',
+    undo: 'undo'
+  }
   //#endregion
 
   //#region lifecycle

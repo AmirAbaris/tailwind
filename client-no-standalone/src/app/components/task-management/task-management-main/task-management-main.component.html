@@ -1,5 +1,5 @@
 <app-task-count [counts]="taskCount" />
 
-<app-task-card-management [todoTasks]="allTasks.todoTasks" [completedTasks]="allTasks.completedTasks"
+<app-task-card-management [todoTasks]="allTasks.todoTasks" [completedTasks]="allTasks.completedTasks" [taskIcon]="icon"
     (clickLeftButtonEvent)="onDeleteTaskHandler($event)" (clickRightButtonEvent)="onDoneTaskHandler($event)"
     (anotherClickRightButtonEvent)="onUndoTaskHandler($event)" />
