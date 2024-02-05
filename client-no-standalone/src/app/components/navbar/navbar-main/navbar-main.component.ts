@@ -5,6 +5,7 @@ import { TaskService } from '../../../services/task.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 import { TaskFormOutPutModel } from '../../task-management/models/task-form-output.model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-navbar-main',
@@ -12,10 +13,13 @@ import { TaskFormOutPutModel } from '../../task-management/models/task-form-outp
   styleUrl: './navbar-main.component.css'
 })
 export class NavbarMainComponent {
-  //#region inject funciton
+  //#region inject function
   private dialog = inject(MatDialog);
   private taskService = inject(TaskService);
   private destroyRef = inject(DestroyRef);
+  //#endregion
+
+  //#region logic method
   //#endregion
 
   //#region handler methods
@@ -25,7 +29,7 @@ export class NavbarMainComponent {
     });
 
     dialogRef.afterClosed().subscribe((outputDialog: TaskFormOutPutModel) => {
-      if (outputDialog && outputDialog.title) {
+      if (outputDialog?.title) {
         this.taskService.add(outputDialog.title).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
       }
     });

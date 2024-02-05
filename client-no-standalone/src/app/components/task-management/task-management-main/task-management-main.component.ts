@@ -45,12 +45,14 @@ export class TaskManagementMainComponent {
 
   //#region logic methods
   private _fetchData(): void {
-    forkJoin([this._taskService.getTodoTasks(), this._taskService.getCompletedTasks()]).subscribe(([todoTasks, completedTasks]) => {
-      this.allTasks.todoTasks = todoTasks;
-      this.allTasks.completedTasks = completedTasks;
+    forkJoin([this._taskService.getTodoTasks(), this._taskService.getCompletedTasks()])
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(([todoTasks, completedTasks]) => {
+        this.allTasks.todoTasks = todoTasks;
+        this.allTasks.completedTasks = completedTasks;
 
-      this._calcTaskCounts(todoTasks, completedTasks);
-    });
+        this._calcTaskCounts(todoTasks, completedTasks);
+      });
   }
 
   private _calcTaskCounts(todoTasks: Task[], completedTasks: Task[]): void {
@@ -61,11 +63,15 @@ export class TaskManagementMainComponent {
 
   //#region handler methods
   public onDoneTaskHandler(taskId: string): void {
-    this._taskService.complete(taskId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
+    this._taskService.complete(taskId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      this._fetchData();
+    });
   }
 
   public onUndoTaskHandler(taskId: string): void {
-    this._taskService.inComplete(taskId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
+    this._taskService.inComplete(taskId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+      this._fetchData();
+    });
   }
 
   public onDeleteTaskHandler(taskId: string): void {
