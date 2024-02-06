@@ -13,6 +13,7 @@ export class TaskCardComponent {
   task = input.required<Task[]>();
   taskIcon = input.required<TaskIcon>();
   taskEmptyCaption = input.required<TaskEmptyCaption>();
+  loading = input.required<boolean>();
 
   @Output() clickLeftButtonEvent = new EventEmitter<string>();
   @Output() clickRightButtonEvent = new EventEmitter<string>();

@@ -16,6 +16,7 @@ export class TaskCardManagementComponent {
   taskIcon = input.required<TaskIcon>();
   taskEmptyCaption = input.required<TaskEmptyCaption>();
   taskCaption = input.required<TaskCaption>();
+  loading = input.required<boolean>();
 
   @Output() clickLeftButtonEvent = new EventEmitter<string>();
   @Output() clickRightButtonEvent = new EventEmitter<string>();

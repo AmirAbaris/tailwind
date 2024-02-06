@@ -3,7 +3,7 @@ import { TaskService } from '../../../services/task.service';
 import { Task, TaskInput } from '../models/task.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskCount } from '../models/task-count.model';
-import { forkJoin } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 import { TaskIcon } from '../models/task-card-icon.model';
 import { TranslateService } from '@ngx-translate/core';
 import { TaskEmptyCaption } from '../models/task-input-caption.model';
@@ -52,6 +52,8 @@ export class TaskManagementMainComponent {
     completedCaption: ''
   }
 
+  public loading: boolean = true;
+
   private readonly captionSource = {
     "emptyCaption": "task-management.TaskManagementMain.TaskCardManagement.Task.TaskCard.TaskEmptyCard.taskTitle",
     "countCaption": "task-management.TaskManagementMain.TaskCount",
@@ -85,7 +87,7 @@ export class TaskManagementMainComponent {
 
   private _fetchData(): void {
     forkJoin([this._taskService.getTodoTasks(), this._taskService.getCompletedTasks()])
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef), finalize(() => this.loading = false))
       .subscribe(([todoTasks, completedTasks]) => {
         this.allTasks.todoTasks = todoTasks;
         this.allTasks.completedTasks = completedTasks;

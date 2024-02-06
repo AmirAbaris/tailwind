@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskEmptyCardComponent } from '../components/task-management/task-empty-card/task-empty-card.component';
-import { NgOptimizedImage } from '@angular/common'
+import { CommonModule, NgOptimizedImage } from '@angular/common'
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -38,6 +38,7 @@ const taskRoutes: Routes = [
         TranslateModule,
         MatProgressSpinnerModule,
         FormsModule,
+        CommonModule,
         RouterModule.forChild(taskRoutes),
     ]
 })

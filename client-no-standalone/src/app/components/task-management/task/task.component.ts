@@ -16,21 +16,14 @@ export class TaskComponent {
   taskIcon = input.required<TaskIcon>();
   taskEmptyCaption = input.required<TaskEmptyCaption>();
   taskCaption = input.required<TaskCaption>();
+  loading = input.required<boolean>();
 
   @Output() clickLeftButtonEvent = new EventEmitter<string>();
   @Output() clickRightButtonEvent = new EventEmitter<string>();
   @Output() anotherClickRightButtonEvent = new EventEmitter<string>();
-
   // #endregion
 
-  // #region handler methods
-  // public onClickLeftButtonHandler(taskId: string): void {
-  //   this.clickLeftButtonEvent.emit(taskId);
-  // }
-
-  // public onClickRightButtonHandler(taskId: string): void {
-  //   this.clickRightButtonEvent.emit(taskId);
-  // }
+  //#region handler methods
   public onClickDoneHandler(taskId: string): void {
     this.clickRightButtonEvent.emit(taskId);
   }

@@ -1,11 +1,12 @@
 <div class="flex flex-col justify-center items-center gap-10 mt-12">
     <h1 class="font-poppins font-bold text-3xl">{{taskCaption().todoCaption}}</h1>
-    <app-task-card [taskEmptyCaption]="taskEmptyCaption()" [task]="todoTasks()" [taskIcon]="taskIcon()"
+    <app-task-card [loading]="loading()" [taskEmptyCaption]="taskEmptyCaption()" [task]="todoTasks()" [taskIcon]="taskIcon()"
         (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickDoneHandler($event)" />
 </div>
 
 <div class="flex flex-col justify-center items-center gap-10 mt-12">
     <h2 class="font-poppins font-bold text-3xl">{{taskCaption().completedCaption}}</h2>
-    <app-task-card [taskEmptyCaption]="taskEmptyCaption()" [task]="completedTasks()" [taskIcon]="taskIcon()"
-        (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickUndoHandler($event)" />
+    <app-task-card [loading]="loading()" [taskEmptyCaption]="taskEmptyCaption()" [task]="completedTasks()"
+        [taskIcon]="taskIcon()" (clickLeftButtonEvent)="onClickDeleteHandler($event)"
+        (clickRightButtonEvent)="onClickUndoHandler($event)" />
 </div>
