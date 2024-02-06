@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
 import { Task } from '../models/task.model';
 import { TaskIcon } from '../models/task-card-icon.model';
+import { TaskEmptyCaption } from '../models/task-input-caption.model';
 
 @Component({
   selector: 'app-task-card-management',
@@ -12,7 +13,7 @@ export class TaskCardManagementComponent {
   todoTasks = input.required<Task[]>();
   completedTasks = input.required<Task[]>();
   taskIcon = input.required<TaskIcon>();
-
+  taskEmptyCaption = input.required<TaskEmptyCaption>();
 
   @Output() clickLeftButtonEvent = new EventEmitter<string>();
   @Output() clickRightButtonEvent = new EventEmitter<string>();

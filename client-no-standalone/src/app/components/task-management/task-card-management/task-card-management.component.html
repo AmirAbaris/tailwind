@@ -1,5 +1,5 @@
 <div class="flex-row items-center gap-64 justify-center mt-10 lg:flex">
-    <app-task [todoTasks]="todoTasks()" [taskIcon]="taskIcon()" [completedTasks]="completedTasks()"
+    <app-task [taskEmptyCaption]="taskEmptyCaption()" [todoTasks]="todoTasks()" [taskIcon]="taskIcon()" [completedTasks]="completedTasks()"
         (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickDoneHandler($event)"
         (anotherClickRightButtonEvent)="onClickUndoHandler($event)" />
 </div>

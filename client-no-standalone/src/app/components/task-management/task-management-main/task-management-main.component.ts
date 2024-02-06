@@ -5,6 +5,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskCount } from '../models/task-count.model';
 import { forkJoin } from 'rxjs';
 import { TaskIcon } from '../models/task-card-icon.model';
+import { TranslateService } from '@ngx-translate/core';
+import { TaskEmptyCaption } from '../models/task-input-caption.model';
+import { TaskCountCaption } from '../models/task-count-caption.model';
 
 @Component({
   selector: 'app-task-management-main',
@@ -15,6 +18,7 @@ export class TaskManagementMainComponent {
   //#region inject functions
   private _taskService = inject(TaskService);
   private _destroyRef = inject(DestroyRef);
+  private _translateService = inject(TranslateService);
 
   @Output() clickLeftButtonEvent = new EventEmitter<string>();
   @Output() clickRightButtonEvent = new EventEmitter<string>();
@@ -25,25 +29,48 @@ export class TaskManagementMainComponent {
   public allTasks: TaskInput = {
     todoTasks: [],
     completedTasks: []
-  };
+  }
   public taskCount: TaskCount = {
     toDoTaskCount: 0,
     completedTaskCount: 0
-  };
+  }
   public icon: TaskIcon = {
     delete: 'delete',
     complete: 'done',
     undo: 'undo'
+  }
+  public taskEmptyCaption: TaskEmptyCaption = {
+    emptyTitle: ''
+  }
+  public taskCountCaption: TaskCountCaption = {
+    dayCaption: '',
+    taskCaption: ''
+  }
+
+  private readonly captionSource = {
+    "emptyCaption": "task-management.TaskManagementMain.TaskCardManagement.Task.TaskCard.TaskEmptyCard.taskTitle",
+    "countCaption": "task-management.TaskManagementMain.TaskCount"
   }
   //#endregion
 
   //#region lifecycle
   ngOnInit(): void {
     this._fetchData();
+    this._fetchCaptions();
   }
   //#endregion
 
   //#region logic methods
+  private _fetchCaptions(): void {
+    this._translateService.get(this.captionSource.emptyCaption).subscribe((taskEmptyCap) => {
+      this.taskEmptyCaption.emptyTitle = taskEmptyCap;
+    });
+    this._translateService.get(this.captionSource.countCaption).subscribe((cap) => {
+      this.taskCountCaption.dayCaption = cap.dayTitle;
+      this.taskCountCaption.taskCaption = cap.taskTitle;
+    });
+  }
+
   private _fetchData(): void {
     forkJoin([this._taskService.getTodoTasks(), this._taskService.getCompletedTasks()])
       .pipe(takeUntilDestroyed(this._destroyRef))

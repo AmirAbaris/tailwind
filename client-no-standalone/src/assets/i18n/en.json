@@ -1,5 +1,19 @@
 {
-    "data": {
-        "details": "this is a test for translation"
+    "task-management": {
+        "TaskManagementMain": {
+            "TaskCount": {
+                "dayTitle": "today",
+                "taskTitle": "Task"
+            },
+            "TaskCardManagement": {
+                "Task": {
+                    "TaskCard": {
+                        "TaskEmptyCard": {
+                            "taskTitle": "No Task here"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

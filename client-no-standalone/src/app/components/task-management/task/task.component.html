@@ -1,11 +1,11 @@
 <div class="flex flex-col justify-center items-center gap-10 mt-12">
     <h1 class="font-poppins font-bold text-3xl">To Do 🚀</h1>
-    <app-task-card [task]="todoTasks()" [taskIcon]="taskIcon()"
+    <app-task-card [taskEmptyCaption]="taskEmptyCaption()" [task]="todoTasks()" [taskIcon]="taskIcon()"
         (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickDoneHandler($event)" />
 </div>
 
 <div class="flex flex-col justify-center items-center gap-10 mt-12">
     <h1 class="font-poppins font-bold text-3xl">Complete 💆🏻‍♂️</h1>
-    <app-task-card [task]="completedTasks()" [taskIcon]="taskIcon()"
+    <app-task-card [taskEmptyCaption]="taskEmptyCaption()" [task]="completedTasks()" [taskIcon]="taskIcon()"
         (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickUndoHandler($event)" />
 </div>
