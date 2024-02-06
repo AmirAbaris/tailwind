@@ -2,7 +2,14 @@
     "task-management": {
         "NavbarMain": {
             "mainTitle": "Hello 👋🏻",
-            "addTask": "Add task"
+            "addTask": "Add task",
+            "TaskDialog": {
+                "taskTitle": "Task Title",
+                "reqError": "This field is required.",
+                "spaceError": "Can't let that input",
+                "addTask": "Add",
+                "close": "Close"
+            }
         },
         "TaskManagementMain": {
             "TaskCount": {

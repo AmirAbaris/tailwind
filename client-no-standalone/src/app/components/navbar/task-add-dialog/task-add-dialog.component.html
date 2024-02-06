@@ -1,23 +1,24 @@
 <div mat-dialog-content>
     <form [formGroup]="taskGroup" (ngSubmit)="onSubmit()">
         <div>
-            <label for="title">Task Title</label>
+            <label for="title">{{data.titleCaption}}</label>
             <textarea matInput type="text" id="title" formControlName="{{formKeys.titleCtrl}}"
                 class="mt-1 p-2 w-full border rounded-md"> </textarea>
             @if (taskGroup.get('titleCtrl')?.hasError('required')) {
             <mat-error>
-                This field is required.
+                {{data.reqErrorCaption}}
             </mat-error>
             }
             @else if (taskGroup.get('titleCtrl')?.hasError('allSpaces')) {
             <mat-error>
-                Can't let that input
+                {{data.spaceErrorCaption}}
             </mat-error>
             }
         </div>
         <div class="actions" mat-dialog-actions>
-            <button mat-raised-button color="primary" type="submit" [disabled]="taskGroup.invalid">Add</button>
-            <button mat-button mat-dialog-close cdkFocusInitial (click)="closeDialog()">Close</button>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="taskGroup.invalid">{{data.addTaskCaption}}</button>
+            <button mat-button mat-dialog-close cdkFocusInitial (click)="closeDialog()">{{data.closeCaption}}</button>
         </div>
     </form>
 </div>

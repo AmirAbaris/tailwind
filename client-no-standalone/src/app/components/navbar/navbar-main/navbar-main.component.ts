@@ -1,13 +1,12 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { TaskAddDialogComponent } from '../task-add-dialog/task-add-dialog.component';
 import { TaskService } from '../../../services/task.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormGroup } from '@angular/forms';
 import { TaskFormOutPutModel } from '../../task-management/models/task-form-output.model';
-import { forkJoin } from 'rxjs';
 import { NavbarMainCaption } from '../models/navbar-main-caption.model';
 import { TranslateService } from '@ngx-translate/core';
+import { TaskDialogCaption } from '../models/task-dialog-caption.model';
 
 @Component({
   selector: 'app-navbar-main',
@@ -28,8 +27,17 @@ export class NavbarMainComponent implements OnInit {
     addTaskCaption: ''
   }
 
+  public taskDialogCaption: TaskDialogCaption = {
+    titleCaption: '',
+    reqErrorCaption: '',
+    spaceErrorCaption: '',
+    addTaskCaption: '',
+    closeCaption: ''
+  }
+
   private readonly captionSource = {
-    "navbarMainCaption": "task-management.NavbarMain"
+    "navbarMainCaption": "task-management.NavbarMain",
+    "taskDialogCaption": "task-management.NavbarMain.TaskDialog"
   }
   //#endregion
 
@@ -45,13 +53,22 @@ export class NavbarMainComponent implements OnInit {
       this.navbarCaption.titleCaption = cap.mainTitle;
       this.navbarCaption.addTaskCaption = cap.addTask;
     });
+
+    this._translateService.get(this.captionSource.taskDialogCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
+      this.taskDialogCaption.titleCaption = cap.taskTitle;
+      this.taskDialogCaption.reqErrorCaption = cap.reqError;
+      this.taskDialogCaption.spaceErrorCaption = cap.spaceError;
+      this.taskDialogCaption.addTaskCaption = cap.addTask;
+      this.taskDialogCaption.closeCaption = cap.close;
+    });
   }
   //#endregion
 
   //#region handler methods
   public addTask(): void {
     const dialogRef = this._dialog.open(TaskAddDialogComponent, {
-      width: '500px'
+      width: '500px',
+      data: this.taskDialogCaption
     });
 
     dialogRef.afterClosed().subscribe((outputDialog: TaskFormOutPutModel) => {

@@ -1,8 +1,9 @@
-import { Component, DestroyRef } from '@angular/core';
+import { Component, DestroyRef, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { customValidators } from '../../../validators/validators';
 import { TaskFormOutPutModel } from '../../task-management/models/task-form-output.model';
+import { TaskDialogCaption } from '../models/task-dialog-caption.model';
 
 @Component({
   selector: 'app-task-add-dialog',
@@ -14,6 +15,7 @@ export class TaskAddDialogComponent {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TaskAddDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TaskDialogCaption
   ) {
     this.taskGroup = this.fb.group({
       titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
