@@ -8,6 +8,7 @@ import { TaskIcon } from '../models/task-card-icon.model';
 import { TranslateService } from '@ngx-translate/core';
 import { TaskEmptyCaption } from '../models/task-input-caption.model';
 import { TaskCountCaption } from '../models/task-count-caption.model';
+import { TaskCaption } from '../models/task-caption.model';
 
 @Component({
   selector: 'app-task-management-main',
@@ -46,10 +47,15 @@ export class TaskManagementMainComponent {
     dayCaption: '',
     taskCaption: ''
   }
+  public taskCaption: TaskCaption = {
+    todoCaption: '',
+    completedCaption: ''
+  }
 
   private readonly captionSource = {
     "emptyCaption": "task-management.TaskManagementMain.TaskCardManagement.Task.TaskCard.TaskEmptyCard.taskTitle",
-    "countCaption": "task-management.TaskManagementMain.TaskCount"
+    "countCaption": "task-management.TaskManagementMain.TaskCount",
+    "taskCaption": "task-management.TaskManagementMain.TaskCardManagement.Task"
   }
   //#endregion
 
@@ -62,12 +68,18 @@ export class TaskManagementMainComponent {
 
   //#region logic methods
   private _fetchCaptions(): void {
-    this._translateService.get(this.captionSource.emptyCaption).subscribe((taskEmptyCap) => {
-      this.taskEmptyCaption.emptyTitle = taskEmptyCap;
+    this._translateService.get(this.captionSource.emptyCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
+      this.taskEmptyCaption.emptyTitle = cap;
     });
-    this._translateService.get(this.captionSource.countCaption).subscribe((cap) => {
+
+    this._translateService.get(this.captionSource.countCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
       this.taskCountCaption.dayCaption = cap.dayTitle;
       this.taskCountCaption.taskCaption = cap.taskTitle;
+    });
+
+    this._translateService.get(this.captionSource.taskCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
+      this.taskCaption.todoCaption = cap.todoTitle;
+      this.taskCaption.completedCaption = cap.completedTitle;
     });
   }
 

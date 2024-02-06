@@ -1,5 +1,9 @@
 {
     "task-management": {
+        "NavbarMain": {
+            "mainTitle": "Hello 👋🏻",
+            "addTask": "Add task"
+        },
         "TaskManagementMain": {
             "TaskCount": {
                 "dayTitle": "today",
@@ -7,6 +11,8 @@
             },
             "TaskCardManagement": {
                 "Task": {
+                    "todoTitle": "To Do 🚀",
+                    "completedTitle": "Complete 💆🏻‍♂️",
                     "TaskCard": {
                         "TaskEmptyCard": {
                             "taskTitle": "No Task here"
