@@ -3,11 +3,11 @@
     <app-task-card [loading]="loading()" [taskEmptyCaption]="taskEmptyCaption()" [task]="todoTasks()"
         [rightIcon]="'done'" [leftIcon]="'delete'" (clickLeftButtonEvent)="onClickDeleteHandler($event)"
         (clickRightButtonEvent)="onClickDoneHandler($event)" />
-</div>
 
-<div class="flex flex-col justify-center items-center gap-10 mt-12">
+
     <h2 class="font-poppins font-bold text-3xl">{{taskCaption().completedCaption}}</h2>
     <app-task-card [loading]="loading()" [taskEmptyCaption]="taskEmptyCaption()" [task]="completedTasks()"
         [rightIcon]="'undo'" [leftIcon]="'delete'" (clickLeftButtonEvent)="onClickDeleteHandler($event)"
         (clickRightButtonEvent)="onClickUndoHandler($event)" />
+
 </div>

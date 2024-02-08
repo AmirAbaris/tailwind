@@ -25,16 +25,18 @@ export class TaskAddDialogComponent {
   //#endregion
 
   //#region properties
+  public taskGroup: FormGroup;
+
   readonly formKeys = {
     titleCtrl: 'titleCtrl'
   }
-
-  taskGroup: FormGroup;
   //#endregion
 
+  //#region helper methods
   get TitleCtrl(): FormControl {
     return this.taskGroup.get(this.formKeys.titleCtrl) as FormControl;
   }
+  //#endregion
 
   //#region handler methods
   onSubmit(): void {

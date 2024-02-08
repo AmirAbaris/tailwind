@@ -16,22 +16,22 @@ export class TaskCardManagementComponent {
   taskCaption = input.required<TaskCaptionModel>();
   loading = input.required<boolean>();
 
-  @Output() clickLeftButtonEvent = new EventEmitter<string>();
-  @Output() clickRightButtonEvent = new EventEmitter<string>();
-  @Output() anotherClickRightButtonEvent = new EventEmitter<string>();
+  @Output() deleteTaskEvent = new EventEmitter<string>();
+  @Output() completeTaskEvent = new EventEmitter<string>();
+  @Output() inCompleteTaskEvent = new EventEmitter<string>();
   //#endregion
 
   // #region handler methods
   public onClickDoneHandler(taskId: string): void {
-    this.clickRightButtonEvent.emit(taskId);
+    this.completeTaskEvent.emit(taskId);
   }
 
   public onClickUndoHandler(taskId: string): void {
-    this.anotherClickRightButtonEvent.emit(taskId);
+    this.inCompleteTaskEvent.emit(taskId);
   }
 
   public onClickDeleteHandler(taskId: string): void {
-    this.clickLeftButtonEvent.emit(taskId);
+    this.deleteTaskEvent.emit(taskId);
   }
   //#endregion
 }
