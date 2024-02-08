@@ -17,10 +17,6 @@ export class TaskManagementMainComponent implements OnInit {
   //#region inject functions
   private _taskService = inject(TaskService);
   private _translateService = inject(TranslateService);
-
-  @Output() clickLeftButtonEvent = new EventEmitter<string>();
-  @Output() clickRightButtonEvent = new EventEmitter<string>();
-  @Output() anotherRightButtonEvent = new EventEmitter<string>();
   //#endregion
 
   //#region properties

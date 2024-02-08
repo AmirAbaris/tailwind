@@ -4,9 +4,10 @@ import { TaskAddDialogComponent } from '../task-add-dialog/task-add-dialog.compo
 import { TaskService } from '../../../services/task.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TaskFormOutPutModel } from '../models/task-form-output.model';
-import { NavbarMainCaption } from '../models/navbar-main-caption.model';
+import { NavbarMainCaptionModel } from '../models/navbar-main-caption.model';
 import { TranslateService } from '@ngx-translate/core';
-import { TaskDialogCaption } from '../models/task-dialog-caption.model';
+import { ErrorCaptionModel } from '../models/error-caption.model';
+import { TaskDialogCaptionModel } from '../models/task-dialog-caption.model';
 
 @Component({
   selector: 'app-navbar-main',
@@ -22,22 +23,26 @@ export class NavbarMainComponent implements OnInit {
   //#endregion
 
   //#region properties
-  public navbarCaption: NavbarMainCaption = {
-    titleCaption: '',
-    addTaskCaption: ''
+  public navbarCaption: NavbarMainCaptionModel = {
+    mainTitle: '',
+    addTask: ''
   }
 
-  public taskDialogCaption: TaskDialogCaption = {
-    titleCaption: '',
-    reqErrorCaption: '',
-    spaceErrorCaption: '',
-    addTaskCaption: '',
-    closeCaption: ''
+  public taskDialogCaption: TaskDialogCaptionModel = {
+    taskTitle: '',
+    addTask: '',
+    close: ''
+  }
+
+  public errorCaption: ErrorCaptionModel = {
+    reqError: '',
+    spaceError: ''
   }
 
   private readonly captionSource = {
     "navbarMainCaption": "navbar.NavbarMain",
-    "taskDialogCaption": "navbar.TaskDialog"
+    "taskDialogCaption": "navbar.TaskDialog",
+    "errorCaption": "error-output"
   }
   //#endregion
 
@@ -49,17 +54,17 @@ export class NavbarMainComponent implements OnInit {
 
   //#region logic method
   private _fetchCaption(): void {
-    this._translateService.get(this.captionSource.navbarMainCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
-      this.navbarCaption.titleCaption = cap.mainTitle;
-      this.navbarCaption.addTaskCaption = cap.addTask;
+    this._translateService.get(this.captionSource.navbarMainCaption).subscribe((cap) => {
+      this.navbarCaption = cap;
     });
 
-    this._translateService.get(this.captionSource.taskDialogCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
-      this.taskDialogCaption.titleCaption = cap.taskTitle;
-      this.taskDialogCaption.reqErrorCaption = cap.reqError;
-      this.taskDialogCaption.spaceErrorCaption = cap.spaceError;
-      this.taskDialogCaption.addTaskCaption = cap.addTask;
-      this.taskDialogCaption.closeCaption = cap.close;
+    this._translateService.get(this.captionSource.taskDialogCaption).subscribe((cap) => {
+
+      this.taskDialogCaption = cap;
+    });
+
+    this._translateService.get(this.captionSource.errorCaption).subscribe((cap) => {
+      this.errorCaption = cap;
     });
   }
   //#endregion
@@ -68,7 +73,10 @@ export class NavbarMainComponent implements OnInit {
   public addTask(): void {
     const dialogRef = this._dialog.open(TaskAddDialogComponent, {
       width: '500px',
-      data: this.taskDialogCaption
+      data: {
+        taskDialogCaption: this.taskDialogCaption,
+        errorCaption: this.errorCaption
+      }
     });
 
     dialogRef.afterClosed().subscribe((outputDialog: TaskFormOutPutModel) => {

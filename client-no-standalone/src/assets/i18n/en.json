@@ -1,4 +1,8 @@
 {
+    "error-output": {
+        "reqError": "This field is required.",
+        "spaceError": "Can't let that input"
+    },
     "task-management": {
         "TaskManagementMain": {},
         "TaskCardManagement": {},
@@ -22,8 +26,6 @@
         },
         "TaskDialog": {
             "taskTitle": "Task Title",
-            "reqError": "This field is required.",
-            "spaceError": "Can't let that input",
             "addTask": "Add",
             "close": "Close"
         }

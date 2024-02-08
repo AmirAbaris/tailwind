@@ -1,4 +1,4 @@
-export interface NavbarMainCaption {
-    titleCaption: string;
-    addTaskCaption: string;
+export interface NavbarMainCaptionModel {
+    mainTitle: string;
+    addTask: string;
 }

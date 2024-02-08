@@ -3,7 +3,8 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { customValidators } from '../../../validators/validators';
 import { TaskFormOutPutModel } from '../models/task-form-output.model';
-import { TaskDialogCaption } from '../models/task-dialog-caption.model';
+import { ErrorCaptionModel } from '../models/error-caption.model';
+import { TaskDialogCaptionModel } from '../models/task-dialog-caption.model';
 
 @Component({
   selector: 'app-task-add-dialog',
@@ -15,7 +16,7 @@ export class TaskAddDialogComponent {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TaskAddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: TaskDialogCaption
+    @Inject(MAT_DIALOG_DATA) public data: { taskDialogCaption: TaskDialogCaptionModel, errorCaption: ErrorCaptionModel }
   ) {
     this.taskGroup = this.fb.group({
       titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
