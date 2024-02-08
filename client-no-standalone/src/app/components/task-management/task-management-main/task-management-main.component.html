@@ -1,5 +1,7 @@
 <app-task-count [caption]="taskCountCaption" [counts]="taskCount" />
 
-<app-task-card-management [loading]="loading" [taskCaption]="taskCaption" [taskEmptyCaption]="taskEmptyCaption" [todoTasks]="allTasks.todoTasks"
-    [completedTasks]="allTasks.completedTasks" [taskIcon]="icon" (clickLeftButtonEvent)="onDeleteTaskHandler($event)"
-    (clickRightButtonEvent)="onDoneTaskHandler($event)" (anotherClickRightButtonEvent)="onUndoTaskHandler($event)" />
+
+<app-task-card-management [loading]="loading" [taskCaption]="taskCaption" [taskEmptyCaption]="taskEmptyCaption"
+    [todoTasks]="allTasks.todoTasks" [completedTasks]="allTasks.completedTasks"
+    (clickLeftButtonEvent)="onDeleteTaskHandler($event)" (clickRightButtonEvent)="onDoneTaskHandler($event)"
+    (anotherClickRightButtonEvent)="onUndoTaskHandler($event)" />

@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { TaskEmptyCaption } from '../models/task-input-caption.model';
+import { TaskEmptyCaptionModel } from '../models/task-input-caption.model';
 
 @Component({
   selector: 'app-task-empty-card',
@@ -8,6 +8,6 @@ import { TaskEmptyCaption } from '../models/task-input-caption.model';
 })
 export class TaskEmptyCardComponent {
   //#region properties
-  taskEmptyCaption = input.required<TaskEmptyCaption>();
+  taskEmptyCaption = input.required<TaskEmptyCaptionModel>();
   //#endregion
 }

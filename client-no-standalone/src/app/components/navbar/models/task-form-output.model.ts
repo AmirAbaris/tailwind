@@ -1,3 +1,3 @@
 export interface TaskFormOutPutModel {
-    title: string
+    title: string;
 }

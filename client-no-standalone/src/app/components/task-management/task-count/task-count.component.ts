@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { TaskCount } from '../models/task-count.model';
-import { TaskCountCaption } from '../models/task-count-caption.model';
+import { TaskCountModel } from '../models/task-count.model';
+import { TaskCountCaptionModel } from '../models/task-count-caption.model';
 
 @Component({
   selector: 'app-task-count',
@@ -9,7 +9,7 @@ import { TaskCountCaption } from '../models/task-count-caption.model';
 })
 export class TaskCountComponent {
   //#region properties
-  counts = input.required<TaskCount>();
-  caption = input.required<TaskCountCaption>();
+  counts = input.required<TaskCountModel>();
+  caption = input.required<TaskCountCaptionModel>();
   //#endregion
 }

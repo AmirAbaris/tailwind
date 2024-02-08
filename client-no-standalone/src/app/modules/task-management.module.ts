@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { TaskManagementMainComponent } from '../components/task-management/task-management-main/task-management-main.component';
-import { FilterPipe } from "../pipes/filter.pipe";
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +13,6 @@ import { FormFieldErrorDirective } from '../directives/form-field-error.directiv
 import { TaskCardComponent } from '../components/task-management/task-card/task-card.component';
 import { TaskCountComponent } from '../components/task-management/task-count/task-count.component';
 import { TaskCardManagementComponent } from '../components/task-management/task-card-management/task-card-management.component';
-import { TaskComponent } from '../components/task-management/task/task.component';
 import { TaskService } from '../services/task.service';
 import { LocalStorageService } from '../services/local-storage.service';
 
@@ -28,8 +26,6 @@ const taskRoutes: Routes = [
         TaskCardManagementComponent,
         TaskCardComponent,
         TaskCountComponent,
-        TaskComponent,
-        FilterPipe,
         FormFieldErrorDirective,
     ],
     imports: [

@@ -1,10 +1,10 @@
-export interface Task {
+export interface TaskModel {
     id: string;
     title: string;
     completed: boolean;
 }
 
-export interface TaskInput {
-    todoTasks: Task[];
-    completedTasks: Task[];
+export interface TaskInputModel {
+    todoTasks: TaskModel[];
+    completedTasks: TaskModel[];
 }

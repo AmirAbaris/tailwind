@@ -1,4 +1,4 @@
-export interface TaskCaption {
+export interface TaskCaptionModel {
     todoCaption: string;
     completedCaption: string;
 }

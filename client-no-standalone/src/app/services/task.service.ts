@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, delay, of, tap } from 'rxjs';
-import { Task } from '../components/task-management/models/task.model';
 import { LocalStorageService } from './local-storage.service';
 import Chance from 'chance';
+import { TaskModel } from '../components/task-management/models/task.model';
 
 @Injectable()
 export class TaskService {
@@ -18,11 +18,11 @@ export class TaskService {
   //#endregion
 
   //#region logic methods
-  getTodoTasks(): Observable<Task[]> {
+  getTodoTasks(): Observable<TaskModel[]> {
     return of(this.localStorageService.allTasks.todoTasks);
   }
 
-  getCompletedTasks(): Observable<Task[]> {
+  getCompletedTasks(): Observable<TaskModel[]> {
     return of(this.localStorageService.allTasks.completedTasks);
   }
 
@@ -34,7 +34,7 @@ export class TaskService {
       tap(() => {
         const chance = new Chance();
 
-        const newTask: Task = {
+        const newTask: TaskModel = {
           id: chance.string({ length: 8 }),
           title: taskTitle,
           completed: false

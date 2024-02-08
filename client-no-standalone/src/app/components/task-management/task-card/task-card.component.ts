@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { Task } from '../models/task.model';
-import { TaskIcon } from '../models/task-card-icon.model';
-import { TaskEmptyCaption } from '../models/task-input-caption.model';
+import { TaskEmptyCaptionModel } from '../models/task-input-caption.model';
+import { TaskModel } from '../models/task.model';
 
 @Component({
   selector: 'app-task-card',
@@ -10,9 +9,10 @@ import { TaskEmptyCaption } from '../models/task-input-caption.model';
 })
 export class TaskCardComponent {
   //#region properties
-  task = input.required<Task[]>();
-  taskIcon = input.required<TaskIcon>();
-  taskEmptyCaption = input.required<TaskEmptyCaption>();
+  task = input.required<TaskModel[]>();
+  rightIcon = input.required<string>();
+  leftIcon = input.required<string>();
+  taskEmptyCaption = input.required<TaskEmptyCaptionModel>();
   loading = input.required<boolean>();
 
   @Output() clickLeftButtonEvent = new EventEmitter<string>();

@@ -1,4 +1,4 @@
-export interface TaskCountCaption {
-    dayCaption: string;
-    taskCaption: string;
+export interface TaskCountCaptionModel {
+    dayTitle: string;
+    taskTitle: string;
 }

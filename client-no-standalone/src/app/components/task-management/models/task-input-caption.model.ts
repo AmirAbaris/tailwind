@@ -1,3 +1,3 @@
-export interface TaskEmptyCaption {
-    emptyTitle: string;
+export interface TaskEmptyCaptionModel {
+    taskTitle: string;
 }

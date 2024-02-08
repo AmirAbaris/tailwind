@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Task, TaskInput } from '../components/task-management/models/task.model';
+import { TaskInputModel, TaskModel } from '../components/task-management/models/task.model';
 
 @Injectable()
 export class LocalStorageService {
   //#region properties
-  allTasks: TaskInput = {
+  allTasks: TaskInputModel = {
     todoTasks: [],
     completedTasks: []
   }
@@ -18,7 +18,7 @@ export class LocalStorageService {
   //#endregion
 
   //#region logical methods
-  addTodoTask(task: Task): void {
+  addTodoTask(task: TaskModel): void {
     this.allTasks.todoTasks.push(task);
 
     this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
@@ -58,13 +58,13 @@ export class LocalStorageService {
     }
   }
 
-  private getStoredTasks(key: string): Task[] {
+  private getStoredTasks(key: string): TaskModel[] {
     const taskJson = localStorage.getItem(key);
 
     return taskJson ? JSON.parse(taskJson) : [];
   }
 
-  private saveTasksToStorage(key: string, tasks: Task[]): void {
+  private saveTasksToStorage(key: string, tasks: TaskModel[]): void {
     localStorage.setItem(key, JSON.stringify(tasks));
   }
   //#endregion

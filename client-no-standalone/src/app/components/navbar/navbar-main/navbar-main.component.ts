@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TaskAddDialogComponent } from '../task-add-dialog/task-add-dialog.component';
 import { TaskService } from '../../../services/task.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TaskFormOutPutModel } from '../../task-management/models/task-form-output.model';
+import { TaskFormOutPutModel } from '../models/task-form-output.model';
 import { NavbarMainCaption } from '../models/navbar-main-caption.model';
 import { TranslateService } from '@ngx-translate/core';
 import { TaskDialogCaption } from '../models/task-dialog-caption.model';
@@ -36,8 +36,8 @@ export class NavbarMainComponent implements OnInit {
   }
 
   private readonly captionSource = {
-    "navbarMainCaption": "task-management.NavbarMain",
-    "taskDialogCaption": "task-management.NavbarMain.TaskDialog"
+    "navbarMainCaption": "navbar.NavbarMain",
+    "taskDialogCaption": "navbar.TaskDialog"
   }
   //#endregion
 
