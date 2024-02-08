@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, Output, inject } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { TaskService } from '../../../services/task.service';
 import { Task, TaskInput } from '../models/task.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -15,7 +15,7 @@ import { TaskCaption } from '../models/task-caption.model';
   templateUrl: './task-management-main.component.html',
   styleUrl: './task-management-main.component.css'
 })
-export class TaskManagementMainComponent {
+export class TaskManagementMainComponent implements OnInit {
   //#region inject functions
   private _taskService = inject(TaskService);
   private _destroyRef = inject(DestroyRef);

@@ -15,6 +15,8 @@ import { TaskCardComponent } from '../components/task-management/task-card/task-
 import { TaskCountComponent } from '../components/task-management/task-count/task-count.component';
 import { TaskCardManagementComponent } from '../components/task-management/task-card-management/task-card-management.component';
 import { TaskComponent } from '../components/task-management/task/task.component';
+import { TaskService } from '../services/task.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 const taskRoutes: Routes = [
     { path: '', component: TaskManagementMainComponent }
@@ -40,6 +42,7 @@ const taskRoutes: Routes = [
         FormsModule,
         CommonModule,
         RouterModule.forChild(taskRoutes),
-    ]
+    ],
+    providers: [TaskService, LocalStorageService] // change ls task service
 })
 export class TaskManagementModule { }
