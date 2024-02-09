@@ -1,6 +1,24 @@
-<div class="flex-row items-center gap-64 justify-center mt-10 lg:flex">
-    <app-task [loading]="loading()" [taskCaption]="taskCaption()" [taskEmptyCaption]="taskEmptyCaption()" [todoTasks]="todoTasks()"
-        [taskIcon]="taskIcon()" [completedTasks]="completedTasks()"
-        (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickDoneHandler($event)"
-        (anotherClickRightButtonEvent)="onClickUndoHandler($event)" />
+<div class="flex flex-col justify-center items-center gap-10 mt-12">
+    @if (!loading()) {
+    <h1 class="font-poppins font-bold text-3xl">{{caption().taskCardManagement.todoTitle}}</h1>
+    <app-task-card [tasks]="tasks().todoTasks" [rightIcon]="'done'" [leftIcon]="'delete'"
+        (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickDoneHandler($event)" />
+
+    @if (tasks().todoTasks.length === 0) {
+    <app-task-empty-card [taskEmptyCaption]="caption().taskEmptyCaption" />
+    }
+
+    <h2 class="font-poppins font-bold text-3xl">{{caption().taskCardManagement.completedTitle}}</h2>
+
+    <app-task-card [tasks]="tasks().completedTasks" [rightIcon]="'undo'" [leftIcon]="'delete'"
+        (clickLeftButtonEvent)="onClickDeleteHandler($event)" (clickRightButtonEvent)="onClickUndoHandler($event)" />
+
+    @if (tasks().completedTasks.length === 0) {
+    <app-task-empty-card [taskEmptyCaption]="caption().taskEmptyCaption" />
+    }
+
+    }
+    @if (loading()) {
+    <mat-spinner />
+    }
 </div>

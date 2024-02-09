@@ -1,12 +1,11 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskAddDialogComponent } from '../task-add-dialog/task-add-dialog.component';
 import { TaskService } from '../../../services/task.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TaskFormOutPutModel } from '../../task-management/models/task-form-output.model';
-import { NavbarMainCaption } from '../models/navbar-main-caption.model';
+import { TaskFormOutPutModel } from '../models/task-form-output.model';
 import { TranslateService } from '@ngx-translate/core';
-import { TaskDialogCaption } from '../models/task-dialog-caption.model';
+import { NavbarCaptionModel } from '../models/navbar-captions.model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-navbar-main',
@@ -18,26 +17,29 @@ export class NavbarMainComponent implements OnInit {
   private _dialog = inject(MatDialog);
   private _taskService = inject(TaskService);
   private _translateService = inject(TranslateService);
-  private _destroyRef = inject(DestroyRef);
   //#endregion
 
   //#region properties
-  public navbarCaption: NavbarMainCaption = {
-    titleCaption: '',
-    addTaskCaption: ''
+  public navbarCaptions: NavbarCaptionModel = {
+    navbarCaption: {
+      mainTitle: '',
+      addTask: ''
+    },
+    taskDialogCaption: {
+      taskTitle: '',
+      addTask: '',
+      close: ''
+    },
+    errorCaption: {
+      reqError: '',
+      spaceError: ''
+    }
   }
 
-  public taskDialogCaption: TaskDialogCaption = {
-    titleCaption: '',
-    reqErrorCaption: '',
-    spaceErrorCaption: '',
-    addTaskCaption: '',
-    closeCaption: ''
-  }
-
-  private readonly captionSource = {
-    "navbarMainCaption": "task-management.NavbarMain",
-    "taskDialogCaption": "task-management.NavbarMain.TaskDialog"
+  private readonly _captionSource = {
+    "navbarMainCaption": "navbar.NavbarMain",
+    "taskDialogCaption": "navbar.TaskDialog",
+    "errorCaption": "error-output"
   }
   //#endregion
 
@@ -49,31 +51,36 @@ export class NavbarMainComponent implements OnInit {
 
   //#region logic method
   private _fetchCaption(): void {
-    this._translateService.get(this.captionSource.navbarMainCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
-      this.navbarCaption.titleCaption = cap.mainTitle;
-      this.navbarCaption.addTaskCaption = cap.addTask;
-    });
+    const navbarMainCaption = this._translateService.get(this._captionSource.navbarMainCaption);
+    const taskDialogCaption = this._translateService.get(this._captionSource.taskDialogCaption);
+    const errorCaption = this._translateService.get(this._captionSource.errorCaption);
 
-    this._translateService.get(this.captionSource.taskDialogCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
-      this.taskDialogCaption.titleCaption = cap.taskTitle;
-      this.taskDialogCaption.reqErrorCaption = cap.reqError;
-      this.taskDialogCaption.spaceErrorCaption = cap.spaceError;
-      this.taskDialogCaption.addTaskCaption = cap.addTask;
-      this.taskDialogCaption.closeCaption = cap.close;
+    forkJoin([navbarMainCaption, taskDialogCaption, errorCaption]).subscribe({
+      next: ([navbarMainCaption, taskDialogCaption, errorCaption]) => {
+        if (!this.navbarCaptions) {
+          return;
+        }
+        this.navbarCaptions.navbarCaption = navbarMainCaption;
+        this.navbarCaptions.taskDialogCaption = taskDialogCaption;
+        this.navbarCaptions.errorCaption = errorCaption;
+      }
     });
   }
   //#endregion
 
   //#region handler methods
-  public addTask(): void {
+  public onClickAddTask(): void {
     const dialogRef = this._dialog.open(TaskAddDialogComponent, {
       width: '500px',
-      data: this.taskDialogCaption
+      data: {
+        taskDialogCaption: this.navbarCaptions?.taskDialogCaption,
+        errorCaption: this.navbarCaptions?.errorCaption
+      }
     });
 
     dialogRef.afterClosed().subscribe((outputDialog: TaskFormOutPutModel) => {
       if (outputDialog?.title) {
-        this._taskService.add(outputDialog.title).pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
+        this._taskService.add(outputDialog.title).subscribe();
       }
     });
   }

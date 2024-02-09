@@ -1,32 +1,32 @@
 {
+    "error-output": {
+        "reqError": "This field is required.",
+        "spaceError": "Can't let that input"
+    },
     "task-management": {
+        "TaskManagementMain": {},
+        "TaskCardManagement": {
+            "todoTitle": "To Do 🚀",
+            "completedTitle": "Complete 💆🏻‍♂️"
+        },
+        "TaskCard": {},
+        "TaskEmptyCard": {
+            "taskTitle": "No Task here"
+        },
+        "TaskCount": {
+            "dayTitle": "today",
+            "taskTitle": "Task"
+        }
+    },
+    "navbar": {
         "NavbarMain": {
             "mainTitle": "Hello 👋🏻",
-            "addTask": "Add task",
-            "TaskDialog": {
-                "taskTitle": "Task Title",
-                "reqError": "This field is required.",
-                "spaceError": "Can't let that input",
-                "addTask": "Add",
-                "close": "Close"
-            }
+            "addTask": "Add task"
         },
-        "TaskManagementMain": {
-            "TaskCount": {
-                "dayTitle": "today",
-                "taskTitle": "Task"
-            },
-            "TaskCardManagement": {
-                "Task": {
-                    "todoTitle": "To Do 🚀",
-                    "completedTitle": "Complete 💆🏻‍♂️",
-                    "TaskCard": {
-                        "TaskEmptyCard": {
-                            "taskTitle": "No Task here"
-                        }
-                    }
-                }
-            }
+        "TaskDialog": {
+            "taskTitle": "Task Title",
+            "addTask": "Add",
+            "close": "Close"
         }
     }
 }

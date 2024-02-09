@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { customValidators } from '../../../validators/validators';
-import { TaskFormOutPutModel } from '../../task-management/models/task-form-output.model';
-import { TaskDialogCaption } from '../models/task-dialog-caption.model';
+import { TaskFormOutPutModel } from '../models/task-form-output.model';
+import { ErrorCaptionModel } from '../models/error-caption.model';
+import { TaskDialogCaptionModel } from '../models/task-dialog-caption.model';
 
 @Component({
   selector: 'app-task-add-dialog',
@@ -15,8 +16,9 @@ export class TaskAddDialogComponent {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TaskAddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: TaskDialogCaption
+    @Inject(MAT_DIALOG_DATA) public data: { taskDialogCaption: TaskDialogCaptionModel, errorCaption: ErrorCaptionModel }
   ) {
+    // grouping should be on constructor for our use case in dialog component!
     this.taskGroup = this.fb.group({
       titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
     });
@@ -24,16 +26,18 @@ export class TaskAddDialogComponent {
   //#endregion
 
   //#region properties
+  public taskGroup: FormGroup;
+
   readonly formKeys = {
     titleCtrl: 'titleCtrl'
   }
-
-  taskGroup: FormGroup;
   //#endregion
 
+  //#region helper methods
   get TitleCtrl(): FormControl {
     return this.taskGroup.get(this.formKeys.titleCtrl) as FormControl;
   }
+  //#endregion
 
   //#region handler methods
   onSubmit(): void {

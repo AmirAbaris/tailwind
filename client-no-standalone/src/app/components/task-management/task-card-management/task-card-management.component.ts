@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { Task } from '../models/task.model';
-import { TaskIcon } from '../models/task-card-icon.model';
-import { TaskEmptyCaption } from '../models/task-input-caption.model';
-import { TaskCaption } from '../models/task-caption.model';
+import { TaskManagementCaptionModel } from '../models/task-management-caption.model';
+import { AllTasksModel } from '../models/task.model';
 
 @Component({
   selector: 'app-task-card-management',
@@ -11,29 +9,26 @@ import { TaskCaption } from '../models/task-caption.model';
 })
 export class TaskCardManagementComponent {
   //#region properties
-  todoTasks = input.required<Task[]>();
-  completedTasks = input.required<Task[]>();
-  taskIcon = input.required<TaskIcon>();
-  taskEmptyCaption = input.required<TaskEmptyCaption>();
-  taskCaption = input.required<TaskCaption>();
+  tasks = input.required<AllTasksModel>();
+  caption = input.required<TaskManagementCaptionModel>()
   loading = input.required<boolean>();
 
-  @Output() clickLeftButtonEvent = new EventEmitter<string>();
-  @Output() clickRightButtonEvent = new EventEmitter<string>();
-  @Output() anotherClickRightButtonEvent = new EventEmitter<string>();
+  @Output() deleteTaskEvent = new EventEmitter<string>();
+  @Output() completeTaskEvent = new EventEmitter<string>();
+  @Output() inCompleteTaskEvent = new EventEmitter<string>();
   //#endregion
 
   // #region handler methods
   public onClickDoneHandler(taskId: string): void {
-    this.clickRightButtonEvent.emit(taskId);
+    this.completeTaskEvent.emit(taskId);
   }
 
   public onClickUndoHandler(taskId: string): void {
-    this.anotherClickRightButtonEvent.emit(taskId);
+    this.inCompleteTaskEvent.emit(taskId);
   }
 
   public onClickDeleteHandler(taskId: string): void {
-    this.clickLeftButtonEvent.emit(taskId);
+    this.deleteTaskEvent.emit(taskId);
   }
   //#endregion
 }

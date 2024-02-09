@@ -1,14 +1,10 @@
-import { Component, DestroyRef, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TaskService } from '../../../services/task.service';
-import { Task, TaskInput } from '../models/task.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TaskCount } from '../models/task-count.model';
-import { finalize, forkJoin } from 'rxjs';
-import { TaskIcon } from '../models/task-card-icon.model';
 import { TranslateService } from '@ngx-translate/core';
-import { TaskEmptyCaption } from '../models/task-input-caption.model';
-import { TaskCountCaption } from '../models/task-count-caption.model';
-import { TaskCaption } from '../models/task-caption.model';
+import { forkJoin, finalize } from 'rxjs';
+import { AllTasksModel, TaskModel } from '../models/task.model';
+import { TaskManagementCaptionModel } from '../models/task-management-caption.model';
+import { TaskCountModel } from '../models/task-count.model';
 
 @Component({
   selector: 'app-task-management-main',
@@ -18,46 +14,41 @@ import { TaskCaption } from '../models/task-caption.model';
 export class TaskManagementMainComponent implements OnInit {
   //#region inject functions
   private _taskService = inject(TaskService);
-  private _destroyRef = inject(DestroyRef);
   private _translateService = inject(TranslateService);
-
-  @Output() clickLeftButtonEvent = new EventEmitter<string>();
-  @Output() clickRightButtonEvent = new EventEmitter<string>();
-  @Output() anotherRightButtonEvent = new EventEmitter<string>();
   //#endregion
 
   //#region properties
-  public allTasks: TaskInput = {
-    todoTasks: [],
-    completedTasks: []
+  caption: TaskManagementCaptionModel = {
+    taskCardManagement: {
+      todoTitle: '',
+      completedTitle: ''
+    },
+    taskEmptyCaption: {
+      taskTitle: ''
+    },
+    taskCountCaption: {
+      dayTitle: '',
+      taskTitle: ''
+    }
   }
-  public taskCount: TaskCount = {
+
+  public taskCount: TaskCountModel = {
     toDoTaskCount: 0,
     completedTaskCount: 0
   }
-  public icon: TaskIcon = {
-    delete: 'delete',
-    complete: 'done',
-    undo: 'undo'
-  }
-  public taskEmptyCaption: TaskEmptyCaption = {
-    emptyTitle: ''
-  }
-  public taskCountCaption: TaskCountCaption = {
-    dayCaption: '',
-    taskCaption: ''
-  }
-  public taskCaption: TaskCaption = {
-    todoCaption: '',
-    completedCaption: ''
+
+  public tasks: AllTasksModel = {
+    todoTasks: [],
+    completedTasks: []
   }
 
-  public loading: boolean = true;
+  public loading: boolean = false;
+  public actionLoading: boolean = false;
 
   private readonly captionSource = {
-    "emptyCaption": "task-management.TaskManagementMain.TaskCardManagement.Task.TaskCard.TaskEmptyCard.taskTitle",
-    "countCaption": "task-management.TaskManagementMain.TaskCount",
-    "taskCaption": "task-management.TaskManagementMain.TaskCardManagement.Task"
+    "emptyCaption": "task-management.TaskEmptyCard",
+    "countCaption": "task-management.TaskCount",
+    "taskCardManagementCaption": "task-management.TaskCardManagement"
   }
   //#endregion
 
@@ -70,55 +61,73 @@ export class TaskManagementMainComponent implements OnInit {
 
   //#region logic methods
   private _fetchCaptions(): void {
-    this._translateService.get(this.captionSource.emptyCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
-      this.taskEmptyCaption.emptyTitle = cap;
-    });
-
-    this._translateService.get(this.captionSource.countCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
-      this.taskCountCaption.dayCaption = cap.dayTitle;
-      this.taskCountCaption.taskCaption = cap.taskTitle;
-    });
-
-    this._translateService.get(this.captionSource.taskCaption).pipe(takeUntilDestroyed(this._destroyRef)).subscribe((cap) => {
-      this.taskCaption.todoCaption = cap.todoTitle;
-      this.taskCaption.completedCaption = cap.completedTitle;
+    forkJoin({
+      emptyCaption: this._translateService.get(this.captionSource.emptyCaption),
+      countCaption: this._translateService.get(this.captionSource.countCaption),
+      taskCardManagementCaption: this._translateService.get(this.captionSource.taskCardManagementCaption)
+    }).subscribe({
+      next: (results) => {
+        this.caption.taskEmptyCaption = results.emptyCaption;
+        this.caption.taskCountCaption = results.countCaption;
+        this.caption.taskCardManagement = results.taskCardManagementCaption;
+      }
     });
   }
 
   private _fetchData(): void {
+    this.loading = true;
+
     forkJoin([this._taskService.getTodoTasks(), this._taskService.getCompletedTasks()])
-      .pipe(takeUntilDestroyed(this._destroyRef), finalize(() => this.loading = false))
+      .pipe(finalize(() => this.loading = false))
       .subscribe(([todoTasks, completedTasks]) => {
-        this.allTasks.todoTasks = todoTasks;
-        this.allTasks.completedTasks = completedTasks;
+        this.tasks.todoTasks = todoTasks;
+        this.tasks.completedTasks = completedTasks;
 
         this._calcTaskCounts(todoTasks, completedTasks);
       });
   }
 
-  private _calcTaskCounts(todoTasks: Task[], completedTasks: Task[]): void {
+  private _calcTaskCounts(todoTasks: TaskModel[], completedTasks: TaskModel[]): void {
     this.taskCount.toDoTaskCount = todoTasks.length;
     this.taskCount.completedTaskCount = completedTasks.length;
+  }
+
+  private _completeTask(taskId: string): void {
+    this.actionLoading = true;
+
+    this._taskService.complete(taskId).pipe(finalize(() => this.actionLoading = false)).subscribe(() => {
+      this._fetchData();
+    });
+  }
+
+  private _incompleteTask(taskId: string): void {
+    this.actionLoading = true;
+
+    this._taskService.inComplete(taskId).pipe(finalize(() => this.actionLoading = false)).subscribe(() => {
+      this._fetchData();
+    })
+  }
+
+  private _deleteTask(taskId: string): void {
+    this.actionLoading = true;
+
+    this._taskService.delete(taskId).pipe(finalize(() => this.actionLoading = false)).subscribe(() => {
+      this._fetchData();
+    });
   }
   //#endregion
 
   //#region handler methods
   public onDoneTaskHandler(taskId: string): void {
-    this._taskService.complete(taskId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-      this._fetchData();
-    });
+    this._completeTask(taskId);
   }
 
   public onUndoTaskHandler(taskId: string): void {
-    this._taskService.inComplete(taskId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-      this._fetchData();
-    });
+    this._incompleteTask(taskId);
   }
 
   public onDeleteTaskHandler(taskId: string): void {
-    this._taskService.delete(taskId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-      this._fetchData();
-    });
+    this._deleteTask(taskId);
   }
   //#endregion
 }

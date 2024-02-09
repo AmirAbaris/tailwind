@@ -1,4 +1,4 @@
-export interface TaskCount {
+export interface TaskCountModel {
     toDoTaskCount: number;
     completedTaskCount: number;
 }

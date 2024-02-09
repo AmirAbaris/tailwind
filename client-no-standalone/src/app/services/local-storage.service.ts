@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Task, TaskInput } from '../components/task-management/models/task.model';
+import { AllTasksModel, TaskModel } from '../components/task-management/models/task.model';
+import Chance from 'chance';
 
 @Injectable()
 export class LocalStorageService {
   //#region properties
-  allTasks: TaskInput = {
+  allTasks: AllTasksModel = {
     todoTasks: [],
     completedTasks: []
   }
@@ -18,10 +19,19 @@ export class LocalStorageService {
   //#endregion
 
   //#region logical methods
-  addTodoTask(task: Task): void {
-    this.allTasks.todoTasks.push(task);
+  addTodoTask(taskTitle: string): void {
+    const chance = new Chance();
+    
+    const newTask: TaskModel = {
+      id: chance.string({ length: 8 }),
+      title: taskTitle,
+      completed: false
+    };
 
-    this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
+    // Update the todoTasks array directly in local storage
+    const todoTasks = this.getStoredTasks('todoTasks');
+    todoTasks.push(newTask);
+    this.saveTasksToStorage('todoTasks', todoTasks);
   }
 
   deleteTask(taskId: string): void {
@@ -58,13 +68,13 @@ export class LocalStorageService {
     }
   }
 
-  private getStoredTasks(key: string): Task[] {
+  private getStoredTasks(key: string): TaskModel[] {
     const taskJson = localStorage.getItem(key);
 
     return taskJson ? JSON.parse(taskJson) : [];
   }
 
-  private saveTasksToStorage(key: string, tasks: Task[]): void {
+  private saveTasksToStorage(key: string, tasks: TaskModel[]): void {
     localStorage.setItem(key, JSON.stringify(tasks));
   }
   //#endregion

@@ -1,8 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, delay, of, tap } from 'rxjs';
-import { Task } from '../components/task-management/models/task.model';
+import { Observable, of } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
-import Chance from 'chance';
+import { TaskModel } from '../components/task-management/models/task.model';
 
 @Injectable()
 export class TaskService {
@@ -18,64 +17,28 @@ export class TaskService {
   //#endregion
 
   //#region logic methods
-  getTodoTasks(): Observable<Task[]> {
+  getTodoTasks(): Observable<TaskModel[]> {
     return of(this.localStorageService.allTasks.todoTasks);
   }
 
-  getCompletedTasks(): Observable<Task[]> {
+  getCompletedTasks(): Observable<TaskModel[]> {
     return of(this.localStorageService.allTasks.completedTasks);
   }
 
-  add(taskTitle: string): Observable<null> {
-    // simulate HTTP request delay
-    return of(null).pipe(
-      delay(500),
-      // update tasks locally
-      tap(() => {
-        const chance = new Chance();
-
-        const newTask: Task = {
-          id: chance.string({ length: 8 }),
-          title: taskTitle,
-          completed: false
-        };
-
-        this.localStorageService.addTodoTask(newTask);
-      })
-    );
+  add(taskTitle: string): Observable<void> {
+    return of(this.localStorageService.addTodoTask(taskTitle));
   }
 
-  delete(taskId: string): Observable<null> {
-    return of(null).pipe(
-      delay(500),
-      tap(() => {
-        this.localStorageService.deleteTask(taskId);
-
-        console.log('delete is ok!');
-      })
-    );
+  delete(taskId: string): Observable<void> {
+    return of(this.localStorageService.deleteTask(taskId));
   }
 
-  complete(taskId: string): Observable<null> {
-    return of(null).pipe(
-      delay(500),
-      tap(() => {
-        this.localStorageService.completeTask(taskId);
-
-        console.log('done is ok!');
-      })
-    );
+  complete(taskId: string): Observable<void> {
+    return of(this.localStorageService.completeTask(taskId));
   }
 
-  inComplete(taskId: string): Observable<null> {
-    return of(null).pipe(
-      delay(500),
-      tap(() => {
-        this.localStorageService.inCompleteTask(taskId);
-
-        console.log('undo is ok!');
-      })
-    );
+  inComplete(taskId: string): Observable<void> {
+    return of(this.localStorageService.inCompleteTask(taskId));
   }
   //#endregion
 }
