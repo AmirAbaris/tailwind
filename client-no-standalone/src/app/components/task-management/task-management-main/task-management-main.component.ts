@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TaskService } from '../../../services/task.service';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, finalize } from 'rxjs';
-import { TaskCaptionModel } from '../models/task-caption.model';
-import { TaskModel } from '../models/task.model';
+import { TaskInputModel, TaskModel } from '../models/task.model';
 import { TaskManagementCaptionModel } from '../models/task-management-caption.model';
+import { TaskCountModel } from '../models/task-count.model';
 
 @Component({
   selector: 'app-task-management-main',
@@ -19,13 +19,9 @@ export class TaskManagementMainComponent implements OnInit {
 
   //#region properties
   caption: TaskManagementCaptionModel = {
-    allTasks: {
-      todoTasks: [],
-      completedTasks: []
-    },
-    taskCount: {
-      toDoTaskCount: 0,
-      completedTaskCount: 0
+    taskCardManagement: {
+      todoTitle: '',
+      completedTitle: ''
     },
     taskEmptyCaption: {
       taskTitle: ''
@@ -36,9 +32,14 @@ export class TaskManagementMainComponent implements OnInit {
     }
   }
 
-  public taskCaption: TaskCaptionModel = {
-    todoCaption: '',
-    completedCaption: ''
+  public taskCount: TaskCountModel = {
+    toDoTaskCount: 0,
+    completedTaskCount: 0
+  }
+
+  public tasks: TaskInputModel = {
+    todoTasks: [],
+    completedTasks: []
   }
 
   public loading: boolean = false;
@@ -47,7 +48,7 @@ export class TaskManagementMainComponent implements OnInit {
   private readonly captionSource = {
     "emptyCaption": "task-management.TaskEmptyCard",
     "countCaption": "task-management.TaskCount",
-    "taskCaption": "task-management.Task"
+    "taskCardManagementCaption": "task-management.TaskCardManagement"
   }
   //#endregion
 
@@ -63,14 +64,12 @@ export class TaskManagementMainComponent implements OnInit {
     forkJoin({
       emptyCaption: this._translateService.get(this.captionSource.emptyCaption),
       countCaption: this._translateService.get(this.captionSource.countCaption),
-      taskCaption: this._translateService.get(this.captionSource.taskCaption)
+      taskCardManagementCaption: this._translateService.get(this.captionSource.taskCardManagementCaption)
     }).subscribe({
       next: (results) => {
         this.caption.taskEmptyCaption = results.emptyCaption;
         this.caption.taskCountCaption = results.countCaption;
-        const taskCaption = results.taskCaption;
-        this.taskCaption.todoCaption = taskCaption.todoTitle;
-        this.taskCaption.completedCaption = taskCaption.completedTitle;
+        this.caption.taskCardManagement = results.taskCardManagementCaption;
       }
     });
   }
@@ -81,16 +80,16 @@ export class TaskManagementMainComponent implements OnInit {
     forkJoin([this._taskService.getTodoTasks(), this._taskService.getCompletedTasks()])
       .pipe(finalize(() => this.loading = false))
       .subscribe(([todoTasks, completedTasks]) => {
-        this.caption.allTasks.todoTasks = todoTasks;
-        this.caption.allTasks.completedTasks = completedTasks;
+        this.tasks.todoTasks = todoTasks;
+        this.tasks.completedTasks = completedTasks;
 
         this._calcTaskCounts(todoTasks, completedTasks);
       });
   }
 
   private _calcTaskCounts(todoTasks: TaskModel[], completedTasks: TaskModel[]): void {
-    this.caption.taskCount.toDoTaskCount = todoTasks.length;
-    this.caption.taskCount.completedTaskCount = completedTasks.length;
+    this.taskCount.toDoTaskCount = todoTasks.length;
+    this.taskCount.completedTaskCount = completedTasks.length;
   }
 
   private _completeTask(taskId: string): void {

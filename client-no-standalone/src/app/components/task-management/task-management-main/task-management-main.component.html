@@ -1,7 +1,5 @@
-<app-task-count [caption]="caption.taskCountCaption" [counts]="caption.taskCount"></app-task-count>
+<app-task-count [taskCount]="taskCount" [caption]="caption.taskCountCaption"></app-task-count>
 
-<app-task-card-management [loading]="loading || actionLoading" [taskCaption]="taskCaption"
-    [taskEmptyCaption]="caption.taskEmptyCaption" [todoTasks]="caption.allTasks.todoTasks"
-    [completedTasks]="caption.allTasks.completedTasks" (deleteTaskEvent)="onDeleteTaskHandler($event)"
-    (completeTaskEvent)="onDoneTaskHandler($event)"
+<app-task-card-management [loading]="loading || actionLoading" [caption]="caption" [tasks]="tasks"
+    (deleteTaskEvent)="onDeleteTaskHandler($event)" (completeTaskEvent)="onDoneTaskHandler($event)"
     (inCompleteTaskEvent)="onUndoTaskHandler($event)"></app-task-card-management>

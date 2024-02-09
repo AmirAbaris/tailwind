@@ -9,7 +9,7 @@ import { TaskCountCaptionModel } from '../models/task-count-caption.model';
 })
 export class TaskCountComponent {
   //#region properties
-  counts = input.required<TaskCountModel>();
   caption = input.required<TaskCountCaptionModel>();
+  taskCount = input.required<TaskCountModel>();
   //#endregion
 }

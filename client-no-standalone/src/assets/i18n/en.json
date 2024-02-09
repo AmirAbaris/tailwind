@@ -5,8 +5,7 @@
     },
     "task-management": {
         "TaskManagementMain": {},
-        "TaskCardManagement": {},
-        "Task": {
+        "TaskCardManagement": {
             "todoTitle": "To Do 🚀",
             "completedTitle": "Complete 💆🏻‍♂️"
         },

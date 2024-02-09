@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { TaskModel } from '../models/task.model';
+import { TaskInputModel, TaskModel } from '../models/task.model';
 import { TaskEmptyCaptionModel } from '../models/task-input-caption.model';
-import { TaskCaptionModel } from '../models/task-caption.model';
+import { TaskManagementCaptionModel } from '../models/task-management-caption.model';
 
 @Component({
   selector: 'app-task-card-management',
@@ -10,10 +10,8 @@ import { TaskCaptionModel } from '../models/task-caption.model';
 })
 export class TaskCardManagementComponent {
   //#region properties
-  todoTasks = input.required<TaskModel[]>();
-  completedTasks = input.required<TaskModel[]>();
-  taskEmptyCaption = input.required<TaskEmptyCaptionModel>();
-  taskCaption = input.required<TaskCaptionModel>();
+  tasks = input.required<TaskInputModel>();
+  caption = input.required<TaskManagementCaptionModel>()
   loading = input.required<boolean>();
 
   @Output() deleteTaskEvent = new EventEmitter<string>();
