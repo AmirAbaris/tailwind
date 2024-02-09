@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { TaskInputModel, TaskModel } from '../components/task-management/models/task.model';
+import { AllTasksModel, TaskModel } from '../components/task-management/models/task.model';
 import Chance from 'chance';
 
 @Injectable()
 export class LocalStorageService {
   //#region properties
-  allTasks: TaskInputModel = {
+  allTasks: AllTasksModel = {
     todoTasks: [],
     completedTasks: []
   }

@@ -4,7 +4,7 @@ export interface TaskModel {
     completed: boolean;
 }
 
-export interface TaskInputModel {
+export interface AllTasksModel {
     todoTasks: TaskModel[];
     completedTasks: TaskModel[];
 }

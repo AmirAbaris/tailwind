@@ -1,6 +1,5 @@
 <div class="flex flex-col justify-center items-center mt-10 gap-8">
-    @if (!loading()) {
-    @for (task of task(); track $index) {
+    @for (task of tasks(); track $index) {
     <mat-card class="card">
         <mat-card-content>
             <h1>{{ task.title }}</h1>
@@ -12,13 +11,5 @@
             </mat-icon>
         </mat-card-actions>
     </mat-card>
-    }
-    }
-    @else if (loading()) {
-    <mat-spinner />
-    }
-
-    @if (task().length === 0) {
-    <app-task-empty-card [taskEmptyCaption]="taskEmptyCaption()" />
     }
 </div>

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { TaskEmptyCaptionModel } from '../models/task-input-caption.model';
 import { TaskModel } from '../models/task.model';
 
 @Component({
@@ -9,11 +8,9 @@ import { TaskModel } from '../models/task.model';
 })
 export class TaskCardComponent {
   //#region properties
-  task = input.required<TaskModel[]>();
+  tasks = input.required<TaskModel[]>();
   rightIcon = input.required<string>();
   leftIcon = input.required<string>();
-  taskEmptyCaption = input.required<TaskEmptyCaptionModel>();
-  loading = input.required<boolean>();
 
   @Output() clickLeftButtonEvent = new EventEmitter<string>();
   @Output() clickRightButtonEvent = new EventEmitter<string>();

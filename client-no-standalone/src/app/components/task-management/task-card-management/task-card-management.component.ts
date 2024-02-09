@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output, input } from '@angular/core';
-import { TaskInputModel, TaskModel } from '../models/task.model';
-import { TaskEmptyCaptionModel } from '../models/task-input-caption.model';
 import { TaskManagementCaptionModel } from '../models/task-management-caption.model';
+import { AllTasksModel } from '../models/task.model';
 
 @Component({
   selector: 'app-task-card-management',
@@ -10,7 +9,7 @@ import { TaskManagementCaptionModel } from '../models/task-management-caption.mo
 })
 export class TaskCardManagementComponent {
   //#region properties
-  tasks = input.required<TaskInputModel>();
+  tasks = input.required<AllTasksModel>();
   caption = input.required<TaskManagementCaptionModel>()
   loading = input.required<boolean>();
 

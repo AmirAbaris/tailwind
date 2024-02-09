@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { TaskService } from '../../../services/task.service';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, finalize } from 'rxjs';
-import { TaskInputModel, TaskModel } from '../models/task.model';
+import { AllTasksModel, TaskModel } from '../models/task.model';
 import { TaskManagementCaptionModel } from '../models/task-management-caption.model';
 import { TaskCountModel } from '../models/task-count.model';
 
@@ -37,7 +37,7 @@ export class TaskManagementMainComponent implements OnInit {
     completedTaskCount: 0
   }
 
-  public tasks: TaskInputModel = {
+  public tasks: AllTasksModel = {
     todoTasks: [],
     completedTasks: []
   }
