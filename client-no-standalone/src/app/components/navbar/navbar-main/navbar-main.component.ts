@@ -47,17 +47,15 @@ export class NavbarMainComponent implements OnInit {
   ngOnInit(): void {
     this._fetchCaption();
   }
-
-  getData(): void { }
   //#endregion
 
   //#region logic method
   private _fetchCaption(): void {
-    const navbarMainCaption$ = this._translateService.get(this._captionSource.navbarMainCaption);
-    const taskDialogCaption$ = this._translateService.get(this._captionSource.taskDialogCaption);
-    const errorCaption$ = this._translateService.get(this._captionSource.errorCaption);
+    const navbarMainCaption = this._translateService.get(this._captionSource.navbarMainCaption);
+    const taskDialogCaption = this._translateService.get(this._captionSource.taskDialogCaption);
+    const errorCaption = this._translateService.get(this._captionSource.errorCaption);
 
-    forkJoin([navbarMainCaption$, taskDialogCaption$, errorCaption$]).subscribe({
+    forkJoin([navbarMainCaption, taskDialogCaption, errorCaption]).subscribe({
       next: ([navbarMainCaption, taskDialogCaption, errorCaption]) => {
         if (!this.navbarCaptions) {
           return;

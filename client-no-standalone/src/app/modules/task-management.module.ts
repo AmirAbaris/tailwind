@@ -39,6 +39,6 @@ const taskRoutes: Routes = [
         CommonModule,
         RouterModule.forChild(taskRoutes),
     ],
-    providers: [TaskService, LocalStorageService] // change ls task service
+    providers: [TaskService, LocalStorageService]
 })
 export class TaskManagementModule { }
