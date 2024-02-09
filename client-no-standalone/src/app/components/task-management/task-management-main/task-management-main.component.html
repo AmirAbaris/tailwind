@@ -1,4 +1,4 @@
-<app-task-count [taskCount]="taskCount" [caption]="caption.taskCountCaption"></app-task-count>
+<app-task-count [taskCount]="taskCount" [caption]="caption.taskCountCaption" />
 
 <app-task-card-management [loading]="loading || actionLoading" [caption]="caption" [tasks]="tasks"
     (deleteTaskEvent)="onDeleteTaskHandler($event)" (completeTaskEvent)="onDoneTaskHandler($event)"
