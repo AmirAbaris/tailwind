@@ -18,5 +18,7 @@
     <mat-spinner />
     }
 
-    <app-task-empty-card *ngIf="task().length === 0" [taskEmptyCaption]="taskEmptyCaption()" />
+    @if (task().length === 0) {
+    <app-task-empty-card [taskEmptyCaption]="taskEmptyCaption()" />
+    }
 </div>
