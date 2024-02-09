@@ -1,30 +1,4 @@
 <div class="flex flex-col justify-center items-center mt-10 gap-8">
-    <ng-container *ngIf="!loading()">
-        <ng-container *ngIf="task().length > 0; else emptyTask">
-            <mat-card *ngFor="let taskItem of task(); let index = index" class="card">
-                <mat-card-content>
-                    <h1>{{ taskItem.title }}</h1>
-                    <mat-divider></mat-divider>
-                </mat-card-content>
-                <mat-card-actions class="card-actions">
-                    <mat-icon class="cursor-pointer" (click)="onClickLeftButtonHandler(taskItem.id)">{{
-                        leftIcon() }}</mat-icon>
-                    <mat-icon class="cursor-pointer" (click)="onClickRightButtonHandler(taskItem.id)">
-                        {{ rightIcon() }}
-                    </mat-icon>
-                </mat-card-actions>
-            </mat-card>
-        </ng-container>
-        <ng-template #emptyTask>
-            <app-task-empty-card [taskEmptyCaption]="taskEmptyCaption()"></app-task-empty-card>
-        </ng-template>
-    </ng-container>
-
-    <mat-spinner *ngIf="loading()"></mat-spinner>
-</div>
-
-
-<!-- <div class="flex flex-col justify-center items-center mt-10 gap-8">
     @if (!loading()) {
     @for (task of task(); track $index) {
     <mat-card class="card">
@@ -33,15 +7,8 @@
             <mat-divider></mat-divider>
         </mat-card-content>
         <mat-card-actions class="card-actions">
-            <mat-icon class="cursor-pointer"
-                (click)="onClickLeftButtonHandler(task.id)">{{taskIcon().delete}}</mat-icon>
-            <mat-icon class="cursor-pointer" (click)="onClickRightButtonHandler(task.id)">
-                @if (task.completed) {
-                {{taskIcon().undo}}
-                }
-                @else {
-                {{taskIcon().complete}}
-                }
+            <mat-icon class="cursor-pointer" (click)="onClickLeftButtonHandler(task.id)">{{leftIcon()}}</mat-icon>
+            <mat-icon class="cursor-pointer" (click)="onClickRightButtonHandler(task.id)"> {{rightIcon()}}
             </mat-icon>
         </mat-card-actions>
     </mat-card>
@@ -50,7 +17,6 @@
     @else if (loading()) {
     <mat-spinner />
     }
-    @else if (task().length === 0) {
-    <app-task-empty-card [taskEmptyCaption]="taskEmptyCaption()" />
-    }
-</div> -->
+
+    <app-task-empty-card *ngIf="task().length === 0" [taskEmptyCaption]="taskEmptyCaption()" />
+</div>

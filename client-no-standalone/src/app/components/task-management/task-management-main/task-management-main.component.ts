@@ -3,10 +3,8 @@ import { TaskService } from '../../../services/task.service';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, finalize } from 'rxjs';
 import { TaskCaptionModel } from '../models/task-caption.model';
-import { TaskCountCaptionModel } from '../models/task-count-caption.model';
-import { TaskCountModel } from '../models/task-count.model';
-import { TaskEmptyCaptionModel } from '../models/task-input-caption.model';
-import { TaskInputModel, TaskModel } from '../models/task.model';
+import { TaskModel } from '../models/task.model';
+import { TaskManagementCaptionModel } from '../models/task-management-caption.model';
 
 @Component({
   selector: 'app-task-management-main',
@@ -20,27 +18,31 @@ export class TaskManagementMainComponent implements OnInit {
   //#endregion
 
   //#region properties
-  public allTasks: TaskInputModel = {
-    todoTasks: [],
-    completedTasks: []
+  caption: TaskManagementCaptionModel = {
+    allTasks: {
+      todoTasks: [],
+      completedTasks: []
+    },
+    taskCount: {
+      toDoTaskCount: 0,
+      completedTaskCount: 0
+    },
+    taskEmptyCaption: {
+      taskTitle: ''
+    },
+    taskCountCaption: {
+      dayTitle: '',
+      taskTitle: ''
+    }
   }
-  public taskCount: TaskCountModel = {
-    toDoTaskCount: 0,
-    completedTaskCount: 0
-  }
-  public taskEmptyCaption: TaskEmptyCaptionModel = {
-    taskTitle: ''
-  }
-  public taskCountCaption: TaskCountCaptionModel = {
-    dayTitle: '',
-    taskTitle: ''
-  }
+
   public taskCaption: TaskCaptionModel = {
     todoCaption: '',
     completedCaption: ''
   }
 
   public loading: boolean = false;
+  public actionLoading: boolean = false;
 
   private readonly captionSource = {
     "emptyCaption": "task-management.TaskEmptyCard",
@@ -58,17 +60,18 @@ export class TaskManagementMainComponent implements OnInit {
 
   //#region logic methods
   private _fetchCaptions(): void {
-    this._translateService.get(this.captionSource.emptyCaption).subscribe((cap) => {
-      this.taskEmptyCaption = cap;
-    });
-
-    this._translateService.get(this.captionSource.countCaption).subscribe((cap) => {
-      this.taskCountCaption = cap;
-    });
-
-    this._translateService.get(this.captionSource.taskCaption).subscribe((cap) => {
-      this.taskCaption.todoCaption = cap.todoTitle;
-      this.taskCaption.completedCaption = cap.completedTitle;
+    forkJoin({
+      emptyCaption: this._translateService.get(this.captionSource.emptyCaption),
+      countCaption: this._translateService.get(this.captionSource.countCaption),
+      taskCaption: this._translateService.get(this.captionSource.taskCaption)
+    }).subscribe({
+      next: (results) => {
+        this.caption.taskEmptyCaption = results.emptyCaption;
+        this.caption.taskCountCaption = results.countCaption;
+        const taskCaption = results.taskCaption;
+        this.taskCaption.todoCaption = taskCaption.todoTitle;
+        this.taskCaption.completedCaption = taskCaption.completedTitle;
+      }
     });
   }
 
@@ -78,32 +81,38 @@ export class TaskManagementMainComponent implements OnInit {
     forkJoin([this._taskService.getTodoTasks(), this._taskService.getCompletedTasks()])
       .pipe(finalize(() => this.loading = false))
       .subscribe(([todoTasks, completedTasks]) => {
-        this.allTasks.todoTasks = todoTasks;
-        this.allTasks.completedTasks = completedTasks;
+        this.caption.allTasks.todoTasks = todoTasks;
+        this.caption.allTasks.completedTasks = completedTasks;
 
         this._calcTaskCounts(todoTasks, completedTasks);
       });
   }
 
   private _calcTaskCounts(todoTasks: TaskModel[], completedTasks: TaskModel[]): void {
-    this.taskCount.toDoTaskCount = todoTasks.length;
-    this.taskCount.completedTaskCount = completedTasks.length;
+    this.caption.taskCount.toDoTaskCount = todoTasks.length;
+    this.caption.taskCount.completedTaskCount = completedTasks.length;
   }
 
   private _completeTask(taskId: string): void {
-    this._taskService.complete(taskId).subscribe(() => {
+    this.actionLoading = true;
+
+    this._taskService.complete(taskId).pipe(finalize(() => this.actionLoading = false)).subscribe(() => {
       this._fetchData();
     });
   }
 
   private _incompleteTask(taskId: string): void {
-    this._taskService.inComplete(taskId).subscribe(() => {
+    this.actionLoading = true;
+
+    this._taskService.inComplete(taskId).pipe(finalize(() => this.actionLoading = false)).subscribe(() => {
       this._fetchData();
     })
   }
 
   private _deleteTask(taskId: string): void {
-    this._taskService.delete(taskId).subscribe(() => {
+    this.actionLoading = true;
+
+    this._taskService.delete(taskId).pipe(finalize(() => this.actionLoading = false)).subscribe(() => {
       this._fetchData();
     });
   }
