@@ -71,7 +71,7 @@ export class NavbarMainComponent implements OnInit {
   //#endregion
 
   //#region handler methods
-  public addTask(): void {
+  public onClickAddTask(): void {
     const dialogRef = this._dialog.open(TaskAddDialogComponent, {
       width: '500px',
       data: {

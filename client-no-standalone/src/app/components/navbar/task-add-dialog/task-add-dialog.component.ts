@@ -18,6 +18,7 @@ export class TaskAddDialogComponent {
     private dialogRef: MatDialogRef<TaskAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { taskDialogCaption: TaskDialogCaptionModel, errorCaption: ErrorCaptionModel }
   ) {
+    // grouping should be on constructor for our use case in dialog component!
     this.taskGroup = this.fb.group({
       titleCtrl: [null, [Validators.required, customValidators.notAllSpaces]]
     });
