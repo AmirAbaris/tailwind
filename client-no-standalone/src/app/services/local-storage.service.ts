@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TaskInputModel, TaskModel } from '../components/task-management/models/task.model';
+import Chance from 'chance';
 
 @Injectable()
 export class LocalStorageService {
@@ -18,10 +19,19 @@ export class LocalStorageService {
   //#endregion
 
   //#region logical methods
-  addTodoTask(task: TaskModel): void {
-    this.allTasks.todoTasks.push(task);
+  addTodoTask(taskTitle: string): void {
+    const chance = new Chance();
+    
+    const newTask: TaskModel = {
+      id: chance.string({ length: 8 }),
+      title: taskTitle,
+      completed: false
+    };
 
-    this.saveTasksToStorage('todoTasks', this.allTasks.todoTasks);
+    // Update the todoTasks array directly in local storage
+    const todoTasks = this.getStoredTasks('todoTasks');
+    todoTasks.push(newTask);
+    this.saveTasksToStorage('todoTasks', todoTasks);
   }
 
   deleteTask(taskId: string): void {
